@@ -1,0 +1,28 @@
+Good instinct to stop here. Digests are the feature where the design decisions all happen before the code, and where the code is the easy part.
+
+**The decision that determines every other one**
+
+Does the digest inherit the delivery gate, or does it bypass it?
+
+Right now the product's whole position on push is that it's gated — something reaches you because it was directed at you or because it touches work you're actually doing, and everything else waits on the map for you to go look. A daily digest is, by default, the opposite: an ungated channel that reaches everyone on a timer regardless of relevance. If you build it that way you have two notification philosophies in one product, and the loose one wins, because it's the one that fires every day.
+
+My answer would be that the digest inherits the gate — it's a batched replay of things that would have reached you, plus nothing else. That makes it defensible and makes the content rules fall out for free. If you decide it's ungated ("here's everything, you decide"), that's a legitimate choice but it's a different product surface and it needs its own justification, not the digest's.
+
+**The other forks, with the answer I'd argue for**
+
+1. *Who is it for?* Someone who was in the app all day already saw everything; sending them a recap is pure cost. The real recipient is the person who wasn't there — non-engineering roles, people between sessions, the lapsed. Design it for absence, not for coverage. That means eligibility should be a function of "did you see this already," not "do you have an account."
+2. *What happens on a thin or empty day?* This is where digests die. The default implementation sends anyway, and within two weeks everyone has learned that the email is skippable — including on the day it wasn't. Set a content floor and hold it: below it, no send. Never a "nothing happened today" email. Be honest that on a small team most days will be below the floor.
+3. *What's in it?* You already have events that deliberately have no reader — the build atoms are records, not messages. If the digest pulls off the raw event feed you'll ship them by accident, and that's the third filter that can drift out of sync with the other two. Digest inclusion needs to be one predicate shared with the existing delivery decision, not a new list.
+4. *Batch or replay?* If a message already reached someone mid-task, does it appear again in the digest? I'd say no — a digest that repeats what you already read teaches you it contains nothing new.
+5. *Does it say why?* Every line should carry the reason it's there ("this touched a place you worked in Tuesday"). Same discipline as the rest of delivery: a non-delivery has a named reason, so a delivery should too. It also makes the unsubscribe conversation into a tuning conversation.
+6. *Frequency, timezone, and off-switch.* Daily is a guess. Per-recipient send time, a one-click off, and a "less of this" that actually changes the gate rather than muting the channel.
+
+**How you'll know it worked**
+
+Not sends. Not opens. Opens will look great for three weeks and then decay, and by the time they decay you'll have built a habit of reporting them. The only measure that maps to the job is: did the recipient come back and do something traceable to a line in that digest, within a day. If you can't attribute that, you can't tell a working digest from a tolerated one. Decide the number and the kill date before you build — something like "if under X% of digests produce an action after six weeks, we delete it," and mean the deletion.
+
+**The thing I'd actually do first**
+
+Before any of this: write and send the digest by hand for two weeks. You know what happened in the workspace; you can compose it in ten minutes a day. You'll learn the three things that decide the build — what's actually worth including, how many days fall below the floor, and whether anybody replies or acts. If nobody reacts to a handcrafted one written by a human who knows the context, the generated one will do worse, and you'll have spent two weeks instead of a month finding that out.
+
+Tell me which way you want the gate question to go and I'll write the spec against it.

@@ -1,0 +1,26 @@
+You have two users. Worth saying plainly, because the plan for 4 and the plan for 2 are the same plan and it starts from "nothing has happened yet."
+
+**First, don't decide anything until you know which failure this is.** Pull two numbers from analytics — how many people landed from the Show HN, and how many signed up. Three very different shapes:
+
+- **~50 visitors.** The post sank. You learned nothing about the product, the market, or the pitch. Do not update any belief about demand. This is by far the most common outcome and the one founders most often misread as a verdict.
+- **500–2,000 visitors, 4 signups.** A landing/message problem, or the wrong audience. The diagnostic is on the page and in the first sentence of the pitch — not in the product.
+- **Lots of signups, 2 stuck.** An activation problem. The most useful of the three, and the only one where the answer lives in the code.
+
+Most founders in this position code the response for #3 while actually living in #1 or #2. Thirty minutes of analytics saves you a month of rebuilding.
+
+**Second, the actual work this week: get ten users by hand.** Not a channel, not another launch. Individual people you have reason to believe have this problem, contacted one at a time, onboarded by you on a call where you watch them use it. Twenty outreaches, ten live sessions.
+
+Rules while you do it: no self-serve flow, no onboarding tour, no email drip, no help docs. You do their setup for them, in their environment, on the call. If it takes 40 minutes a user, that's fine — ten users is one week of your time and it's the highest-information week you'll have all quarter. The reason to do it by hand isn't grit; it's resolution. The thing you need to see is the face someone makes at the exact second they get confused, and the sentence they use to describe what they thought the product did. Metrics summarize both of those away, and any automation you build now hardcodes your current guesses and then hides the evidence that they were wrong.
+
+**Third, if this is a team/collaboration product, "4 users" is the wrong unit and it's hiding the real problem.** One team of five who use it together for two weeks teaches you more than fifty solo signups, because a solo user of a collaboration product is testing an empty room, not your product. Recruit *teams* — one company at a time, ideally somewhere you can be in their Slack. Your bar for the next month should be "three teams actively using it," not a user count.
+
+**Fourth, the thing that matters for month two: Show HN is not a channel.** It can't be re-run, and its traffic decays to zero within 48 hours. Before you do another launch-shaped event, name one motion that still produces users on day 30 and day 60 — one specific place your people already congregate, and one repeatable thing you do there every week. And to have that, you need a beachhead: one role, one company shape, one trigger moment where the pain becomes acute. "Any team that…" cannot be repeated by one user to the next in a sentence, and one-user-tells-the-next is the only distribution that compounds at your size.
+
+**Concrete next 7 days:**
+
+- Day 1, 30 min: pull the funnel numbers, classify which of the three failures you're in.
+- Day 1: call both non-founder users. Not a survey — a conversation. What made them sign up, what did they expect, what did they do next, why did they stop.
+- Days 2–6: 20 personal outreaches to a *single* narrow persona. Target ten onboarded live.
+- Day 7: write down the sentence those ten people used to describe the product. If it isn't your sentence, yours is wrong and that's your rewrite.
+
+The failure mode to avoid is treating 4 users as a verdict and rebuilding the product in response. You haven't had enough contact with reality to have learned anything about the product yet — you've learned something about your distribution, which is that you don't have any.

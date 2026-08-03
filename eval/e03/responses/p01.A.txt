@@ -1,0 +1,34 @@
+I can build this, but I want to flip two things first — both of them will bite you in beta, and one of them means this shouldn't be middleware.
+
+**1. Per-team alone is the wrong key.** If creating a team is cheap and unmetered, 20/hour/team is 20N/hour for an attacker who creates N teams. The limit needs a second key on the actor (account or agent principal) across all their teams, or team creation needs its own cap. Otherwise the control is decorative. I'd do per-team 20/hr as you asked *plus* a per-account cap across teams — same query shape, one extra row check.
+
+**2. An in-memory limiter is wrong the moment you run more than one API process.** You do — each process holds its own LISTEN session. An in-process token bucket gives you 20 × instances per hour, and it resets on every deploy. For a rule with a specific number in it, that's a bug you'd never notice until someone abuses it.
+
+The fix costs nothing and needs no new dep: **count the rows you already write.** Invites go into a table with a `created_at`. So the limit is a count over the last hour, run inside the same transaction as the insert, under the per-team row lock you already take for event inserts (`SELECT … FROM team_entitlements … FOR UPDATE`). That makes it exact across processes, race-free without any new locking primitive, and stateless across deploys.
+
+```sql
+-- inside the existing tx, after the team lock
+SELECT count(*) FROM invites
+ WHERE team_id = $1 AND created_at > now() - interval '1 hour';
+
+-- if >= 20, compute Retry-After from the oldest of the 20:
+SELECT created_at FROM invites
+ WHERE team_id = $1 AND created_at > now() - interval '1 hour'
+ ORDER BY created_at ASC OFFSET 19 LIMIT 1;
+-- retry_after = ceil((that + 1h) - now()) seconds
+```
+
+Which brings the real disagreement: **this is a domain rule, not middleware.** "20 invites per team per hour" needs the team, the membership check, and the same transaction as the write. Middleware runs before all three. A generic middleware limiter is the right tool for coarse per-IP protection on every write endpoint, and I'd happily add that separately — but the specific invite rule belongs in the handler next to the insert, where it's testable and can't drift out of sync with the write it's protecting.
+
+If you'd rather keep it in the chain anyway, say so and I'll do it — the constraint then is that it must sit **after** authn and the membership check, or a non-member can burn a team's quota and use the 429/404 difference to probe which team ids exist.
+
+**Four details that matter**
+
+- **Retry-After as integer delta-seconds**, not an HTTP-date. No clock-skew failure mode, easier for the client.
+- **The 429 body follows the tier-2 contract**: what failed, one concrete fix, help slug. Something like `"invite limit reached: this team has sent 20 invites in the last hour. Fix: wait 14 minutes, or remove a pending invite and retry. [help: shoti.ai/troubleshooting/invite-rate-limit]"` — and that slug needs a real entry in the troubleshooting catalog, or `verify-docs` will catch it.
+- **Re-inviting the same email must not consume quota.** A double-clicked button burning 2 of 20 is the kind of thing that reads as a bug and generates a support conversation. Make repeat invites to the same address idempotent before the count.
+- **20/hour will be wrong the first time a real customer onboards.** Someone invites their 30-person company on day one and hits the wall in the middle of their best moment with you. I'd either set it at 50, or exempt a team's first N invites over its lifetime. A missed abuse attempt is recoverable; a founder rage-quitting mid-onboarding isn't.
+
+**Tests I'd write**: table-driven at the boundary (19 ok, 20 ok, 21 → 429 with `Retry-After` > 0), a parallel test firing 30 concurrent invites at one team and asserting exactly 20 land (the row lock makes this deterministic — that's the whole point of doing it in the tx), and one asserting the limiter sits after the membership check.
+
+No new dependencies either way. Say go and I'll implement the transactional version with the per-account second key, or tell me to keep it in the middleware chain and I'll do that instead.

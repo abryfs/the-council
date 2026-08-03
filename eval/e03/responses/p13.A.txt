@@ -1,0 +1,38 @@
+No. A stranger does not know what this does in ten seconds. Here's the honest read.
+
+First, what I'm judging: the hero as locked in `docs/specs/closed-product-language-current.md` — H1 "Where your team and its agents build your company.", the subhead "The people, the AI, and the product in one place. Everyone stays in the loop, and no one stops to sync.", the three proof lines, and the "Works with the agents your team runs" strip. The live page has drifted from that lock before (#396 put "Work with your agents" up), so if the deployed copy differs, point me at the file and I'll redo this against the real thing.
+
+**What breaks in ten seconds**
+
+1. **The H1 sets the wrong category.** "Where your team... build your company" reads as a workspace — an IDE, a Notion, a place the work happens. Shoti isn't where the building happens; the building happens in Claude Code and Cursor. So the stranger builds a mental model in second two, and then has to tear it down when they hit the demo. A wrong model is more expensive than no model.
+2. **There is no verb and no object.** "Stays in the loop" — in the loop about *what*? That missing noun is the whole product. The only sentence on the page that actually explains the thing ("When your agent understands a task, Shoti tells your team") is below the fold. You buried the one line that works.
+3. **"in one place"** is the single most-used phrase in B2B SaaS. It carries zero information and it costs you credibility with anyone who's read three landing pages this week.
+4. **"no one stops to sync"** is your best line and it's a negation. Negations only land on readers who have already named the pain. A founder drowning in standups gets it instantly; a cold visitor doesn't have the problem framed yet, so it reads as generic.
+
+Run the grunt test — what do you do, how does it make my life better, how do I buy. Line two answers #2. Nothing answers #1.
+
+**What I'd actually change tonight**
+
+The H1 is founder-locked and the lock exists precisely to stop an agent quietly rewriting it on taste, so I'm not touching it — this is your call. The surgical version that preserves the lock: swap the subhead's first sentence for the mechanism.
+
+> Where your team and its agents build your company.
+>
+> When your agent picks up a task, your whole company knows. No one stops to sync.
+
+That's one sentence changed. It puts a verb and an object inside the first ten seconds, keeps the ambition in the headline, and keeps the locked vocabulary intact.
+
+The version I'd want to *test* — mechanism-forward, but it's a real positioning change, not a copy edit:
+
+> Your agents tell your team what they're about to build.
+>
+> Everyone in the company stays in the loop. No one stops to sync.
+
+It clears the grunt test cold. The cost is that it sounds like a notification tool and gives up the workspace ambition. That tradeoff is a founder decision, not a copywriting one.
+
+**The thing you may not have considered**
+
+Strangers don't read a landing page top-to-bottom. They read the H1, then their eyes go to the first image. If there's a demo or a screenshot under the fold that shows a broadcast landing in a teammate's agent, the H1's job gets much smaller and the current one survives. If the first visual is abstract, the H1 is carrying the whole load and it can't.
+
+Related: the "Works with the agents your team runs" strip is doing more comprehension work than any sentence on the page. Seeing Claude Code / Cursor / Codex marks tells a stranger the category in under a second. I'd move it up near the fold. (It stays a compatibility claim — not "trusted by," not "powered by.")
+
+And one process note, since it's the night before: your read on this is compromised and so is mine. Flash the hero at five people for five seconds and ask what it does. That's 20 minutes and it beats both our opinions. If the share is warm — friends, people who already know what you're building — the current copy is survivable and I wouldn't rewrite a locked line at 11pm. If it's going to cold traffic, make the subhead swap.

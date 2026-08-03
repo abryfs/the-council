@@ -1,0 +1,63 @@
+The feeling you're describing is real but it's pointing at the wrong cost. Let me separate what's actually going on, then give you a process you can run in an afternoon.
+
+## First: you're conflating three different decisions
+
+"Cut a feature" can mean three things with wildly different costs and reversibility:
+
+1. **Stop investing** — no more work on it, no new states, it stops appearing in planning.
+2. **De-surface** — remove it from the UI, keep it behind a flag. Reversible in minutes.
+3. **Delete** — rip out the code, the tests, the tables.
+
+Almost all the benefit is in 1 and 2. Almost all the emotional pain is about 3. So do 1 and 2 now, and put 3 on a 30-day timer. You're not throwing work away, you're taking it off the surface. That single reframe usually unblocks the whole thing.
+
+## Second: sunk cost is genuinely irrelevant, but the number that matters isn't
+
+The reason "I'd be throwing away work" feels wrong is that it's evaluating the *build* cost, which is spent and unrecoverable no matter what you choose. The number that should drive the decision is the **carrying cost** — what each feature charges you per week, forever:
+
+- Code paths every new change has to be correct in
+- Tests it slows down
+- Decisions it constrains ("we can't restructure X because Y depends on it")
+- Docs, support, onboarding surface
+- Space in your own head
+
+The question to ask each feature is not "was this good work?" It's: **if this vanished tonight, how much faster is the next thing I ship?** That converts "throwing away work" into "buying back weeks," which is what it actually is.
+
+And this is probably the real cause of your slipping ship dates. It isn't that 9 features took time to build. It's that with 9 features, every new change has to be right in 9 contexts. The cost is combinatorial, not additive — which is why shipping gets slower even when you're not building the old stuff anymore.
+
+## Third: "I'd guess 3 get used" — stop guessing, it takes a day
+
+A guess is a bad foundation for an irreversible-feeling decision, and it's also the thing that makes it feel irreversible. One event per feature entry point, seven days. If you can't instrument by tomorrow, use the proxy: for each of the 9, can you **name a specific user, not you, who used it in the last two weeks?** If you can't name them, that's your answer for now.
+
+But usage alone will mislead you in both directions. Some low-usage features are load-bearing (invite flow, auth recovery — used once per user, catastrophic if missing). Some high-usage ones are just where people flail. So usage is an input, not the verdict.
+
+## The actual process — 2 hours, 9 rows
+
+Write the one-sentence promise of the product at the top of the page. Not the positioning — the promise a user would say back to you.
+
+Then a table, one row per feature, five columns:
+
+| Feature | What it promises the user | Real users last 2 weeks | Weekly carrying cost (hrs + what it constrains) | What breaks if it's gone |
+
+Then classify each into exactly one of three buckets:
+
+- **Delivers the promise** — the thing they came for.
+- **Makes the promise credible** — it isn't the point, but without it people don't trust or can't reach the point. Auth, invites, error recovery, the empty state.
+- **Neither.** 
+
+Everything in bucket 3 is cut, regardless of how much you like it or how much it cost.
+
+Then — and this is the part people skip — **force a strict rank order of what's left. No ties.** "Everything is important" is the failure state you're currently in, and allowing ties preserves it. Cut or starve the bottom third of the ranked list.
+
+## Two rules that make it safe
+
+**Flag, don't delete.** De-surface behind a flag with a date on the calendar 30 days out. If nobody notices, delete on that date. If someone complains, you just learned something valuable for free, and you flip it back in one commit. This is what makes the decision cheap enough to actually make.
+
+**Tell people.** If any real user is on something you're removing, email them directly. Removing a feature deliberately and saying why reads as taste and focus. Removing it silently reads as instability. With a small user base this costs you three emails and buys you real information about who cared.
+
+## Two things you probably haven't considered
+
+**The bloat isn't only whole features — it's the states inside the ones you keep.** In my experience most of the drag lives in the 4th and 5th state of a feature that's used almost exclusively in state 1: the edge case, the config option, the alternate flow, the setting nobody changed. When you go through the 9, cut *inside* the survivors too. That often reclaims more than deleting a whole feature does, and it costs nothing emotionally because you're keeping the feature.
+
+**Don't cut until you've named what you're cutting for.** Subtraction without a next bet just produces a smaller version of the same drift, and in three months you'll have 7 features and the same feeling. The reclaimed weeks have to go to *one* thing, decided before you start cutting — otherwise they'll be absorbed by the same process that produced 9 features in the first place. Write that one thing at the top of the same page as the table.
+
+If you want, paste me the 9 and I'll fill in the carrying-cost column from the code — that's the column you can't estimate accurately from memory, and it's the one that decides the ranking.

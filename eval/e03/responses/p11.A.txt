@@ -1,0 +1,66 @@
+Your three hypotheses are all plausible, which is exactly why you shouldn't pick between them. You can find out which it is in about a day, and the sequencing matters — the cheap diagnostics come before the instrumentation, not after.
+
+## Before anything: 22% of what, to what?
+
+Two definitional problems that routinely turn out to be half the story.
+
+**The denominator.** Accounts created includes bots, your own test accounts, duplicate signups from people who bounced and came back, and traffic from a source that was never going to convert. Slice by source before you touch the product. If your referred/invited cohort converts at 60% and cold traffic at 8%, you don't have an onboarding problem, you have a traffic problem, and redesigning the wizard will move nothing.
+
+**The numerator's window.** If you're measuring same-session, and a meaningful share of first actions happen on day 2–7, then 22% is undercounting and the fix is a nudge email, not a redesign. Plot time-to-first-action as a distribution, not an average.
+
+**And check that first-action is even the right target.** Among the 22% who do act — what fraction come back in week 2? If that's low, raising 22% to 35% raises nothing that matters. The metric worth optimizing is the one that predicts retention, and it might be a different action than the one you're counting.
+
+This is 30 minutes of querying and it can invalidate the whole investigation. Do it first.
+
+## The reframe: 22% isn't one number, it's a product
+
+"Signup to first action" is six or seven steps multiplied together. Sign in → welcome/name → create-or-join a team → the repo connect ask → the OAuth grant screen → repo selected → hook installed → first action. At 22% overall you're averaging ~80% per step, which means one step is probably at 40% and the rest are fine. Your question "is it the empty state or the repo ask" dissolves the moment you can see the step chart.
+
+So: **one event per step, fired on arrival, not on completion.** Half a day of work, and it converts a debate into a reading.
+
+## But add one dimension the standard funnel misses: can't vs. won't
+
+A step-completion funnel tells you *where* people stop. It does not tell you *why*, and the three whys need opposite fixes:
+
+- **Never attempted** the step → motivation or clarity problem. Fix copy, ordering, or show value first.
+- **Attempted and failed** → technical problem. Fix the error path.
+- **Succeeded and still didn't act** → the "now what" problem. Fix the empty state.
+
+So instrument the repo-connect step with **attempt and outcome separately**, not just completion. Without that split you will spend two weeks rewriting headline copy for a population that was clicking the button and hitting an error.
+
+## Where I'd bet the money, and the specific failure to check today
+
+An immediate repo/permission ask is nearly always the biggest single drop, because it's the only step that does all three of these at once: it sends the user out of your app, it demands high trust before you've delivered any value, and it has a **hard technical dead end**.
+
+That dead end: a user at any company with GitHub org policies clicks connect, lands on the grant screen, and discovers the app requires org owner approval they don't have. They cannot proceed. They do not email you. In your analytics this is indistinguishable from someone who lost interest — it looks like a click and then nothing, forever.
+
+Go check this one specifically, today, with a real account in an org you don't own. If it's happening, it's a bigger number than you'd guess and it's the cheapest fix on the list (detect it, say what happened, offer a path that doesn't need the grant).
+
+## The two diagnostics that beat instrumentation on speed
+
+**Watch five sessions.** Replay if you have it; three 20-minute screenshare calls with recent signups if you don't. Say nothing while they go. Five is enough to find a cliff — this is not a sample-size problem, it's an observation problem.
+
+**Run your own cold path.** Fresh browser, fresh email, a machine that isn't yours, no shortcuts, and time each step with a stopwatch. Founders never actually do this — you have credentials cached, a team already created, a repo already bound, and a mental model that makes every ambiguous screen legible. The cold path is a different product than the one you think you shipped.
+
+## The structural change to consider once you know
+
+If the repo ask does turn out to be the cliff, the principle to fix against is: **never charge a credential before the user has seen what it buys.** Three options, in increasing cost:
+
+1. **Reduce the price.** Narrowest possible scope, one repo not org-wide, and state plainly what you can and can't see. Often worth more than reordering.
+2. **Add a real skip.** "Skip for now" that leads somewhere non-empty. This is also a free experiment: if 60% skip and 5% come back, the ask was never the problem — the empty state is, and you'll have proven it.
+3. **Show value first.** A populated demo state they can poke before connecting anything, with the connect ask surfacing at the moment its payoff is visible on screen.
+
+Don't do 3 speculatively. It's a real build, and 1 and 2 will tell you whether it's needed.
+
+## Order of operations this week
+
+1. Slice existing signups by source and cohort (30 min) — may end the investigation.
+2. Plot time-to-first-action, and week-2 retention among converters (30 min).
+3. Test the org-approval dead end yourself with a non-owner account (20 min).
+4. Five session replays or three calls (2 hrs).
+5. Add step-arrival events plus attempt/outcome on the connect step (half a day).
+6. Read the chart. Then decide.
+
+Don't ship a redesign before step 6. The three hypotheses you named have three different fixes, and shipping the wrong one costs you a week and, worse, muddies the baseline you'd need to tell whether the right one worked.
+
+One last thing worth checking while you're in there: look at the 22% who *did* convert and ask whether they converted for a reason that scales. If most of them are people you personally walked through it, your real conversion rate is lower than 22% and the funnel is worse than the number says.

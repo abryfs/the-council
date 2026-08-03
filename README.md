@@ -78,8 +78,8 @@ publishing results that went against its own changes.
 | ...without losing useful signal | **no** — signal fell 1.60 → 0.60/prompt |
 | Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; replaced |
 | An agent scanning a compact index can | **yes** — recall 67%, end-to-end 26/26 precision at 1.30 signal, no dependencies |
-| Patterns improve output quality vs no corpus | **not yet run** — blocked on a semantic retriever |
-| Corpus scales to 1,000 without precision collapse | **not yet run** |
+| Patterns improve output quality vs no corpus | **NO** — 1/5 decisive pairs, sign test p=0.969. Kill condition fired. |
+| Corpus scales to 1,000 without precision collapse | **moot** — not scaling a corpus that shows no benefit |
 
 **The honest one-line summary: what it shows you is now trustworthy, and it shows you too
 little.** The shipped pipeline (BM25 → 8 candidates → semantic gate → ≤4) surfaced 12 patterns

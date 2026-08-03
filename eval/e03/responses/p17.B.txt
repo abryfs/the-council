@@ -1,0 +1,34 @@
+The instinct is right and the framing is the thing standing in your way. Let's fix the framing first, then run the actual cut.
+
+**"I'd guess 3 get used" is the part to attack first**
+
+You're about to make an irreversible decision on a guess. Not a call for six weeks of analytics — for a product your size the answer is available in about a day: look at what's actually invoked (event log, command counts, whatever telemetry exists), and then ask the handful of people who use it which ones they'd miss. That second half is not optional. Usage tells you what people do; it doesn't tell you why they don't. A feature can be unused because nobody wants it or because nobody can find it, and those have opposite treatments — the first gets deleted, the second gets moved to where people look. Guessing collapses them into one bucket and you'll delete the wrong thing.
+
+**Then evaluate forward only**
+
+For each feature, two questions, both about the future:
+
+- If this didn't exist next Monday, who complains, by name?
+- What does it cost to keep? Not to build — to keep. Every session it's loaded into an agent's context. Every refactor it constrains. Every test and verifier that encodes it. Every line of the docs it appears in. Every PR review where someone has to remember it exists.
+
+Notice what's not on that list: how long it took, how hard it was, how much you liked building it. Those are facts about the past and they can't be inputs to this decision. Same for "but this is what we are" — if a feature is load-bearing for identity, it should be able to win on the first two questions. If it can't, the identity claim is doing the work the value should be doing.
+
+That's also the answer to feeling like you're throwing work away. You aren't. The work already paid out — you learned the shape of the problem, and that knowledge is in your head and in the surrounding code. What you're carrying forward is not the value, it's the rent. In a codebase written mostly by agents the rent is unusually high and unusually invisible: every feature that survives is context an agent loads before doing anything, and past a certain volume it dilutes everything else you've told it. Nine features' worth of surface area is why shipping is slipping, more than any individual feature is.
+
+**Delete, don't defer**
+
+This is where feature-cut exercises usually fail. "Phase 2" and "later slice" and "it's on the roadmap" are not cuts. The feature stays in the data model, the API, the config, the tests, the type unions, the agent-facing tool list — you keep paying the entire complexity cost and collect none of the value. Deferral is a way of making the decision feel less final so you don't have to feel the loss. It's the most expensive option available.
+
+A cut means gone: schema, endpoints, UI surface, docs, tests, verifier rules, CLAUDE.md lines. And that's fine, because git makes it recoverable. Do the removal on one branch, one commit per feature, tag it before you merge. If in three months someone genuinely needs it back, you cherry-pick. The tag is what lets you make the decision without the emotional stake — you're not destroying it, you're unloading it.
+
+One real cost to name: anything that's a public interface others' tooling remembers — an MCP tool name, a CLI command, a URL — can't be un-shipped cleanly. Removing those is a legitimate breaking change and needs a deprecation, not a deletion. That's the one place where "keep it" can win on cost grounds alone.
+
+**The order I'd run it in**
+
+1. One afternoon: list all nine, pull real usage per feature, write the number next to each.
+2. Ask the people who use it, in their words, which three they'd fight to keep and which they forgot existed. Don't lead them.
+3. Score each on the two forward questions. Anything with no named complainer and non-trivial keep-cost goes.
+4. Look at coupling before you finalize — if two of the survivors are the ones tangled with everything else, the coupling is your shipping problem, not the count.
+5. Cut in one branch, tagged, merged as a single visible event. Then write down what the product does now, in one paragraph, and see if it reads better.
+
+Give me the list of nine and I'll do step one and three with you — pull the actual usage from the repo and take a first pass at the scoring, and you can argue with me about the ones I get wrong.

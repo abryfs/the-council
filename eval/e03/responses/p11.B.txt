@@ -1,0 +1,25 @@
+You have three hypotheses and no evidence, and all three are plausible, so the temptation is to fix all three. Don't — you'd change four things at once and learn nothing from the result. A day of looking will tell you which one it is.
+
+**Look at this first, in this order**
+
+**1. Segment by how they arrived.** Cheapest and highest-information cut available. Split the 22% into people who came in on a teammate's invite versus people who signed up cold and alone. My guess is those numbers are wildly different — invited users arrive with context, a reason, and someone waiting for them; cold ones arrive with a hypothesis. If invited converts at 55% and cold at 8%, you don't have an onboarding problem at all, you have a positioning or channel problem and the fix is upstream of the app entirely. If they're roughly equal, the friction is genuinely in the flow and you keep digging.
+
+**2. Get step-level, not funnel-level.** "Signup to first action" is one number over a chain of maybe five steps: account created, CLI installed, authenticated, repo connected, hooks installed, something actually broadcast. Instrument each one and the shape usually names the culprit outright — a cliff at one step is a broken step, an even bleed across all of them is a motivation problem, not a friction problem. Those get different fixes and you cannot tell them apart from 22%.
+
+**3. Watch or ask five of them.** Five session recordings, or five short emails to people who signed up and stopped: "you signed up last week and didn't get further — what were you expecting, and what stopped you?" Half won't reply. The two or three who do will tell you something none of your three hypotheses contain. Every drop-off explanation that skips this step defaults to the most legible variable — the one you already instrumented — and the resulting fix reliably does nothing, which then reads as the problem being unfixable.
+
+**The thing your three hypotheses have in common**
+
+All three — empty state, repo connection, "something dumber" — are friction explanations. There's a fourth that isn't, and for a coordination product it's the most likely one: **the first action has no payoff at n=1.**
+
+Someone signs up alone. They install, connect a repo, and broadcast — to nobody. The mechanism worked perfectly and the experience is nothing happening. That isn't a step being too hard, it's the product's value being structurally unavailable until a second person shows up. If that's what's going on, streamlining the repo connect will move 22% to maybe 26% and you'll conclude that onboarding is a slog, when the actual finding is that you're asking a single user to do setup work for a benefit that requires a colleague.
+
+That hypothesis is testable with the segmentation in step 1, and if it holds, the fix is a different shape entirely: either the invite becomes the first action (get the second person in before you ask for any setup), or the solo path delivers something real on its own so the first user has a reason to stay long enough to bring someone. Both are bigger than a copy change, which is exactly why it's worth spending a day distinguishing them before you build.
+
+**Two things to check while you're in there**
+
+Who's in the denominator. If sign-up is frictionless, some fraction of that 78% is bots and curiosity that never intended to convert, and your real number is better than it looks. Filter to accounts that did anything after the sign-up screen and re-run it.
+
+What happens after the 22%. If the converters don't come back in week two, conversion is the wrong problem — pushing more people through a bucket that leaks a step later just costs you more of them. Check the retention curve on the ones who did convert before you spend a month on the ones who didn't.
+
+If you point me at wherever the sign-up and event data live, I'll do the segmentation and the step-level breakdown and come back with the shape rather than a theory.

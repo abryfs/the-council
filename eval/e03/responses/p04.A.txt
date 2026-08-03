@@ -1,0 +1,15 @@
+A Show HN going nowhere is close to zero signal. It's a distribution channel with a brutal timing lottery, not a demand test. What you have isn't "we failed" — it's "we still have no data." Those feel identical from the inside and call for completely different responses.
+
+The goal for the next two weeks isn't growth. It's finding out whether your two real users have a problem worth solving.
+
+**Talk to both of them this week.** Not a survey — a call or a screenshare. The highest-value question is "what were you doing about this before you found us?" If the answer is "nothing," there's no pain, and no amount of distribution fixes that. Then: have you come back since the first session, and what would you do tomorrow if this disappeared?
+
+**Define the one action that means the product worked, and count that instead of signups.** Four signups where two people did the real thing is a completely different situation from four where nobody did. My guess is you can't currently answer this, and it's the number every subsequent decision hangs off.
+
+**Hand-deliver it to 10–20 people.** Pick specific humans who fit who you think this is for. Message them individually. Offer to get on a call and set it up for them. Not a launch — DMs and calendar invites. This is the only reliable way to separate the two failure modes you're stuck between: if it works when you personally put it in someone's hands, you have a messaging and distribution problem; if it doesn't stick even then, you have a product or problem-selection problem. Right now you can't tell those apart, and they need opposite fixes.
+
+The thing you may not have considered: you can Show HN again. Founders treat a launch as one-shot. It isn't. Six months and a real change later, a second Show HN is completely normal and nobody remembers the first. Stop reading this one as a verdict.
+
+What I'd write down now, while you're not attached to a specific outcome: a date and a number. Something like — by eight weeks from today, ten people who aren't us use it in a given week without me nudging them. Decide it now, because in eight weeks you'll be able to rationalize almost any number as progress.
+
+One caution. The instinct after a flat launch is to build — new feature, redesign, another launch post. It's the most comfortable available action and it's the one that produces no information. Six weeks of building without talking to the two people who actually showed up is how a year goes by.

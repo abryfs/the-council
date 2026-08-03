@@ -1,0 +1,28 @@
+Happy to, but the fastest version of this is also the one that breaks things quietly, so let me tell you what I'd actually do and why it isn't "delete eight rows."
+
+**The thing that makes settings dangerous to clean up:** a settings row is a UI control on top of a stored value that some code path reads. Those are three separate things, and "clean it up" can mean removing any one of them. If you remove the row but leave the value and the read, every user who ever flipped that toggle is now frozen in a non-default behavior with no way to see it or change it — and *you* can't see it either. That's strictly worse than both leaving it and removing it. It's the kind of thing that surfaces six weeks later as "this one user's app behaves differently and nobody can figure out why."
+
+So for each of the 14, there are only three honest verdicts:
+
+1. **Delete it entirely** — remove the control, delete the read path, delete the stored values. The behavior becomes a decision you made, not a choice you offer.
+2. **Demote it** — it's real, it's rare, it goes behind a disclosure. Nothing is removed, it just stops competing for your eye.
+3. **Keep it** — it's one of the few you actually use.
+
+There is no fourth option where you hide it and leave it working. That one's a landmine.
+
+**What I need before touching anything.** Give me 30 minutes and I'll produce a table: for each of the 14 rows — what it controls, every place in the code that reads the value, how many stored values are currently off-default, and a proposed verdict. The off-default count is the whole game. "Nobody touches it" usually means "*I* don't touch it," and those aren't the same claim. If four users flipped a setting, that setting is load-bearing for four people and deleting it changes their product without telling them. If zero users are off-default, deletion is free.
+
+If you don't store these server-side and can't count, say so — then the rule flips to conservative: demote, don't delete, and revisit once you can measure.
+
+**Then, separately: clutter isn't a row-count problem.** Fourteen rows all rendered at the same weight, in the order you happened to add them, reads as clutter. Fourteen rows in four named groups, with the three you touch weekly at the top, reads as a settings page. You'd probably stop hating it after the reordering alone, before a single deletion. So I'd split this into two changes:
+
+- **PR 1 — pure arrangement.** Group and reorder, nothing added or removed. Whitespace plus a lowercase eyebrow per group as the separator, no cards, no borders, ordered by how often you actually touch each one rather than by when it was built. Zero behavioral risk, and it's the change that fixes the feeling. Don't add a search box — 14 rows is well under the threshold where search beats grouping.
+- **PR 2..N — one deletion at a time,** each removing the control, the read, and the stored values together, each with the table row explaining what it was for.
+
+**The thing worth sitting with.** I'd bet a real fraction of those 14 aren't settings at all. They're decisions you didn't want to make — you weren't sure which behavior was right, so you shipped both and let the user pick. Every one of those is a deferred decision sitting in your UI charging rent. Deleting it means *making* the call, which is why they accumulate.
+
+Another chunk are probably escape hatches you added while chasing a bug, or things support/debug needs. Those shouldn't be on a user's settings page at all — they belong behind a dev surface or a config file.
+
+So when I hand you the table, the question I'll be asking on each row isn't "does anyone use this?" It's **"why was this ever a choice?"** That's the part that actually shrinks the page, and it's product work, not layout work. The layout pass just stops it from bothering you while you do it.
+
+Point me at the settings component and I'll start the table.

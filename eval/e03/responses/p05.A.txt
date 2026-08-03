@@ -1,0 +1,25 @@
+You're probably right about the rewrite and probably wrong about the problem — and "6 week detour" collapses those into one claim, which is why this isn't resolving.
+
+There are two separate assertions on the table: (1) the Node service has a real latency problem, (2) the fix is Rust. Claim 1 may be completely true. Claim 2 almost certainly isn't, and you can find out cheaply.
+
+The technical part: language-level speed only matters if you're CPU-bound inside your own process. In practice, most Node latency-under-load is one of — N+1 queries or a missing index, connection pool exhaustion, blocking the event loop with synchronous work (large JSON.parse, crypto, sync fs), no backpressure so queues grow unbounded, or running a single process on an 8-core box. Rust fixes exactly one of those. Rewrite with the same N+1 and you get the same p99.
+
+So before anyone agrees to anything, get three numbers:
+
+- p99 at what RPS, and which SLO are we missing? ("Showing latency problems" is not a number.)
+- Where does the time actually go — DB, external calls, event loop lag, or CPU in our own code? A flamegraph plus span breakdown over an hour of production traffic.
+- What fraction of p99 is CPU in our process?
+
+If that last number is under ~30%, the rewrite's *best case* is a ~30% improvement and Amdahl settles the argument for both of you. If it's 70%+, your cofounder has found something real and you should stop calling it a detour.
+
+The argument I'd push hardest on is "we'll have to do it eventually anyway." That assumes a scale you haven't reached and a product shape you haven't settled. Plenty of companies have gone very far on Node. And even if the eventuality were real, the moment to pay it is when the product stops changing — rewriting something that's still moving means writing it twice.
+
+The compromise, and I mean this as the technically correct answer rather than a peace offering: strangler-fig the hot path. If profiling finds a genuinely CPU-bound endpoint or job, pull that one thing out into a small Rust service, or drop in a native module via napi-rs and leave the rest of the app alone. Timebox it to a week. He writes Rust, you get the win where it actually matters, and you both learn whether Rust helps *here* before betting the roadmap on it.
+
+Where you might be wrong:
+
+- If the service is genuinely small — a few thousand lines of thin CRUD over Postgres — six weeks might be two, and the calculus changes. Go count it instead of estimating from vibes.
+- If latency is costing you users right now, "detour" reads as denial, and you owe a plan with a date on it regardless of language.
+- If he owns the backend, he's the one carrying the pager at 2am, and that's a legitimate input. But the currency you pay him in is the hot path in Rust, not the whole service.
+
+One more thing, and it's the part I'd actually say out loud to him: name what the six weeks costs. What's on the roadmap that doesn't happen? That converts an aesthetic argument into a business one — and it usually surfaces the real disagreement, which is that you two don't agree on what the company's bottleneck is. If he thinks it's technical foundations and you think it's customers, you'll be having this same fight in two months about a different technology.

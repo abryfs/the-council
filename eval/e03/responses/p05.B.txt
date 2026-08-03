@@ -1,0 +1,24 @@
+You're both arguing from the same missing fact, which is why neither of you can win it. Get the number first — it's two days, not six weeks.
+
+**The measurement, specifically:**
+
+1. Reproduce the latency under a load test that resembles production: right concurrency, real payload shapes, a database with real row counts. Not 10k RPS against an empty table.
+2. Report p50/p95/p99 **per endpoint**, not an average. "Latency under load" is nearly always a tail problem, and averages hide exactly the thing you're chasing.
+3. Flame-graph the Node process (`--cpu-prof`, clinic.js, or 0x) and separately account for database time: `pg_stat_statements`, connection-pool wait time, queries per request.
+
+**Then read where the time actually goes.** It'll be one of four, and only one of them says "the runtime is the problem":
+
+- **In Postgres** — missing index, N+1, pool exhaustion, lock contention. Extremely common. Rust changes nothing here; the same queries take the same time, and you'd carry the problem into the new stack having spent six weeks.
+- **Event loop blocked by sync work** — JSON serialization of large payloads, crypto, compression, a hot synchronous loop. This is the case where Rust genuinely is 5–20x — but it's 5–20x on *that function*, which you can have without touching the rest of the backend.
+- **GC pauses on a large heap** — real, shows up precisely in p99, and the strongest structural argument for a compiled runtime. Often also fixable by not retaining the object.
+- **Something dumb** — a serial `await` chain that should be parallel, missing keep-alive, TLS handshakes per request, a logger doing sync I/O, autoscaler thrash. Statistically the most likely bucket, and consistently embarrassing.
+
+**Where your cofounder may be right, since you asked.** If the profile shows the time is CPU-bound in your own JavaScript, on the path every request takes — not in a peripheral job — then he's right about the physics, and "we'll have to do it eventually" becomes a real cost-of-delay argument: the migration gets more expensive with every feature you stack on the Node service. There's also a class of tail-latency behavior that has no clean Node fix. Don't wave that away. The measurement is designed to find out if you're in that world, and you should want to know.
+
+**Where "eventually anyway" is weak.** It's a bet that the company survives long enough for "eventually" to arrive, and at your stage the thing that kills you is almost certainly not p99. "Eventually" also tends to resolve strangely — the service gets deleted, split, or its load profile changes shape entirely, and the rewrite you'd have done today would have been the wrong rewrite.
+
+**The move that gets you both what you want: extract the hot path, don't rewrite the backend.** Whatever the profile names becomes one Rust service behind the existing API, or a napi-rs native module Node calls directly. Days to two weeks. Your cofounder writes Rust, gets the actual win where the time actually is, and you both get a real production data point on operating Rust — build times, deploys, on-call, what happens when only one of you can fix it at 2am — before betting the whole backend on it. If that goes well, the full migration happens incrementally, service by service, from a much better-informed position, instead of as a big-bang cutover.
+
+**On the six weeks.** Don't argue the estimate on its merits; check it against a base rate. What's the last project either of you scoped by listing the work, and what did it actually take? Apply that ratio. A rewrite specifically inflates worse than most, because the old service is full of ugly branches that are each a production bug someone found and nobody remembers the reason for. Those don't survive a clean-room rewrite — you rediscover them as customer-facing regressions over the following three months, while still maintaining the Node service, because it still has to take traffic the whole time. So the cost isn't six weeks of Rust; it's six weeks of neither of you shipping product, plus a regression tail, plus two systems to keep alive.
+
+**On the disagreement itself.** Don't win it by argument — you'll spend capital you need. Propose the two-day profile as a joint task, and agree *in advance* on what result decides it: "if more than half of p99 is CPU in our own JS on the request path, we do it; if it's database or I/O wait, we fix the actual cause and revisit in three months." Then follow the number. Whoever turns out to be right, nobody had to concede a position, and if it's him you'll be glad you found out with a flame graph rather than by losing the argument.

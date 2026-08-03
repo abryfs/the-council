@@ -1,0 +1,45 @@
+Good instinct to stop here. Most digest features die because three questions get answered by accident during implementation rather than on purpose beforehand. Here's the full decision list, split into the ones only you can make and the ones I'll default unless you veto.
+
+## The three that actually change the shape
+
+**1. Which reader is this for?** You have two, and they need opposite products.
+
+- The person with live scope (heads-down in a place all week). The gate already reaches them when something touches their work. For them the digest is *the misses* — the things that landed near them but didn't earn an interrupt.
+- The person with no live scope — you, mostly. Your locked hero pain is "I'm out of the loop," and the delivery gate is structurally incapable of serving that person: relevance is scored against live scope, and a founder who wrote nothing this week has none. They get silence from the gate by design.
+
+Those are different emails. One is a diff against your attention; the other is a narrated summary of the whole map. **My recommendation: build the second one first.** It serves the persona your existing mechanism cannot reach, which means it's additive rather than a second, worse copy of the gate. It also has a clean content rule, which decision 2 needs.
+
+**2. What is the selection rule, stated as a rule and not a vibe?** This is where digests rot. A three-person team running agents in parallel generates hundreds of events a day. "Everything that happened" is unreadable by week two, and unreadable means unopened, and unopened means you now maintain a dead feature that still sends mail.
+
+The product-coherent answer, if you take the framing above: the digest is the batched home for the volumes the gate deliberately *doesn't* push — "waits at the place" and "notifies nobody." That gives you a definition instead of a ranking model you don't have yet, and it makes the feature explainable in one line: *nothing here interrupted anyone; here's what it was.*
+
+If you'd rather rank, then you need a ranking signal, and you don't have one. Don't invent one for this.
+
+**3. What do you send on a quiet day?** Non-negotiable and always underspecified. "Nothing happened yesterday" is the single fastest way to train someone to filter your domain. My default: a floor (say, under N items or under one place with activity) below which you send nothing at all, and no makeup send. Silence is a feature. Decide the floor now, because retrofitting it after people have unsubscribed doesn't get them back.
+
+## The ones I'd default — say the word if you disagree
+
+- **Frequency and preferences:** one toggle plus daily/weekly. Nothing else. Every preference knob is permanent and each one multiplies the states you have to test.
+- **Default state:** off for existing users, opt-in prompt in-app. On-by-default for a new send to an existing list is how you buy complaints.
+- **Timing:** per-user local time, computed from their last recorded activity, with a stored tz once they tell you. Not server-time — that's how you send at 3am to half your users.
+- **Sending domain:** a subdomain separate from your transactional mail. Digests get marked as spam; transactional (sign-in, invite) must not inherit that reputation.
+- **Unsubscribe:** one-click `List-Unsubscribe` + `List-Unsubscribe-Post` headers, honored immediately, plus an in-email link. This is legally required and also the thing that keeps you out of spam folders.
+- **Idempotency:** a sent record keyed on (user, digest\_date), written in the same transaction as the send attempt. Cron retries and partial failures are the norm; double-sends are the visible failure.
+- **Bounce/complaint handling:** hard bounces and complaints go to a suppression list that the send path checks. Skipping this is the "half-designed" part of every notification feature that later burns someone.
+- **Rendering:** plaintext-first, single column, no custom fonts, no images-as-content. Email clients are a hostile surface and dark-mode inversion will wreck a warm-grey palette. Do not port the reading-room design; write an email.
+
+## Three failure modes worth naming before you start
+
+**The trust boundary leaves the building.** Every intent and reply in that digest is teammate-authored text. Today it's wrapped by `internal/untrust` on its way into an agent's context. In an email it goes into HTML — so you need escaping and a policy on links (I'd render URLs as inert text). This is a new boundary crossing and it should get the same test treatment.
+
+**Authorization drifts between generation and send.** A digest generated at 06:00 and sent at 09:00 can contain content for a team the recipient was removed from at 07:30. Re-check membership at send, not at compose.
+
+**Deleted and dormant accounts.** Digests to churned users are the classic "I thought we shut that off" incident. The send path needs an account-state check, not just a preference check.
+
+## The thing to decide that nobody decides
+
+**What number kills it.** Pick it now, while you're unattached: e.g. if after 30 days fewer than X% of recipients click through to the app in a given week, you delete the feature and the cron and the preference column. Open rates are meaningless now (Apple's proxy pre-fetch inflates them), so the metric has to be click-to-app-and-then-did-something.
+
+Without that, this becomes permanent infrastructure — a cron, a template, a preferences row, a suppression list, and a support surface — that nobody reads and nobody is willing to be the one to remove.
+
+If you give me answers to the three at the top, I'll write the spec against them. If you want, I can also write it as "digest = the ungated volumes, batched" and you can react to a concrete draft instead of an abstract question — that's usually faster.

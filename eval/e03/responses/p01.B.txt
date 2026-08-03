@@ -1,0 +1,51 @@
+Straightforward, but there are two spec holes that decide the implementation, and one operational risk that'll bite you in the beta specifically. Let me name them before I write code.
+
+**Hole 1: 20 what per hour?** If `/v1/invites` accepts a list of emails in one request, "20 per hour" as a request limit isn't a limit at all — one request invites 200 people. If it's one email per request, request-counting and invite-counting are the same thing. Confirm which, because it changes the counter.
+
+Assuming you want to cap *invites sent*, not *HTTP calls made*, don't build a request counter at all:
+
+```sql
+SELECT count(*), min(created_at)
+  FROM invites
+ WHERE team_id = $1
+   AND created_at > now() - interval '1 hour'
+```
+
+That gives you a true sliding window with zero new state, no new dep, no eviction logic, no memory growth, and it's exact across every API process. A fixed-window counter lets someone send 40 across a boundary; this doesn't. And it counts the thing you actually care about — invites that exist — rather than requests, so a client retrying a 429 or a failed-validation request never eats budget.
+
+The tradeoff to accept knowingly: requests that fail validation cost you a DB read and don't consume the limit, so this is not a shield against someone hammering the endpoint with garbage. That's a different problem (per-IP, at the edge) and I wouldn't solve it here.
+
+**Hole 2: per-team is the wrong blast radius on its own.** With a pure team limit, one member — compromised, or just enthusiastic — locks out inviting for everyone else on the team for an hour, including the owner. Two limits, checked in this order, is the shape I'd build: **10/hr per actor, 20/hr per team.** The actor limit does the abuse work; the team limit is the backstop. If you want to keep it to one number for now, fine, but know that the failure mode you're buying is a legitimate admin being told to wait an hour because of someone else's action.
+
+**Retry-After has to be computed, not constant.** `3600` is wrong — it tells someone who's 59 minutes into the window to wait a full hour. Use the window's oldest row:
+
+```
+retry_after = ceil(3600 - age_seconds(oldest_in_window)) + 1
+```
+
+That's the exact second the window frees a slot. Emit it as integer seconds (the delta-seconds form), not an HTTP-date — every client library handles the int and about half mishandle the date.
+
+**Placement.** After auth and after team resolution — the limiter needs `team_id`, so it can't run ahead of whatever resolves the path param and checks membership. Practically that means it's the last thing before the handler, and an unauthenticated or non-member request gets 401/403 without ever touching the limiter. That's correct: you don't want to burn a team's budget on a request from someone who isn't on the team.
+
+**The error body.** Tier-2 rules apply, and the thing to avoid is the default shape here, which is `{"error":"rate_limit_exceeded","limit":20,"window":3600}`. That's the system describing its own state. Nobody reading it knows whether they did something wrong, whether it's permanent, or what to do. What I'd return:
+
+```
+This team has sent its 20 invites for the hour. The next slot opens at 3:47pm —
+send the rest then, or reply here and we'll raise the cap for your team.
+[help: shoti.ai/troubleshooting/invite-rate-limit]
+```
+
+Structured fields alongside it (`limit`, `retry_after_seconds`, `resets_at`) so the CLI and desktop can render their own version — but the human string has to say what happened, when it clears, and one action. And make sure the desktop/CLI actually renders it rather than falling through to a generic "request failed (429)" — that's the part that usually gets missed, and it's where the whole benefit of writing good copy evaporates.
+
+**The operational risk, which is the real reason to think twice about 20.** In a small public beta, the user most likely to hit this cap is your *best* one: a team that signs up, gets excited, and invites 25 coworkers in the first ten minutes. Your abuse control fires on your ideal activation event and tells them to come back in an hour. Half of them won't.
+
+Two cheap mitigations, pick one:
+
+- **First-hour grace.** Teams younger than ~24h get a higher cap (say 50). Onboarding is exactly when high volume is legitimate.
+- **Log before you enforce.** Ship the check in shadow mode for a week — count and log what *would* have been blocked, don't 429 anyone — then turn it on once you know whether real teams cross 20. If nobody's near it, 20 is safe. If your first three teams all trip it, you learned that for free instead of by losing them.
+
+Given you're pre-beta with essentially no abuse surface yet, I'd ship it enforcing but log every 429 with `team_id` and actor, and put a note in your head to check that log after the first week.
+
+**Tests I'd write** (and these are the only ones worth having): the 20th succeeds and the 21st gets 429; `Retry-After` matches the oldest-row math within a second, at both edges of the window; a request that fails schema validation doesn't consume budget; a request from a non-member 403s without touching the counter; two concurrent requests at the boundary can't both slip through (this one needs the count and the insert in the same transaction, or you'll leak one over the cap under concurrency — worth doing since your insert path already serializes per team).
+
+Tell me the answer on the list-vs-single question and whether you want the per-actor limit, and I'll write it.

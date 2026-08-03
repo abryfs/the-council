@@ -1,0 +1,21 @@
+Ship single-user — but the decision you're weighing has three things bundled inside it, with very different costs and very different urgency.
+
+**1. The data model — do it now, this week.** Does a workspace/account exist as an object, or is everything hung off `user_id`? Create the team/account row now, with exactly one member, and put the foreign key everywhere. That's about a day. Retrofitting it after you have live customer data is the genuinely painful migration, and unlike the other two pieces it has no interface you can get wrong — a table with an id and an owner is not a design you can regret.
+
+**2. Invites + multi-user access — depends on the fork question below.** Real work, bounded.
+
+**3. Per-seat billing in Stripe — don't build it.** Quantity changes, proration, mid-cycle add/remove, the reconciliation webhook, what happens when a seat is removed on day 3 of the cycle. It's the most expensive piece, and it's the one you're most likely to design wrong, because nothing about it is derived from a real customer — it's derived from your imagination of one. Your first 20 customers can be handled with a payment link and a spreadsheet, and each of those manual invoices is a conversation that tells you what the plan shape should actually be.
+
+**The fork: what does one person alone get out of this?**
+
+If the answer is "quite a lot" — cut #2 as well. Launch single-player, clean.
+
+If the answer is "not much, the value shows up once their team is on it" — then a single-user launch isn't a smaller launch, it's a launch of the half without the value. Every user arrives, sees an empty room, leaves, and you read the result as "no demand" when the correct reading is "we shipped the part that doesn't work alone." In that case #2 isn't a nice-to-have, it's the product — but notice that's still not #3. Getting a second person onto the account and charging for that person are completely independent, and only one of them is load-bearing for learning whether the thing works.
+
+My read from "billing assumes one person per account" is that you've been designing it as a solo tool with a team upsell. If the actual value is collaborative, that framing is what's making this decision feel 50/50 — it isn't, once you name which side you're on.
+
+**A cheap instrument instead of the feature:** ship an "add a teammate" button that opens a one-field form and emails you. It costs an hour, it lies to nobody (you follow up personally within a day), and it measures seat demand precisely — how many people press it, and who — without building seats. If nobody presses it in the first month, you saved the sprint. If everyone does, you build it knowing exactly what they wanted it for.
+
+**One coupled warning on pricing.** When you do charge, be slow to make per-seat the default if value rises with how many colleagues are on it. Per-seat makes your buyer's rational move "roll it out to 3 people, not 30," which starves the exact mechanism the product depends on — and the low penetration reads back to you as weak demand rather than as your own pricing fighting you. Flat per-workspace, or per-seat with free read-only members, is the safer opening position. You have no customers; you are not locked into anything, and your first ten prices are individually negotiated regardless.
+
+**Concrete cut for the two weeks:** team object in the schema (1 day) · invite flow only if the fork question says the product doesn't work solo · zero Stripe seat logic · one flat price · manual invoicing · the fake "add teammate" button as your instrument.

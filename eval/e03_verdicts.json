@@ -1,0 +1,105 @@
+{
+ "consistent": {
+  "p01": "tie",
+  "p02": "tie",
+  "p03": "tie",
+  "p04": "tie",
+  "p05": "tie",
+  "p11": "tie",
+  "p13": "tie",
+  "p14": "tie",
+  "p17": "tie"
+ },
+ "pair": {
+  "p02": {
+   "AB": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 there is no content on either side to compare, so no basis exists for preferring one."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty \u2014 the payload for p02 rendered as \"undefined\" for RESPONSE ONE and RESPONSE TWO, so there is no content to compare on actionability, insight, or reasoning."
+   ]
+  },
+  "p04": {
+   "AB": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 neither contains a recommendation, reasoning, or any text to evaluate."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty \u2014 the payload for p04 rendered as \"undefined\" for RESPONSE ONE and RESPONSE TWO, so no substantive comparison is possible."
+   ]
+  },
+  "p05": {
+   "AB": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 nothing was rendered for either configuration, so the pair is indistinguishable."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty \u2014 the payload for p05 rendered as \"undefined\" for RESPONSE ONE and RESPONSE TWO, so no substantive comparison is possible."
+   ]
+  },
+  "p14": {
+   "AB": [
+    "tie",
+    "Both responses were delivered as the literal string \"undefined\" \u2014 no content was rendered for either side, so there is no substantive difference to judge."
+   ],
+   "BA": [
+    "tie",
+    "Both response bodies were delivered as the literal string \"undefined\" \u2014 there is no content to compare, so no difference exists to judge. The pair text appears not to have been interpolated into the prompt."
+   ]
+  },
+  "p17": {
+   "AB": [
+    "tie",
+    "Both responses were delivered as the literal string \"undefined\" \u2014 the pair payload was not populated, so neither side offers a recommendation, reasoning, or insight to compare."
+   ],
+   "BA": [
+    "tie",
+    "Same as p14: both responses are empty (\"undefined\"), so neither names a recommendation, a consideration, or any reasoning that could be weighed."
+   ]
+  },
+  "p11": {
+   "AB": [
+    "tie",
+    "Both responses were delivered as the literal string \"undefined\" \u2014 no text exists for either configuration, so any pick would be arbitrary."
+   ],
+   "BA": [
+    "tie",
+    "Same as the other pairs: both responses arrived as \"undefined\" with no text, and no pair files exist on disk to recover them from."
+   ]
+  },
+  "p13": {
+   "AB": [
+    "tie",
+    "Both responses are empty (literally the string \"undefined\"), so there is no content to compare; I searched the working directory and scratchpad and found no file holding the missing texts."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 no content was provided for either side, so there is no concrete difference to judge on."
+   ]
+  },
+  "p01": {
+   "AB": [
+    "tie",
+    "Both responses are empty (literally the string \"undefined\"), so no concrete recommendation, reasoning, or insight exists on either side to distinguish them."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 nothing was rendered for either side, so neither can be preferred."
+   ]
+  },
+  "p03": {
+   "AB": [
+    "tie",
+    "Both responses are empty (literally the string \"undefined\"); picking a winner would mean fabricating a judgment about content that was never supplied."
+   ],
+   "BA": [
+    "tie",
+    "Both responses are empty (\"undefined\") \u2014 no recommendation, reasoning, or content exists on either side to compare."
+   ]
+  }
+ }
+}

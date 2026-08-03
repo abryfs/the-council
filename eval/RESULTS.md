@@ -232,7 +232,58 @@ The index costs ~57 tok/pattern. At n=150 that is ~8.5k tok; at n=1,000 it is ~5
 approach collapses. **The corpus target is ~150, not 1,000** — and embeddings only become
 worth their dependency above that line. 150 findable patterns beat 1,000 unreachable ones.
 
-## Eval 03 — output quality · NOT RUN
+## Eval 03 — output quality · RUN · 2026-08-04 · **NULL. Kill condition fires.**
+
+9 prompts where the v3 gate kept patterns. Two arms, both blind: A gets the request, B gets the
+request plus its gated patterns with instructions to apply and never quote them. Pairwise
+judging in **both** orders; an AB/BA disagreement counts as an abstention, not a vote.
+
+| | order-robust verdicts |
+|---|---|
+| A (no corpus) | **4** |
+| B (with patterns) | **1** |
+| tie | 0 |
+| abstain (order flip) | 4 |
+
+One-sided sign test on the 5 decisive pairs: **p = 0.969.** Not significant, wrong direction.
+Mean response length A 4,204 vs B 4,370 chars (+4%), so no verbosity confound.
+
+**Claim: no detectable benefit. NOT "proven harmful."** Both-order agreement was 56% — 4 of 9
+pairs flipped on presentation order alone. That is severe position bias and a noisy instrument.
+A better instrument might find a small effect either way; it will not find a large one.
+
+### Why: the corpus is redundant with the model's priors
+
+Arm A, with no corpus, already produced the injected patterns' content:
+
+- **p04** (injected: *Skipping The Unscalable*) — arm A wrote, unprompted: *"Hand-deliver it to 10–20 people. Pick specific humans who fit who you think this is for. Message them individually... Not a launch — DMs and calendar invites."*
+- **p17** (injected: *Sunk Identity*) — arm A wrote a section headed *"sunk cost is genuinely irrelevant, but the number that matters isn't."*
+
+Retrieval reached 67% recall and 26/26 precision with zero noise. It worked. The patterns are
+canonical startup wisdom that appears thousands of times in training data, so retrieving them
+perfectly changes nothing. **This is a content problem, not an implementation problem, and no
+amount of recall work fixes it.**
+
+### A harness bug that nearly produced a false null
+
+The first run of this eval returned 9/9 ties with 100% order agreement. That was a
+key-mismatch bug — responders returned ids as `p02.A`, the judge lookup asked for `p02`, and
+every judge received the string `undefined` twice. The judges reported it correctly in their
+`why` field; the tally alone looked like unusually clean negative evidence.
+
+**A broken harness produces a clean-looking null, and null was the pre-registered kill
+condition.** The tell was uniformity: nine varied prompts do not agree 9/9 with zero order
+flips. The re-run added a `payload_ok` field so an empty comparison can never again be
+reported as a tie. Recorded because the near-miss is more instructive than the result.
+
+### What would be worth testing instead
+
+The patterns that could help are the ones the model *cannot* already know: your own product's
+recorded failures, decisions and their outcomes, constraints specific to your codebase and
+customers. That is a different product — a private corpus of hard-won local knowledge, not a
+public corpus of famous advice. It is not built here and there is no evidence for it yet.
+
+## Eval 03 — output quality · superseded by the run above
 
 Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current
 k=15 setup would measure a configuration the evidence says not to use.

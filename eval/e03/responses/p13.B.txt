@@ -1,0 +1,53 @@
+Working from the locked hero + subhead in `docs/specs/closed-product-language-current.md` (H1, mechanism subhead, the three proofs, the compatibility strip). If the draft on the live page has drifted from that, paste it and I'll redo this — but that copy is the founder-locked version, so it's the one that matters.
+
+**Ten-second verdict: no. A stranger does not know what this does.**
+
+Here's what actually happens in ten seconds.
+
+> Where your team and its agents build your company.
+>
+> The people, the AI, and the product in one place. Everyone stays in the loop, and no one stops to sync.
+
+A stranger reads line one and has to guess a category. "Where … build your company" is a *place* claim, not a *thing* claim, so their brain reaches for the nearest place-shaped products: Notion, Linear, a workspace, maybe an IDE. None of those are you. They get no prior to fall back on, which means they can't skim — they have to *study* the page, and nobody studies a page they landed on from a tweet.
+
+Line two makes it worse before it makes it better:
+
+- **"in one place"** is the single most-used phrase in all-in-one workspace marketing. It reads as a category signal, and the category it signals is the one where you're the smallest player.
+- **"the product in one place"** is genuinely confusing. People and AI are things that can be in a place. "The product" is not — a stranger stalls here for a beat, and a beat is a big fraction of ten seconds.
+- **"no one stops to sync"** is the best five words on the page. Concrete, felt, and it implies a before-state. It's carrying the whole hero and it's in position four.
+
+What they walk away with: *"some kind of team dashboard for people who use AI coding agents."* That's it. They don't know whether they run agents inside it, whether it watches agents they already run, whether it's a chat app, or whether they install anything. Those are the only four questions a stranger has, and the hero answers none of them.
+
+**Meanwhile the sentence that passes the test is below the fold:**
+
+> When your agent understands a task, Shoti tells your team.
+
+That is a complete, repeatable, ten-second description. A stranger can say it out loud to a coworker without rereading. It's sitting in the mechanism subhead, underneath a headline that can't be repeated at all.
+
+That's the actual bug. The test isn't "did they understand it." The test is **can they repeat it.** Understanding dies when the tab closes; a repeatable sentence is the only thing that travels. Your H1 is not repeatable — try it: someone asks your friend what Shoti is, and the honest answer from that headline is a shrug and "it's like a workspace thing for AI?"
+
+**Two more things, both harder than the copy.**
+
+**1. "Coordination layer" is a category nobody shops for.** Nobody has ever opened a browser to buy a coordination layer. The page never names the buyer or what they're doing today instead. The alternative you're actually displacing is a Slack message that says *"hey, anyone touching auth today?"*, a standup, and finding out on a merge conflict. If the page doesn't put that on screen, the reader has nothing to score you against, and a differentiator with nothing to compare to reads as a feature.
+
+**2. The hero promises more than the demo can show.** "The people, the AI, and the product in one place" tells a stranger that agents *run inside this thing*. If what they then see is a hook that broadcasts a line and injects a teammate's line back, the page has already overshot. That mismatch doesn't read as ambition — it reads as "this is early and they're covering." The narrower claim converts better *because* the demo can cash it.
+
+**What I'd ship.**
+
+Option A — safe, and I'd take this one tonight:
+
+> **Your agent tells your team what it's about to build.**
+>
+> Plain English, the moment it picks up a task — to everyone whose work it touches, and nobody else. No standups. Nobody stops to sync.
+
+Option B — sharper, riskier, better if you're posting it somewhere people already run agents:
+
+> **Everyone on your team is running agents. Nobody knows what the others are building.**
+>
+> Shoti fixes that without a meeting: your agent broadcasts the task it just picked up, and your teammates' agents hear it on their next tool call.
+
+If you want to keep the locked line, the minimum fix is to demote it to the subhead position and promote the mechanism sentence to H1. "Where your team and its agents build your company" is a good *second screen* — it's the ambition, and ambition lands after the reader knows what the thing is, never before.
+
+I know the H1 is founder-locked from 2026-07-13 and that the lock exists because an agent PR already drifted it once. So don't treat this as license to change it — treat it as: the lock protected the wrong line. The thing worth locking is "the whole company, not one developer." Option A keeps that ("your team," "everyone whose work it touches") and adds the thing the locked line is missing, which is a noun a stranger can hold.
+
+**Before you share it tomorrow:** send just the hero — no page, no demo — to five people who don't know what you're building, and ask one question: *"what do you think this does, and who is it for?"* Give them ten seconds. If three of five say some version of "tells your team what your AI is working on," ship it. If you get five different answers, the headline is the problem, not the page.

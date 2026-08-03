@@ -1,0 +1,26 @@
+Happy to. But "clean it up" on a settings page is a series of delete/keep decisions, and if I make 14 of those on my own taste you'll hate the result differently. So let me propose the rule, you veto the rule, and then I apply it — that's five minutes of your time instead of an hour of arguing row by row.
+
+**The rule: every row goes in one of four buckets.**
+
+1. **Set once, never again** (display name, repo path, connected account). These aren't settings — they're onboarding state that leaked here. They belong in the flow where they're first set, with an edit affordance at the point of use. Off the page.
+2. **Status, not setting** (sync health, version, connected machines, entitlement state). Nothing to configure; you're reading it. It belongs where it's observed — the footer, the panel it describes — not in a list of controls. Off the page.
+3. **Real preference** — a thing a user flips more than once, where two users would genuinely choose differently. Keep. These go at the top, ordered by how often they get changed.
+4. **Undecided default.** This is most of them. A setting usually exists because you couldn't decide, so you shipped both. Test: *if I deleted this and hardcoded my preferred value, who complains and what do they do instead?* If the answer is "nobody" or "they'd shrug," delete the row **and the branch behind it**.
+
+Bucket 4 is where the actual win is, and it isn't visual. Every toggle is a permanent doubling of the state space you test, support, and reason about forever. Fourteen settings is up to 2^14 configurations you've implicitly promised to make work. Deleting six rows deletes six branches, and that's worth more than the page looking calmer.
+
+**Two things I'd refuse to do**
+
+Don't group them into sections or tabs. Grouping 14 bad rows into 4 groups gives you 18 things on screen and hides the clutter from you while leaving it in the product. Reduce the count first. If you land at 7 or 8, you won't need groups at all.
+
+Don't reorder by subsystem. Settings pages almost always end up ordered by which part of the codebase the engineer was in that week. Order by frequency of change, with the rare and destructive stuff (sign out, leave team, delete) last and visually quieter — quieter, not hidden.
+
+**The thing you may not have considered**
+
+"I hate looking at it" is often not about the row count. The settings page is the one screen where a design system quietly gets abandoned: every row arrived on its own week with its own control — a toggle here, a dropdown there, a text input, a link that goes somewhere else, a button with a border. The eye reads *control heterogeneity* as mess much more strongly than it reads length. Fourteen identical rows — one template, label left, one control type per class, right-aligned, whitespace between rather than rules — read calmer than seven mismatched ones.
+
+So I'd expect the fix to be two independent things: cut the count with the rule above, and unify the row template. It's worth knowing which one is actually bothering you, because if it's the second one, you can keep every row and still stop hating the page.
+
+**One trap:** deleting a setting isn't just deleting UI. Any persisted value needs a removal path, and if users have it set to the non-default, deleting the row silently changes their app's behavior. For anything in bucket 4 that a real person has flipped, the honest move is to hardcode the value most people are already on and note it in the changelog.
+
+Point me at the settings file and I'll come back with all 14 rows in a table — bucket, recommendation, one line of reasoning each — and you give me yes/no down the column. Then it's a diff.
