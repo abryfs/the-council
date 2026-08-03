@@ -1,0 +1,35 @@
+README.md
+  s_90e8c61216621c::t_326d76c35fe030 81-82
+eval/RESULTS.md
+  s_90e8c61216621c::t_95bb943cb504a8 286-318
+eval/e04/p04.A.md
+  s_90e8c61216621c::t_2d27d38d11a11e 1-5
+eval/e04/p04.B.md
+  s_90e8c61216621c::t_cb3cf30fef5405 1-11
+eval/e04/p05.A.md
+  s_90e8c61216621c::t_4c59de2928360a 1-5
+eval/e04/p05.B.md
+  s_90e8c61216621c::t_73b50c07c5cdb0 1-11
+eval/e04/p17.A.md
+  s_90e8c61216621c::t_1edd82e051a385 1-5
+eval/e04/p17.B.md
+  s_90e8c61216621c::t_cbe77a845fffcd 1-11
+eval/e04/spec.json
+  s_90e8c61216621c::t_2a224288b517e6 1-14
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "044c7b71ab4f281968cfa8751ef7345b87665812",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
