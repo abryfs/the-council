@@ -1,0 +1,33 @@
+eval/retrieve.py
+  s_90e8c61216621c::t_52b8e7a5c04c69 38-62,64
+README.md
+  s_90e8c61216621c::t_3c04f04bb4ac7f 24-62
+SKILL.md
+  s_90e8c61216621c::t_2c59bc5ecae35f 25-26
+install.sh
+  s_90e8c61216621c::t_a40f9b604cdb44 1-28
+install/council-query.py
+  s_90e8c61216621c::t_921a2f002bc617 1-119
+install/council-render.py
+  s_90e8c61216621c::t_f5f0b3aa1e7e4f 1-90
+install/council-retrieve.py
+  s_90e8c61216621c::t_8244dc37ab499e 1-183
+install/council-statusline.sh
+  s_90e8c61216621c::t_2bf7fc3609f267 1-32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "bd76404054700dbfa4493ecc99e525360b942130",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
