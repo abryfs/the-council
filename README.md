@@ -70,10 +70,18 @@ earned that by publishing results that went against its own changes.
 
 | Claim | Status |
 |---|---|
-| Retrieval cuts context vs loading the corpus | **measured locally** — see `eval/RESULTS.md` |
-| Retrieval picks relevant patterns better than random | **not yet run** — `eval/02-selection.md` |
-| Patterns improve output quality vs no corpus | **not yet run** — `eval/03-quality.md` |
-| Corpus scales to 1,000 without precision collapse | **not yet run** — blocked on the above |
+| Retrieval cuts context vs loading the corpus | **yes** — 86% at n=107, 98.5% projected at n=1,000 |
+| A lexical confidence gate can tell "nothing applies" | **no** — three designs, all failed (eval 01b) |
+| A semantic gate can | **yes** — oracle separated all 5 controls unprompted |
+| Retrieval picks relevant patterns better than random | **yes, weakly** — 0.107 vs 0.057 prec@15, CI [+0.05, +1.45] |
+| Patterns improve output quality vs no corpus | **not yet run** — blocked on shipping k=3–5 + semantic gate |
+| Corpus scales to 1,000 without precision collapse | **not yet run** |
+
+**The honest one-line summary: roughly twice random, from a very low base.** At k=15 the
+retriever returns 1.6 useful patterns and 13.4 irrelevant ones. The pass is real and the
+confidence interval's lower bound is +0.05. Do not read this as "it works" — read it as "the
+mechanism is real and the current configuration is wrong." Full numbers, limitations, and two
+negative results in [`eval/RESULTS.md`](eval/RESULTS.md).
 
 Nothing moves from "not yet run" to a claim in this README without the numbers next to it,
 including negative ones.

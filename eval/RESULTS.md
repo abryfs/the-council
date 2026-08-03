@@ -73,11 +73,76 @@ design was specifically trying to avoid.
 Consequence for `SKILL.md`: the documented `score == 0` gate **does not work as written** and
 is now known-broken. It stays documented as broken rather than quietly removed.
 
-## Eval 02 — selection vs random · NOT RUN
+## Eval 02 — selection vs random · RUN · 2026-08-03 · **passes, weakly**
 
-The load-bearing one. Kill condition defined in `01-context.md`. Until this reports, the
-project's central claim is unproven and the README says so.
+20 prompts authored blind to the corpus · 107 patterns · k=15 · three arms, labels shuffled
+per prompt, graders never told which arm they held · analysis script written before the
+grades came back.
+
+| arm | precision@15 | relevant / 15 |
+|---|---|---|
+| random | 0.057 | 0.8 |
+| **bm25** | **0.107** | **1.6** |
+| oracle (LLM, full corpus) | 0.263 | 4.0 |
+
+```
+bm25 - random: +0.75 patterns/prompt   95% paired bootstrap CI [+0.05, +1.45]
+VERDICT: BEATS RANDOM
+oracle - bm25: +2.35                   95% CI [+1.55, +3.20]
+```
+
+**The kill condition does not fire. Retrieval beats random. But read the lower bound: +0.05.**
+This is a marginal pass, not a strong one, and the absolute numbers are worse news than the
+comparison: at k=15 the retriever delivers **1.6 useful patterns and 13.4 irrelevant ones**,
+for 3,060 tokens. 89% of what it returns is noise.
+
+The ceiling is also low. Even hand-picked selection with the whole corpus visible scores
+**0.263** — so at k=15, three quarters of a *perfect* selection is still noise by a strict
+grader's standard. That is a fact about the corpus-to-prompt matching problem, not about BM25.
+
+**Self-assessment inflation, measured in passing.** The oracle rated its own picks at 6.7/15
+relevant. Blind graders rated the same picks at 4.0/15. It over-rated itself by 68%. Anything
+in this repo that self-scores should be assumed to do the same.
+
+### Post-hoc: k=15 is the real mistake
+
+**Declared post-hoc** — the primary comparison above was pre-registered; this curve was
+computed after seeing the result and is therefore weaker evidence.
+
+| k | prec@k | relevant found | tokens/prompt |
+|---|---|---|---|
+| 1 | 0.250 | 0.25 | 204 |
+| 3 | 0.200 | 0.60 | 612 |
+| 5 | 0.150 | 0.75 | 1,020 |
+| 15 | 0.107 | 1.60 | 3,060 |
+
+The ranking is real: BM25's 32 relevant hits land at median rank 6, with 15 of 32 in the top 5.
+Precision more than doubles from k=15 to k=1. **k=15 was chosen by analogy with ITR and is
+wrong here** — it buys 1 extra relevant pattern for 2,448 extra tokens.
+
+### Controls
+
+The five mechanical prompts (regex, async/await, postgres index, timezone, vite build) drew
+0.4/15 relevant for bm25 and 0.8/15 for oracle. Near-zero, as they should be. But note *why*:
+strict grading, not gating. The system still **retrieved and would still have shown** 15
+patterns for "why is this regex not matching."
+
+### Limitations
+
+n=20 is a pilot, not a publication. One grader per set — no inter-rater reliability. Graders
+are LLMs, and LLM judges carry known position and self-preference biases; arm order was
+shuffled per prompt to blunt position bias, which is a mitigation and not a fix. One retriever
+(pure lexical, no embeddings, no reranker) — the weakest reasonable floor by design.
+
+### What this changes
+
+1. **Default k drops from 15 to 3–5.** Better precision, ~5× cheaper.
+2. **The semantic gate is now required, not optional.** Eval 01b showed lexical scoring cannot
+   gate; the oracle showed a semantic judge can. Combining them — BM25 to rank, one cheap
+   semantic call to gate and cut — is the only configuration the evidence supports.
+3. **The honest pitch is "roughly twice random, from a very low base," not "it works."**
 
 ## Eval 03 — output quality · NOT RUN
 
-Blocked on 02. Running it first would measure a corpus we cannot yet retrieve from.
+Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current
+k=15 setup would measure a configuration the evidence says not to use.

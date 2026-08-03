@@ -1,0 +1,572 @@
+[
+ {
+  "id": "p01",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Interface Without A Contract"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Error Text From Inside",
+     "Interface Without A Contract",
+     "Reused Component, New Envelope"
+    ],
+    "relevant_count": 3
+   }
+  ]
+ },
+ {
+  "id": "p02",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "The Inside-View Estimate",
+     "Premature Automation"
+    ],
+    "relevant_count": 2
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Seat Pricing Punishes Adoption",
+     "Retroactive Value-Metric Change",
+     "Skipping The Unscalable",
+     "No Beachhead",
+     "Foundation Before First User",
+     "Premature Scaling"
+    ],
+    "relevant_count": 6
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Foundation Before First User",
+     "Premature Scaling",
+     "Refusing The Amputation",
+     "Cold Start Ignored",
+     "Seat Pricing Punishes Adoption",
+     "The Inside-View Estimate",
+     "Skipping The Unscalable",
+     "Retroactive Value-Metric Change",
+     "No Beachhead"
+    ],
+    "relevant_count": 9
+   }
+  ]
+ },
+ {
+  "id": "p03",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Signifier Erasure",
+     "Relearning Tax Ignored",
+     "Chesterton's Dead Code"
+    ],
+    "relevant_count": 3
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   }
+  ]
+ },
+ {
+  "id": "p04",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Skipping The Unscalable",
+     "Piggyback Channel Ignored",
+     "Exit Reason Assumed"
+    ],
+    "relevant_count": 3
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Referral On A Leaky Bucket",
+     "Product Without Distribution",
+     "Premature Automation",
+     "No Beachhead"
+    ],
+    "relevant_count": 4
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Skipping The Unscalable",
+     "Distribution As An Afterthought",
+     "Wartime Frame In Peacetime",
+     "Funding As Distribution",
+     "No Beachhead",
+     "Exit Reason Assumed",
+     "Piggyback Channel Ignored",
+     "Product Without Distribution",
+     "Growth Before Retention",
+     "Positioning To The Wrong Frame",
+     "Referral On A Leaky Bucket"
+    ],
+    "relevant_count": 11
+   }
+  ]
+ },
+ {
+  "id": "p05",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Second-System Rewrite",
+     "The Famous Forecaster",
+     "The Great Rewrite",
+     "Innovation Token Overdraft"
+    ],
+    "relevant_count": 4
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "The Great Rewrite",
+     "Guessing The Bottleneck",
+     "Innovation Token Overdraft",
+     "Second-System Rewrite",
+     "The Inside-View Estimate",
+     "The Famous Forecaster",
+     "Preference-First Framing",
+     "Commit Without Disagreeing"
+    ],
+    "relevant_count": 8
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Second-System Rewrite"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p06",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "The Never-Restarted Subsystem"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Automatic Failover Split-Brain",
+     "Chesterton's Dead Code",
+     "The Never-Restarted Subsystem",
+     "Root Cause Singular"
+    ],
+    "relevant_count": 4
+   }
+  ]
+ },
+ {
+  "id": "p07",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Chesterton's Dead Code"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p08",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   }
+  ]
+ },
+ {
+  "id": "p09",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Product Line Sprawl",
+     "The Famous Forecaster",
+     "Premature Automation"
+    ],
+    "relevant_count": 3
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Stated Preference Trap",
+     "Product Line Sprawl",
+     "The Inside-View Estimate",
+     "The Famous Forecaster",
+     "Premature Automation"
+    ],
+    "relevant_count": 5
+   }
+  ]
+ },
+ {
+  "id": "p10",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Chesterton's Dead Code"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Chesterton's Dead Code"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p11",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Error Text From Inside",
+     "Skipping The Unscalable",
+     "Cold Start Ignored",
+     "Curated Demo Data"
+    ],
+    "relevant_count": 4
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Skipping The Unscalable",
+     "Exit Reason Assumed",
+     "Cold Start Ignored",
+     "Premature Automation",
+     "Curated Demo Data",
+     "Error Text From Inside"
+    ],
+    "relevant_count": 6
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Error Text From Inside"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p12",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Guessing The Bottleneck"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Guessing The Bottleneck"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p13",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Feature Parity Positioning",
+     "No Beachhead"
+    ],
+    "relevant_count": 2
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Feature Parity Positioning"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Metaphor Fusion",
+     "Positioning To The Wrong Frame",
+     "No Beachhead",
+     "Technology Seeking A Job",
+     "Feature Parity Positioning"
+    ],
+    "relevant_count": 5
+   }
+  ]
+ },
+ {
+  "id": "p14",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Prompt Inflation",
+     "The Metric That Moves Alone",
+     "Curated Demo Data",
+     "Cold Start Ignored"
+    ],
+    "relevant_count": 4
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Skipping The Unscalable",
+     "Prompt Inflation",
+     "Premature Automation"
+    ],
+    "relevant_count": 3
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Cold Start Ignored",
+     "Prompt Inflation"
+    ],
+    "relevant_count": 2
+   }
+  ]
+ },
+ {
+  "id": "p15",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Guessing The Bottleneck",
+     "Alert As The Fix"
+    ],
+    "relevant_count": 2
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Alert As The Fix"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p16",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Interface Without A Contract"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Interface Without A Contract"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ },
+ {
+  "id": "p17",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "Sunk Identity",
+     "Refusing The Amputation",
+     "Numbers Nobody Measured"
+    ],
+    "relevant_count": 3
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Refusing The Amputation"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Refusing The Amputation",
+     "Product Line Sprawl",
+     "Sunk Identity",
+     "Discoverability Mistaken For Absence",
+     "Exit Reason Assumed"
+    ],
+    "relevant_count": 5
+   }
+  ]
+ },
+ {
+  "id": "p18",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [
+     "The Untested Restore"
+    ],
+    "relevant_count": 1
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Alert As The Fix",
+     "The Untested Restore",
+     "Complected Convenience",
+     "Trivial Transitive Dependency"
+    ],
+    "relevant_count": 4
+   }
+  ]
+ },
+ {
+  "id": "p19",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [
+     "Free Tier With No Wall",
+     "Retroactive Value-Metric Change",
+     "Segment-Blind PMF Survey",
+     "Exit Reason Assumed",
+     "Two-Way Door Deliberated"
+    ],
+    "relevant_count": 5
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Exit Reason Assumed",
+     "Free Tier With No Wall"
+    ],
+    "relevant_count": 2
+   }
+  ]
+ },
+ {
+  "id": "p20",
+  "sets": [
+   {
+    "label": "A",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "B",
+    "relevant_pattern_names": [],
+    "relevant_count": 0
+   },
+   {
+    "label": "C",
+    "relevant_pattern_names": [
+     "Trivial Transitive Dependency"
+    ],
+    "relevant_count": 1
+   }
+  ]
+ }
+]
