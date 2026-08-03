@@ -1,0 +1,19 @@
+README.md
+  s_90e8c61216621c::t_6fc2653785bbb8 81-94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "c78bc215f403ef567f8899450cbe0f31b3b88926",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
