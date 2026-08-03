@@ -1,0 +1,61 @@
+eval/score.py
+  s_90e8c61216621c::t_81390ed768d689 1-85
+eval/grading/p01.md
+  s_90e8c61216621c::t_f03fb465fc8499 1-63
+eval/grading/p02.md
+  s_90e8c61216621c::t_c707ada6830c97 1-63
+eval/grading/p03.md
+  s_90e8c61216621c::t_9ad358ab5d1c3b 1-63
+eval/grading/p04.md
+  s_90e8c61216621c::t_985d5fd500cd84 1-63
+eval/grading/p05.md
+  s_90e8c61216621c::t_c069f0c64026b1 1-63
+eval/grading/p06.md
+  s_90e8c61216621c::t_ee6d0f40872106 1-63
+eval/grading/p07.md
+  s_90e8c61216621c::t_d7770881e21946 1-63
+eval/grading/p08.md
+  s_90e8c61216621c::t_379139bad98105 1-63
+eval/grading/p09.md
+  s_90e8c61216621c::t_a30bd738e698dd 1-63
+eval/grading/p10.md
+  s_90e8c61216621c::t_0c08ca3912b789 1-63
+eval/grading/p11.md
+  s_90e8c61216621c::t_9c51391ea7dc44 1-63
+eval/grading/p12.md
+  s_90e8c61216621c::t_8bebeb5b6e7b37 1-63
+eval/grading/p13.md
+  s_90e8c61216621c::t_018d3a9af958af 1-63
+eval/grading/p14.md
+  s_90e8c61216621c::t_54eb5fbd3f00d5 1-63
+eval/grading/p15.md
+  s_90e8c61216621c::t_95755cafd47a33 1-63
+eval/grading/p16.md
+  s_90e8c61216621c::t_433a8b06e61694 1-63
+eval/grading/p17.md
+  s_90e8c61216621c::t_f4e96b446be62f 1-63
+eval/grading/p18.md
+  s_90e8c61216621c::t_360bc325cd8c80 1-63
+eval/grading/p19.md
+  s_90e8c61216621c::t_f1097eea78a0f7 1-63
+eval/grading/p20.md
+  s_90e8c61216621c::t_2139a99472fbfe 1-63
+eval/oracle.json
+  s_90e8c61216621c::t_37c989e8b36b28 1-402
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "ab2def26b5d23c82e14ba717709a5b7f94c80c31",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
