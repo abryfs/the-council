@@ -1,0 +1,99 @@
+README.md
+  s_90e8c61216621c::t_6496403782be59 81-82
+eval/RESULTS.md
+  s_90e8c61216621c::t_ebf36df2fe5e8e 235-286
+eval/e03/p01.A.md
+  s_90e8c61216621c::t_e4e33d3ee33750 1-5
+eval/e03/p01.B.md
+  s_90e8c61216621c::t_cacc59707c0dc3 1-11
+eval/e03/p02.A.md
+  s_90e8c61216621c::t_e2a757f58bbeb0 1-5
+eval/e03/p02.B.md
+  s_90e8c61216621c::t_03290533e8821f 1-13
+eval/e03/p03.A.md
+  s_90e8c61216621c::t_7c3ec425c8dacc 1-5
+eval/e03/p03.B.md
+  s_90e8c61216621c::t_163b1b8a76c050 1-11
+eval/e03/p04.A.md
+  s_90e8c61216621c::t_84bb2b051552b4 1-5
+eval/e03/p04.B.md
+  s_90e8c61216621c::t_2a933b1f763a78 1-13
+eval/e03/p05.A.md
+  s_90e8c61216621c::t_fbbcad9be8970a 1-5
+eval/e03/p05.B.md
+  s_90e8c61216621c::t_b10bc82ac3c6a3 1-13
+eval/e03/p11.A.md
+  s_90e8c61216621c::t_dad94e09865ccc 1-5
+eval/e03/p11.B.md
+  s_90e8c61216621c::t_3e1773876e565a 1-12
+eval/e03/p13.A.md
+  s_90e8c61216621c::t_8b8c4596dd73cb 1-5
+eval/e03/p13.B.md
+  s_90e8c61216621c::t_44eed6f3491fed 1-12
+eval/e03/p14.A.md
+  s_90e8c61216621c::t_6fd67fd05ce7a6 1-5
+eval/e03/p14.B.md
+  s_90e8c61216621c::t_c526f966f783d6 1-13
+eval/e03/p17.A.md
+  s_90e8c61216621c::t_e8b4e3d789c8fd 1-5
+eval/e03/p17.B.md
+  s_90e8c61216621c::t_e2924d0e0478c8 1-13
+eval/e03/responses/p01.A.txt
+  s_90e8c61216621c::t_7b00779874f240 1-34
+eval/e03/responses/p01.B.txt
+  s_90e8c61216621c::t_2b6c2c45b5e773 1-51
+eval/e03/responses/p02.A.txt
+  s_90e8c61216621c::t_657d29389647dc 1-13
+eval/e03/responses/p02.B.txt
+  s_90e8c61216621c::t_06627dc379ae47 1-21
+eval/e03/responses/p03.A.txt
+  s_90e8c61216621c::t_a191f443040da7 1-26
+eval/e03/responses/p03.B.txt
+  s_90e8c61216621c::t_79cbef38a25792 1-28
+eval/e03/responses/p04.A.txt
+  s_90e8c61216621c::t_8d9915a9a3d3c4 1-15
+eval/e03/responses/p04.B.txt
+  s_90e8c61216621c::t_961f299a011b13 1-26
+eval/e03/responses/p05.A.txt
+  s_90e8c61216621c::t_00b4220eed8cc7 1-25
+eval/e03/responses/p05.B.txt
+  s_90e8c61216621c::t_6be69edabc6bfe 1-24
+eval/e03/responses/p11.A.txt
+  s_90e8c61216621c::t_592828c05cc7a2 1-66
+eval/e03/responses/p11.B.txt
+  s_90e8c61216621c::t_9885b0baa431ae 1-25
+eval/e03/responses/p13.A.txt
+  s_90e8c61216621c::t_b70eafdd67e0ec 1-38
+eval/e03/responses/p13.B.txt
+  s_90e8c61216621c::t_78c32f512adaf4 1-53
+eval/e03/responses/p14.A.txt
+  s_90e8c61216621c::t_cd7e1caa23f26c 1-45
+eval/e03/responses/p14.B.txt
+  s_90e8c61216621c::t_c6d118a50070ba 1-28
+eval/e03/responses/p17.A.txt
+  s_90e8c61216621c::t_6ecbf42875c699 1-63
+eval/e03/responses/p17.B.txt
+  s_90e8c61216621c::t_9866a75b00df60 1-34
+eval/e03/selection.json
+  s_90e8c61216621c::t_2884d3c5baed90 1
+eval/e03_verdicts.json
+  s_90e8c61216621c::t_99c5b57d9298ca 1-105
+eval/e03_verdicts_final.json
+  s_90e8c61216621c::t_05c3f9c74df13b 1-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "324dfac4a01bf4172129ce568cd3ce70582369f0",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
