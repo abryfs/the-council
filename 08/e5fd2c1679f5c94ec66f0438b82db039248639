@@ -1,0 +1,21 @@
+SKILL.md
+  s_90e8c61216621c::t_0faad504fedc4a 1-70
+eval/retrieve.py
+  s_90e8c61216621c::t_f7bb43a23e4532 1-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "08e5fd2c1679f5c94ec66f0438b82db039248639",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
