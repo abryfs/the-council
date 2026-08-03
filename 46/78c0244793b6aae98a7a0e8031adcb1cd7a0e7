@@ -1,0 +1,65 @@
+SKILL.md
+  s_90e8c61216621c::t_9aa634b1ea8a32 3,6-7,12-13,15,17-31,33-34,36-39,41,43-46,48,50-52,54-56,60,67,69,71-78,82-84
+eval/score2.py
+  s_90e8c61216621c::t_6ea75fd84b2862 1-77
+eval/candidates.json
+  s_90e8c61216621c::t_de3f81942d9de5 1-442
+eval/gate/p01.md
+  s_90e8c61216621c::t_fd81bf8b110964 1-18
+eval/gate/p02.md
+  s_90e8c61216621c::t_b5391f5996d33a 1-18
+eval/gate/p03.md
+  s_90e8c61216621c::t_e55a9c0cb06383 1-18
+eval/gate/p04.md
+  s_90e8c61216621c::t_20961e9f0e87cd 1-18
+eval/gate/p05.md
+  s_90e8c61216621c::t_5a9adefb4c705b 1-18
+eval/gate/p06.md
+  s_90e8c61216621c::t_e903f3087d5f43 1-18
+eval/gate/p07.md
+  s_90e8c61216621c::t_5963d2adbaf752 1-18
+eval/gate/p08.md
+  s_90e8c61216621c::t_7913cf9702c27b 1-18
+eval/gate/p09.md
+  s_90e8c61216621c::t_da01a69a359ea9 1-18
+eval/gate/p10.md
+  s_90e8c61216621c::t_7e3692b905bd0f 1-18
+eval/gate/p11.md
+  s_90e8c61216621c::t_cacdd28ce8243b 1-18
+eval/gate/p12.md
+  s_90e8c61216621c::t_ac25aefd032a60 1-18
+eval/gate/p13.md
+  s_90e8c61216621c::t_1ca4fdff99eef0 1-18
+eval/gate/p14.md
+  s_90e8c61216621c::t_2465ed201306c3 1-18
+eval/gate/p15.md
+  s_90e8c61216621c::t_c0c252e1afa773 1-18
+eval/gate/p16.md
+  s_90e8c61216621c::t_f16d566199a500 1-18
+eval/gate/p17.md
+  s_90e8c61216621c::t_1516ddc59cc761 1-18
+eval/gate/p18.md
+  s_90e8c61216621c::t_a301f10efc27cf 1-18
+eval/gate/p19.md
+  s_90e8c61216621c::t_adcd3d39f27950 1-18
+eval/gate/p20.md
+  s_90e8c61216621c::t_7de7abe1eb7b13 1-18
+eval/retrieve.py
+  s_90e8c61216621c::t_0aee4970012660 18-20,61,80
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "4678c0244793b6aae98a7a0e8031adcb1cd7a0e7",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
