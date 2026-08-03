@@ -1,0 +1,21 @@
+MECHANISM.md
+  s_90e8c61216621c::t_aeb682cbba8626 1-173
+README.md
+  s_90e8c61216621c::t_3a0c22e9b02814 12-18,42-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "b7e54061ccf4cc49312cd89dfffd1d9d3fad703c",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
