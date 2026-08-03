@@ -1,117 +1,122 @@
 # the-council
 
-**A retrieval-loaded corpus of builder patterns for coding agents.** Not a persona pack. Not
-a rules file. A library of named failure patterns from people who shipped, where only the
-handful that actually apply to your prompt ever enter context — and usually none do.
+**A measured negative result about builder-pattern corpora for coding agents.**
 
-> Working title. Rename before publishing.
+The premise: give an AI coding agent a corpus of named failure patterns drawn from people who
+shipped — Thiel, Brooks, Rams, Graham, Grove — retrieve only the handful relevant to each
+prompt, and the agent gives better advice.
+
+We built it and measured it. **The retrieval works. The corpus does not help.**
+
+This repo is the method, the data, and the null. It is a work in progress, and the code is a
+research harness rather than a product.
 
 ---
 
-## The claim, and what backs it
+## Results
 
-Most agent "rules" repos ship one big always-on file. That fails for a measured reason: the
-perfect-response rate at N=40 simultaneous instructions is 0.09–0.31, and effectively zero by
-N=80. A thousand one-liners in context is not a strong prompt — it is noise that buries the
-six rules you care about.
-
-The alternative is retrieval. [Instruction-Tool Retrieval (arXiv:2602.17046)](https://arxiv.org/html/2602.17046v1)
-measured this architecture against a monolithic-prompt baseline:
-
-| | Monolithic | Retrieved | Δ |
-|---|---|---|---|
-| Per-step context tokens | 30,000 | 1,500 | **−95%** |
-| Tool routing accuracy | 62% | 82% | **+32% rel.** |
-| Cost per episode | $2.90 | $0.86 | **−70%** |
-
-That is the mechanism this repo implements. It is *not* evidence that builder patterns
-improve output — see **Open risk** below, which is the honest part.
-
-## Why patterns, not personas
-
-We tried the persona framing first and dropped it on evidence.
-[Zheng et al., EMNLP Findings 2024 (arXiv:2311.10054)](https://arxiv.org/abs/2311.10054) —
-162 roles, 2,410 questions, 4 model families — found that **adding a persona to a system
-prompt does not improve performance**, and that per-persona effects are "largely random."
-
-"Think like Jony Ive" is a costume. What Ive actually *articulated* — that you subtract until
-removing one more thing breaks it — is a check you can run against a diff. Same people, same
-wisdom, falsifiable form:
-
-```
-### Requirement Deletion
-Optimizing a part that should not exist. Every requirement carries a name, and if
-it carries no name it has no owner and no reason.
-CASE — Musk's five-step process; the fastest-deleted parts on the Model 3 line
-were ones nobody could attribute to a person.
-TRIGGER — a spec adds a field, flag, config knob, or abstraction layer
-SEVERITY — warn
-```
-
-Name · mechanism · real case · trigger · severity. Grep-able, testable, citable.
-
-## The open risk, and where it landed
-
-**The selector was always the whole product.** The persona paper's sharpest finding is that
-*manual* selection of the right principle helped significantly while *automatic* selection
-performed **no better than random** — and a corpus with a random selector is strictly worse
-than no corpus, because you pay context for noise.
-
-That risk has now been measured rather than argued. Selection does beat random (weakly), and
-the two-stage pipeline drives precision to 1.000 with zero noise. But recall came out at 27%,
-so the failure mode moved rather than disappeared: the tool no longer says wrong things, it
-says nothing far too often. See **Measured so far**.
-
-This is stated up front because every comparable repo ships vibes, and the one credible
-project in this space ([obra/superpowers](https://github.com/obra/superpowers)) earned that by
-publishing results that went against its own changes.
-
-## Measured so far
-
-| Claim | Status |
+| Claim | Verdict |
 |---|---|
 | Retrieval cuts context vs loading the corpus | **yes** — 86% at n=107, 98.5% projected at n=1,000 |
-| A lexical confidence gate can tell "nothing applies" | **no** — three designs, all failed (eval 01b) |
-| A semantic gate can | **yes** — oracle separated all 5 controls unprompted |
-| Retrieval picks relevant patterns better than random | **yes, weakly** — 0.107 vs 0.057 prec@15, CI [+0.05, +1.45] |
-| k=4 + semantic gate beats the k=15 baseline | **yes, decisively** — precision 0.107 → 1.000, noise 13.4 → 0.0, cost 25× lower |
-| ...without losing useful signal | **no** — signal fell 1.60 → 0.60/prompt |
-| Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; replaced |
-| An agent scanning a compact index can | **yes** — recall 67%, end-to-end 26/26 precision at 1.30 signal, no dependencies |
-| Patterns improve output quality vs no corpus | **NO** — 1/5 decisive pairs, sign test p=0.969 |
-| Patterns enforce a selection the model makes unreliably | **NO** — 12/12 vs 12/12, +0 points (ceiling) |
-| Corpus scales to 1,000 without precision collapse | **moot** — not scaling a corpus that shows no benefit |
+| A lexical (BM25) gate can tell "nothing applies" | **no** — three designs, all failed |
+| A semantic gate can | **yes** — separated all 5 controls unprompted |
+| Retrieval beats a random draw | **yes, weakly** — 0.107 vs 0.057 prec@15, CI [+0.05, +1.45] |
+| An agent scanning a compact index beats BM25 | **yes** — recall 27% → 67%, 26/26 precision, no dependencies |
+| **Patterns improve output quality** | **NO** — 1 of 5 decisive pairs, sign test p=0.969 |
+| **Patterns enforce a selection the model makes unreliably** | **NO** — 12/12 vs 12/12, +0 points (ceiling) |
 
-**The honest one-line summary: what it shows you is now trustworthy, and it shows you too
-little.** The shipped pipeline (BM25 → 8 candidates → semantic gate → ≤4) surfaced 12 patterns
-across 20 prompts and blind graders judged **all 12 relevant**, with zero noise, silence on
-every mechanical prompt, and 122 tokens per prompt against 3,060 before. But it stayed silent
-on 13 of 20 prompts, and the diagnosis is that **lexical candidate recall is 27%** — the right
-patterns are usually not in the top 8 at all. The gate is good; the retriever is the
-bottleneck. Full numbers, limitations, and three negative results in
-[`eval/RESULTS.md`](eval/RESULTS.md).
+Full numbers, limitations, and a false null that nearly shipped:
+**[`eval/RESULTS.md`](eval/RESULTS.md)**.
 
-Nothing moves from "not yet run" to a claim in this README without the numbers next to it,
-including negative ones.
+## Why it fails
 
-## Build order
+**The corpus is made of the model's defaults.** Canonical startup wisdom is canonical because
+it saturates training data. A corpus of it can only agree with what the model was going to say.
 
-1. ~~30 patterns~~ → **107 patterns, 5 domains.** Done.
-2. ~~Selection eval~~ → beats random; two-stage gate reaches 1.000 precision. Done.
-3. **Fix candidate recall (27%). ← current.** Semantic retrieval at the candidate stage.
-   Nothing downstream is worth measuring until the right patterns reach the gate.
-4. Quality eval, blind-graded, three arms (none / full corpus / retrieved+gated).
-5. Only then scale the corpus toward 1,000.
+Measured directly: across three prompts and four independent runs each, the base model with
+**no corpus at all** made the prescribed move **12 times out of 12**. It told the founder to
+hand-install for five teams on a call. It demanded a flamegraph before conceding a rewrite. It
+named work-already-spent as a fact about the past that doesn't earn rent. Every time, unprompted.
 
-## Not English-encoded, and why
+Injecting the pattern that says those things adds nothing. This is a **content** problem, and
+no amount of retrieval or gating work fixes it.
 
-An early idea was storing the corpus in another language to save tokens. It is backwards:
-tokenizers are English-centric, and English is the cheapest per unit of meaning. Simplified
-Chinese runs ~1.13× English; Polish and Hindi ~1.42×
+## What does work, and is reusable
+
+The pipeline is validated even though its payload isn't:
+
+```
+prompt → agent scans a compact index (name · severity · trigger) → ≤8 candidates
+       → semantic gate: the calling agent keeps ≤4, often 0
+       → act by severity
+```
+
+- **67% candidate recall**, against 27% for BM25. The failure was semantic, not lexical — nothing connects *"we have 4 users, two of them are me and my cofounder"* to *Skipping The Unscalable* by shared vocabulary.
+- **26/26 precision** on what the gate kept, judged by independent blind graders who never saw the gate.
+- **Zero noise, and correct silence** on all five mechanical control prompts.
+- **No embeddings, no vector DB, no API key.** The gate is free because the calling agent is already in context. The index costs ~57 tokens per pattern, which caps the corpus near 150; above that you need embeddings.
+
+If you have a corpus the model *cannot* already know, this machinery is here.
+
+## Method
+
+A negative result is worth exactly as much as its method, so:
+
+- **20 prompts authored blind to the corpus**, by an agent explicitly forbidden from seeing it, including unmarked mechanical controls.
+- **Analysis scripts written before results arrived** (`eval/score.py`, `eval/score2.py`), so the framing could not be tuned to the outcome.
+- **Blind arms**, labels shuffled per prompt, the mapping held outside the graders' reach.
+- **Pairwise judging in both orders**, with an AB/BA disagreement counted as an abstention rather than a vote. The order-flip rate was 44%, which is why this matters.
+- **Ceiling effects and nulls reported at the same volume as wins.**
+- **Predictions logged before each run.** Three were made. All three were wrong, and all three were optimistic in the direction the author wanted.
+
+`eval/RESULTS.md` also documents a harness bug that produced a clean-looking false null — 9/9
+ties at 100% order agreement — because a key mismatch fed every judge the string `undefined`.
+The judges reported it correctly in their reasoning; the tally alone looked like unusually
+rigorous evidence. It was caught by reading the reasoning instead of the count.
+
+## What would be worth testing
+
+Two directions have headroom. Neither is built and neither has evidence.
+
+1. **Patterns that contradict the model's default**, rather than echo it — *"ship the ugly version"*, *"don't add the abstraction even though it's cleaner"*. Selection pressure is untested here, not disproven: these prompts were ones where the model's default was already correct, which left no headroom to measure.
+2. **Local knowledge the model cannot have** — your own product's recorded failures and their outcomes. *"Neon scale-to-zero suspends on query inactivity and pgxpool's health check sends nothing"* is worth retrieving forever. *"Don't boil the ocean"* never was.
+
+Any test of either needs prompts where the base model **fails**, or it reproduces this result.
+
+## Not encoded in another language, and why
+
+An early idea was storing the corpus in a non-English language to save tokens. It is backwards.
+Tokenizers are English-centric and English is the cheapest per unit of meaning — Simplified
+Chinese runs ~1.13× English, Polish and Hindi ~1.42×
 ([Frontiers, 2025](https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2025.1538165/full)).
-LLaMA 3.2 gets 4.9 chars/token on English vs 3.6–3.8 on Spanish/French. Encoding elsewhere
-costs more tokens *and* degrades instruction-following. Recorded so nobody retries it.
+LLaMA 3.2 gets 4.9 chars per token on English against 3.6–3.8 on Spanish and French. Encoding
+elsewhere costs more tokens *and* degrades instruction-following. Recorded so nobody retries it.
+
+## Not a persona pack
+
+[Zheng et al., EMNLP Findings 2024](https://arxiv.org/abs/2311.10054) — 162 roles, 2,410
+questions, 4 model families — found that personas in system prompts do not improve performance,
+and that per-persona effects are largely random. "Think like Jony Ive" is a costume. What Ive
+articulated is a check you can run against a diff. The patterns here are content, not voice.
+
+## Reproduce
+
+```sh
+python3 eval/measure.py                      # context cost
+python3 eval/retrieve.py "your prompt here"  # BM25 baseline retrieval
+python3 eval/score.py                        # eval 02 — unblind and score
+python3 eval/score2.py                       # eval 02b
+```
+
+`corpus.json` holds 107 patterns across product/scope, engineering, design, distribution, and
+decisions. Each carries a named mechanism, a real cited case, a retrieval trigger, and a severity.
+
+## Prior art worth reading
+
+[obra/superpowers](https://github.com/obra/superpowers) is the one credible project in this
+space, and it earned that by publishing results that went against its own changes. This repo
+tries to hold the same bar.
 
 ## License
 
-MIT.
+MIT — see [LICENSE](LICENSE).
