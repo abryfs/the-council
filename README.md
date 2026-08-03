@@ -9,6 +9,13 @@ prompt, and the agent gives better advice.
 We built it and measured it three ways. **The retrieval works. The corpus does not help — and
 the final experiment shows there is no headroom for it to help in.**
 
+Then we went and found out *why*, at the level of attention heads rather than behaviour:
+**[MECHANISM.md](MECHANISM.md)**. The short answer is that retrieved text and parametric memory
+are separate additive write-paths, so a corpus that *agrees* with the prior pushes the same
+token the model was already going to emit — mechanically invisible to a behavioural eval. That
+file also carries what a corpus would have to be instead, where a rule belongs and why, and how
+to run the eval we should have run first.
+
 This repo is the method, the data, and the null. It is a work in progress, and the code is a
 research harness rather than a product.
 
@@ -31,6 +38,8 @@ Full numbers, limitations, and a false null that nearly shipped:
 **[`eval/RESULTS.md`](eval/RESULTS.md)**.
 
 ## Why it fails
+
+Full account in **[MECHANISM.md](MECHANISM.md)**. In one line: **the corpus had a small norm.**
 
 **The corpus is made of the model's defaults.** Canonical startup wisdom is canonical because
 it saturates training data. A corpus of it can only agree with what the model was going to say.
