@@ -74,14 +74,20 @@ earned that by publishing results that went against its own changes.
 | A lexical confidence gate can tell "nothing applies" | **no** — three designs, all failed (eval 01b) |
 | A semantic gate can | **yes** — oracle separated all 5 controls unprompted |
 | Retrieval picks relevant patterns better than random | **yes, weakly** — 0.107 vs 0.057 prec@15, CI [+0.05, +1.45] |
-| Patterns improve output quality vs no corpus | **not yet run** — blocked on shipping k=3–5 + semantic gate |
+| k=4 + semantic gate beats the k=15 baseline | **yes, decisively** — precision 0.107 → 1.000, noise 13.4 → 0.0, cost 25× lower |
+| ...without losing useful signal | **no** — signal fell 1.60 → 0.60/prompt |
+| Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; this is the bottleneck |
+| Patterns improve output quality vs no corpus | **not yet run** — blocked on a semantic retriever |
 | Corpus scales to 1,000 without precision collapse | **not yet run** |
 
-**The honest one-line summary: roughly twice random, from a very low base.** At k=15 the
-retriever returns 1.6 useful patterns and 13.4 irrelevant ones. The pass is real and the
-confidence interval's lower bound is +0.05. Do not read this as "it works" — read it as "the
-mechanism is real and the current configuration is wrong." Full numbers, limitations, and two
-negative results in [`eval/RESULTS.md`](eval/RESULTS.md).
+**The honest one-line summary: what it shows you is now trustworthy, and it shows you too
+little.** The shipped pipeline (BM25 → 8 candidates → semantic gate → ≤4) surfaced 12 patterns
+across 20 prompts and blind graders judged **all 12 relevant**, with zero noise, silence on
+every mechanical prompt, and 122 tokens per prompt against 3,060 before. But it stayed silent
+on 13 of 20 prompts, and the diagnosis is that **lexical candidate recall is 27%** — the right
+patterns are usually not in the top 8 at all. The gate is good; the retriever is the
+bottleneck. Full numbers, limitations, and three negative results in
+[`eval/RESULTS.md`](eval/RESULTS.md).
 
 Nothing moves from "not yet run" to a claim in this README without the numbers next to it,
 including negative ones.

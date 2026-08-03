@@ -142,6 +142,54 @@ shuffled per prompt to blunt position bias, which is a mitigation and not a fix.
    semantic call to gate and cut — is the only configuration the evidence supports.
 3. **The honest pitch is "roughly twice random, from a very low base," not "it works."**
 
+## Eval 02b — k=4 + semantic gate · RUN · 2026-08-03 · **large win, one real loss**
+
+BM25 retrieves 8 candidates; a semantic gate (an agent, given only the prompt and the 8) keeps
+≤4 or none. Scored against the v1 blind graders' relevance judgments — those graders saw these
+exact patterns, judged them blind, and were run **before the gate existed**. No circularity:
+the gate never saw the grades, the graders never saw the gate.
+
+| metric | v1 (k=15, no gate) | v2 (k≤4, gated) |
+|---|---|---|
+| precision | 0.107 | **1.000** (12/12) |
+| signal — relevant shown/prompt | 1.60 | **0.60** |
+| noise — irrelevant shown/prompt | 13.40 | **0.00** |
+| silence on control prompts | 0/5 | **5/5** |
+| tokens/prompt | 3,060 | **122** |
+
+**Every pattern the gate kept was independently judged relevant.** Noise went to zero, the
+five mechanical prompts got silence, and cost fell 25×.
+
+**The loss is real and must not be buried: signal dropped from 1.60 to 0.60.** The gate
+returned nothing on 13 of 20 prompts, including several where the oracle found 6–12 applicable
+patterns. You are shown less useful material than before.
+
+### Root cause: candidate recall is 27%, and it is the retriever
+
+The obvious reading — "the gate over-rejects" — is wrong, and the diagnostic says so:
+
+```
+Of the patterns graders judged relevant, how many appear in BM25's top-8?
+  23 / 84 = 27%      (0% on 7 of 20 prompts)
+```
+
+On p04 (*"we have 4 users, two of them are me and my cofounder"*) the graders found 12 relevant
+patterns and **BM25 surfaced none of them**. The gate returned empty and gave the correct
+reason unprompted: *"the relevant advice (go do unscalable things with users) is not among
+these eight."* It rejected accurately. It was never shown the right candidates.
+
+**The bottleneck is lexical retrieval recall, not gate precision.** A smarter gate cannot fix
+this, and raising k only buys noise — eval 02 already showed precision falling as k rises.
+The fix is a semantic retriever at the candidate stage: embeddings, or an LLM pass over
+pattern names. That is the next experiment and the only one worth running.
+
+### Limitations
+
+n=12 kept patterns is a very small sample for a 100% figure — read it as "no false positives
+observed in 12," not as a precision guarantee. Single gate agent, no inter-rater check on the
+gate itself. Ground truth is the union of v1 graders' relevance marks, so it inherits their
+strictness and their LLM-judge biases.
+
 ## Eval 03 — output quality · NOT RUN
 
 Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current

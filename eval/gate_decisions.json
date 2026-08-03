@@ -1,0 +1,121 @@
+{
+ "p01": {
+  "id": "p01",
+  "keep": [],
+  "reason": "Mechanical middleware task with an explicit no-new-dep constraint; every candidate is pricing, growth, or UI-chrome wisdom with no bearing on writing a per-team 429 limiter."
+ },
+ "p02": {
+  "id": "p02",
+  "keep": [
+   "Skipping The Unscalable"
+  ],
+  "reason": "The decision is whether to build self-serve seats/invites/Stripe multi-seat before a single paying customer exists \u2014 the pattern directly argues to onboard the first teams by hand instead, which changes the recommendation; the pricing patterns are about seat pricing structure, not build sequencing."
+ },
+ "p03": {
+  "id": "p03",
+  "keep": [],
+  "reason": "A settings-page declutter; nothing in the candidate set names the actual risk (removing settings someone quietly depends on), and rewrite/sprawl/motion/positioning patterns are all off-target."
+ },
+ "p04": {
+  "id": "p04",
+  "keep": [],
+  "reason": "No evidence in the prompt matches any candidate's trigger \u2014 no waitlist, no demo, no category fusion, no equity or architecture question; the relevant advice (go do unscalable things with users) is not among these eight."
+ },
+ "p05": {
+  "id": "p05",
+  "keep": [
+   "Second-System Rewrite",
+   "The Famous Forecaster"
+  ],
+  "reason": "The rewrite pattern is the exact case being argued, and 'we'll have to do it eventually anyway' is an undated unfalsifiable forecast the user explicitly wants stress-tested."
+ },
+ "p06": {
+  "id": "p06",
+  "keep": [],
+  "reason": "Live incident triage on a Redis staleness bug; every candidate is design-time or GTM wisdom that would not change a single diagnostic step."
+ },
+ "p07": {
+  "id": "p07",
+  "keep": [],
+  "reason": "Mechanical callback-to-async refactor with an explicit behavior-preservation contract; the nearest pattern (Preserving The Shape) would argue against the user's correct constraint."
+ },
+ "p08": {
+  "id": "p08",
+  "keep": [],
+  "reason": "A regex character-class bug with a one-line answer; all eight candidates are product/positioning patterns with zero bearing on it."
+ },
+ "p09": {
+  "id": "p09",
+  "keep": [],
+  "reason": "The user already articulated the single-data-point risk and the permanent maintenance cost; no candidate adds a move they haven't already made."
+ },
+ "p10": {
+  "id": "p10",
+  "keep": [
+   "Chesterton's Dead Code"
+  ],
+  "reason": "Directly changes the work: static import analysis misses dynamic requires, reflection, and external entrypoints, so 'unreferenced' needs a stronger check than the user proposed."
+ },
+ "p11": {
+  "id": "p11",
+  "keep": [
+   "Skipping The Unscalable",
+   "Cold Start Ignored"
+  ],
+  "reason": "The founder is trying to diagnose activation drop-off from metrics alone; the unscalable pattern redirects the first move from instrumentation to hand-onboarding real users, and cold-start names a structural cause for the 'empty state' hypothesis he already suspects."
+ },
+ "p12": {
+  "id": "p12",
+  "keep": [],
+  "reason": "A composite-index question with a single correct answer the agent would give anyway; every candidate is topically adjacent infrastructure wisdom that changes nothing here."
+ },
+ "p13": {
+  "id": "p13",
+  "keep": [],
+  "reason": "A ten-second comprehension audit of existing copy \u2014 parity-positioning and PMF-survey patterns address different failures and would not change how the agent reads the page."
+ },
+ "p14": {
+  "id": "p14",
+  "keep": [
+   "Prompt Inflation",
+   "Premature Automation"
+  ],
+  "reason": "A daily digest is a recurring interrupt layered on existing notifications, and its content selection is curation \u2014 both give concrete items for the decision list he explicitly asked for."
+ },
+ "p15": {
+  "id": "p15",
+  "keep": [],
+  "reason": "Mechanical triage of a slow, flaky suite; the candidates are incident-postmortem and GTM patterns with no bearing on the sequencing question."
+ },
+ "p16": {
+  "id": "p16",
+  "keep": [],
+  "reason": "The user already named the mechanism (UTC stored, toLocaleDateString formats in local tz); it's a one-file debugging task an agent handles correctly unaided. Interface Without A Contract is topically adjacent (timezone at a boundary) but its trigger is a NEW field/boundary being designed, not an existing formatting bug, and it would not change the fix."
+ },
+ "p17": {
+  "id": "p17",
+  "keep": [
+   "Sunk Identity",
+   "Refusing The Amputation"
+  ],
+  "reason": "The user explicitly defends features by work already spent (Sunk Identity is the exact failure named in the prompt), and the walkthrough will otherwise produce 'phase 2' deferrals rather than deletions \u2014 Refusing The Amputation changes what the cut list looks like."
+ },
+ "p18": {
+  "id": "p18",
+  "keep": [],
+  "reason": "Mechanical infrastructure task with a fully specified contract (backoff, jitter, 5 attempts, DLQ, tests). Every candidate is about deleting guards, failover, backups, or GTM \u2014 none fires on adding a retry wrapper."
+ },
+ "p19": {
+  "id": "p19",
+  "keep": [
+   "Free Tier With No Wall",
+   "Exit Reason Assumed"
+  ],
+  "reason": "The user is setting a paid/free boundary after a free period, which is exactly where the wall's axis decides conversion and where clawback is expensive; and their fear of losing users assumes price is the churn cause without having asked the handful of daily users, which changes the first recommended step."
+ },
+ "p20": {
+  "id": "p20",
+  "keep": [],
+  "reason": "A build-tooling path-alias misconfiguration. All eight candidates are strategy/scaling/API-commitment patterns with no bearing on a vite resolve config."
+ }
+}
