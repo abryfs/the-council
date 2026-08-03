@@ -15,6 +15,9 @@ import re
 from collections import Counter
 
 FIELD_WEIGHTS = {"trigger": 3, "name": 2, "mechanism": 1}
+# k defaults set by eval 02: k=15 (taken from ITR by analogy) measured 0.107 precision;
+# precision more than doubles at low k. Retrieve 8 candidates, semantic gate cuts to <=4.
+N_CANDIDATES, MAX_SHOWN = 8, 4
 K1, B = 1.5, 0.75
 
 STOP = set("""a an the and or but if then than that this these those is are was were be been being
@@ -55,7 +58,7 @@ def build_index(corpus):
     return docs, df, avgdl
 
 
-def bm25(query, corpus, docs, df, avgdl, k=15):
+def bm25(query, corpus, docs, df, avgdl, k=8):
     N = len(corpus)
     q = toks(query)
     scored = []
@@ -74,7 +77,7 @@ def bm25(query, corpus, docs, df, avgdl, k=15):
     return [i for s, i in scored[:k]], [s for s, i in scored[:k]]
 
 
-def random_draw(corpus, k=15, seed=0):
+def random_draw(corpus, k=4, seed=0):
     rng = random.Random(seed)
     return rng.sample(range(len(corpus)), min(k, len(corpus)))
 
