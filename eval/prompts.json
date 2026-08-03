@@ -1,0 +1,102 @@
+[
+ {
+  "id": "p01",
+  "situation": "Mid-build on an API, adding abuse protection before a small public beta",
+  "prompt": "add a rate limiter to the /v1/invites endpoint. 20 per hour per team, return 429 with a retry-after header. use whatever's already in the middleware chain, don't pull in a new dep"
+ },
+ {
+  "id": "p02",
+  "situation": "Two weeks from a small launch, deciding what makes the cut",
+  "prompt": "Should we build the team/multi-seat plan before launch or ship single-user first? Right now billing assumes one person per account and adding seats means touching auth, the invite flow, and the Stripe integration. I keep going back and forth. We have no paying customers yet."
+ },
+ {
+  "id": "p03",
+  "situation": "Just came back to a settings screen that has grown organically for months",
+  "prompt": "the settings page feels cluttered and I hate looking at it. there are like 14 rows now and half of them are things nobody touches. clean it up"
+ },
+ {
+  "id": "p04",
+  "situation": "Post-launch reality check after a Show HN that went nowhere",
+  "prompt": "we have 4 users. two of them are me and my cofounder. what now"
+ },
+ {
+  "id": "p05",
+  "situation": "Cofounder disagreement about the backend stack, mid-week",
+  "prompt": "My cofounder wants to rewrite the backend in Rust. His argument is the Node service is already showing latency problems under load and we'll have to do it eventually anyway. I think it's a 6 week detour. Help me think about this \u2014 and if I'm wrong I want to know."
+ },
+ {
+  "id": "p06",
+  "situation": "Production incident in progress, users reporting stale data",
+  "prompt": "prod is serving stale data to some users but not others. cache layer is redis, ttl is 300s. I already tried flushing and it came back within a couple minutes. where do I even start"
+ },
+ {
+  "id": "p07",
+  "situation": "Routine refactor, callback-style legacy module",
+  "prompt": "convert the callbacks in lib/uploader.js to async/await. keep the error semantics identical."
+ },
+ {
+  "id": "p08",
+  "situation": "Debugging a validation function that keeps rejecting valid input",
+  "prompt": "why is this regex not matching? `^[\\w.-]+@[\\w-]+\\.[a-z]{2,}$` \u2014 it fails on foo+bar@sub.example.co.uk and I don't see why"
+ },
+ {
+  "id": "p09",
+  "situation": "Considering adding an integration a prospect asked for",
+  "prompt": "A prospect said they'd sign up if we had a Slack integration. Just one prospect. Do I build it? It's maybe 3 days of work and I'd have to maintain it forever."
+ },
+ {
+  "id": "p10",
+  "situation": "Cleaning up before opening the repo to a contractor",
+  "prompt": "there's a bunch of dead code in src/legacy that I'm pretty sure nothing imports anymore. find what's actually unreferenced and delete it, but don't touch anything that has a test pointing at it"
+ },
+ {
+  "id": "p11",
+  "situation": "Onboarding funnel is leaking and the founder can see it in the numbers",
+  "prompt": "signup to first-action conversion is 22%. people create an account and then just... stop. I don't know if it's the empty state, the fact that we ask for a repo connection immediately, or something dumber. help me figure out what to look at first"
+ },
+ {
+  "id": "p12",
+  "situation": "Mechanical database question during a feature build",
+  "prompt": "what's the right postgres index for `WHERE team_id = $1 AND created_at > $2 ORDER BY created_at DESC LIMIT 50`? composite or two separate?"
+ },
+ {
+  "id": "p13",
+  "situation": "Reviewing a landing page draft the night before sharing it",
+  "prompt": "read the copy on the landing page and tell me honestly if a stranger would understand what this does in ten seconds. I've read it so many times I can't tell anymore. don't be nice about it"
+ },
+ {
+  "id": "p14",
+  "situation": "Adding a feature that touches the notification system",
+  "prompt": "I want to add email digests \u2014 daily summary of what happened in your workspace. Before you write anything, tell me what you'd need to decide. I've been burned by half-designed notification features before."
+ },
+ {
+  "id": "p15",
+  "situation": "Test suite has become slow and flaky, blocking merges",
+  "prompt": "the test suite takes 11 minutes and about one in five runs fails on something unrelated to the change. I'm starting to just rerun until green which is obviously bad. fix the flakes first or speed it up first?"
+ },
+ {
+  "id": "p16",
+  "situation": "Small formatting bug reported by a user in a different timezone",
+  "prompt": "timestamps are showing up one day off for users in Australia. we store UTC and format client side with toLocaleDateString. find it"
+ },
+ {
+  "id": "p17",
+  "situation": "Six months in, feature list keeps growing and shipping keeps slipping",
+  "prompt": "honestly I think we've built too much. There are 9 features in the app and I'd guess 3 get used. I don't know how to decide what to cut without feeling like I'm throwing away work. Walk me through it."
+ },
+ {
+  "id": "p18",
+  "situation": "Adding a small piece of infrastructure while implementing sync",
+  "prompt": "add retry with exponential backoff and jitter around the webhook dispatcher. cap at 5 attempts, dead-letter after that. write tests"
+ },
+ {
+  "id": "p19",
+  "situation": "Deciding whether to charge, weeks after a free beta started",
+  "prompt": "we've been free for 3 months and I've been too scared to put a price on it. 30ish active users, a handful use it daily. Should I start charging now, and if so how do I not lose the people who are actually using it?"
+ },
+ {
+  "id": "p20",
+  "situation": "Mundane build-tooling annoyance mid-session",
+  "prompt": "vite build is failing with \"Cannot find module './generated/api'\" but the file exists and tsc is fine with it. probably a path alias thing? just make it build"
+ }
+]

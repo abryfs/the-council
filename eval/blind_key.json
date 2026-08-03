@@ -1,0 +1,102 @@
+{
+ "p01": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p02": {
+  "A": "random",
+  "B": "bm25",
+  "C": "oracle"
+ },
+ "p03": {
+  "A": "bm25",
+  "B": "oracle",
+  "C": "random"
+ },
+ "p04": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p05": {
+  "A": "bm25",
+  "B": "oracle",
+  "C": "random"
+ },
+ "p06": {
+  "A": "random",
+  "B": "bm25",
+  "C": "oracle"
+ },
+ "p07": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p08": {
+  "A": "oracle",
+  "B": "random",
+  "C": "bm25"
+ },
+ "p09": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p10": {
+  "A": "oracle",
+  "B": "random",
+  "C": "bm25"
+ },
+ "p11": {
+  "A": "bm25",
+  "B": "oracle",
+  "C": "random"
+ },
+ "p12": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p13": {
+  "A": "random",
+  "B": "bm25",
+  "C": "oracle"
+ },
+ "p14": {
+  "A": "oracle",
+  "B": "bm25",
+  "C": "random"
+ },
+ "p15": {
+  "A": "oracle",
+  "B": "bm25",
+  "C": "random"
+ },
+ "p16": {
+  "A": "oracle",
+  "B": "random",
+  "C": "bm25"
+ },
+ "p17": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p18": {
+  "A": "bm25",
+  "B": "random",
+  "C": "oracle"
+ },
+ "p19": {
+  "A": "random",
+  "B": "oracle",
+  "C": "bm25"
+ },
+ "p20": {
+  "A": "random",
+  "B": "bm25",
+  "C": "oracle"
+ }
+}
