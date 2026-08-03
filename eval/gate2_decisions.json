@@ -1,0 +1,127 @@
+{
+ "p01": {
+  "id": "p01",
+  "keep": [
+   "Error Text From Inside"
+  ],
+  "reason": "Concrete implementation task; the only surface where a pattern changes output is the 429 body \u2014 the default here is `{\"error\":\"rate_limit_exceeded\"}`, and the trigger (diff adds user-visible error copy naming an internal condition instead of what failed plus one action) matches directly. Rejected: Global Blast Radius (this is a code change through the normal deploy path, not a config/rules channel bypassing rollout); One-Way Door Misread (endpoint already public; a tunable rate threshold is not a published contract external parties build against); Numbers Nobody Measured (trigger is reliability/latency/coverage claims cited downstream \u2014 20/hr is an enforcement knob the user chose, not a claim); Preserving The Shape (trigger is migration/backcompat cost driving design \u2014 \"reuse the middleware chain, no new dep\" is ordinary scoping, and any agent reads the existing chain before wiring into it)."
+ },
+ "p02": {
+  "id": "p02",
+  "keep": [
+   "Foundation Before First User",
+   "Cold Start Ignored",
+   "Seat Pricing Punishes Adoption"
+  ],
+  "reason": "The decision is genuinely underdetermined and these three pull in different directions, which is what makes them load-bearing. Foundation Before First User argues the seat plan has no consumer to falsify it at zero customers; Cold Start Ignored is the counterweight the founder is missing \u2014 for a team-coordination product, \"ship single-user first\" means user one opens an empty room, so the cheap option may be worthless rather than just smaller; Seat Pricing Punishes Adoption reframes the question from when to build seats to whether the seat is the right billing unit at all when value requires the whole team. Rejected: Premature Scaling (no headcount/geo/provisioned capacity); Refusing The Amputation (billing already assumes one person \u2014 there is no inherited team model being deferred); Retroactive Value-Metric Change (no existing customers to reprice); Growth Before Retention and Distribution As An Afterthought (true of the company, but neither moves the seats-vs-single-user answer \u2014 this is the pad)."
+ },
+ "p03": {
+  "id": "p03",
+  "keep": [
+   "Chesterton's Dead Code"
+  ],
+  "reason": "\"Half of them are things nobody touches\" is an assumption, not a measurement, and settings rows are user-facing flags \u2014 deleting one silently changes a default or strands a persisted value for the one customer who set it. Surfacing this makes the agent trace each row's reader before cutting instead of cutting by eyeball. Rejected: Signifier Erasure (\"clean it up\" hits the trigger phrase, but the complaint is row count, not chrome, and this project's design system already mandates whitespace-over-borders \u2014 the pattern would fight it); Relearning Tax Ignored (settings is the surface where relearning cost is lowest; the pattern's premise is habituated daily motor memory on primary nav); Control Swallowed By Screen (the rows being moved are by definition the infrequent ones \u2014 the pattern is about frequent/eyes-busy controls); Discoverability Mistaken For Absence (about building a duplicate of an existing capability; this is removal); Curated Demo Data (no design-validation-on-sample-data step here)."
+ },
+ "p04": {
+  "id": "p04",
+  "keep": [
+   "Skipping The Unscalable",
+   "Funding As Distribution",
+   "No Beachhead"
+  ],
+  "reason": "Funding As Distribution names the exact diagnosis the founder has not made \u2014 the trigger literally includes a Show HN day with no channel producing users on day 30 \u2014 so it stops the agent from treating this as bad luck. Skipping The Unscalable turns \"what now\" into the concrete next move at two real users (hand-onboard, don't build funnel). No Beachhead is the precondition for both: with no ranked first customer, every channel and message choice downstream is a guess. Rejected: Distribution As An Afterthought (block-tier and true, but Funding As Distribution covers the same ground with the specific failure already in evidence \u2014 keeping both is duplicate coverage); Piggyback Channel Ignored (trigger needs a channel list of owned surfaces; there is no GTM plan yet to be wrong); Growth Before Retention (no acquisition spend proposed, and retention is unmeasurable at n=2 real users); Exit Reason Assumed (\"went nowhere\" asserts no cause to correct); Wartime Frame In Peacetime (a guard on the agent's own tone rather than a change to the work, and the three keeps already force a single sharp move over a multi-track plan)."
+ },
+ "p05": {
+  "id": "p05",
+  "keep": [
+   "Guessing The Bottleneck",
+   "The Great Rewrite",
+   "The Inside-View Estimate"
+  ],
+  "reason": "The decision hinges on an unprofiled latency claim, so Guessing The Bottleneck changes the work directly: demand a profile before accepting that the runtime is the bottleneck. The Great Rewrite supplies the mechanism the user is missing (discarded encoded bug fixes, two systems maintained in parallel) for a wholesale replacement of a working service. The Inside-View Estimate targets the user's own '6 weeks' number, which matters because they explicitly asked to be told if they're wrong. Rejected Second-System Rewrite as redundant with The Great Rewrite (and its trigger needs a cruft-plus-wishlist scoping that isn't present); Innovation Token Overdraft fires on multiple simultaneous novel components, not one language swap; Numbers Nobody Measured needs a quoted reliability/latency figure, which there isn't; Preference-First Framing describes a boss filtering team input, not a founder asking an AI to argue against him; Chasing The Moving Baseline needs a newly released substrate, not a decade-old language."
+ },
+ "p06": {
+  "id": "p06",
+  "keep": [],
+  "reason": "This is a live debugging request with no root cause named and no remediation proposed yet, so all three candidates fire on artifacts that don't exist. Root Cause Singular triggers on a postmortem that has already settled on one cause; Alert As The Fix triggers on a proposed monitoring-only remediation; The Never-Restarted Subsystem triggers on a design with unstated cold-start cost, and the agent is going to investigate the repopulation path anyway given the user already reported that flushing didn't hold. None would change the next action, which is bisecting which users see stale data and finding the second write path or per-node cache."
+ },
+ "p07": {
+  "id": "p07",
+  "keep": [],
+  "reason": "Both candidates are topically adjacent and neither addresses the real hazards of a callback-to-async conversion (double-invoked callbacks, sync throws becoming async rejections, swallowed error-first args). Preserving The Shape warns that a backward-compat constraint shouldn't drive design, but here 'keep the error semantics identical' is the user's explicit correct requirement, not a smell to push back on. Chesterton's Dead Code needs a diff that actually deletes or repurposes a guard labeled unused, which hasn't happened, and the user's own instruction already forbids dropping error branches."
+ },
+ "p09": {
+  "id": "p09",
+  "keep": [
+   "Product Line Sprawl"
+  ],
+  "reason": "Product Line Sprawl is the one candidate whose trigger literally matches (a new integration surface added to a permanent inventory) and it supplies the mechanism the user's own framing lacks: not just maintenance hours but that the marginal surface sits below the median and drags average quality down, plus the check for whether existing surfaces are unfinished. Rejected Built On Rented Land because a single-prospect integration isn't being proposed as a primary growth channel; Stated Preference Trap is about users being unable to report system costs (latency, density) and the user has already priced the cost; One-Way Door, Casual is inverted here since the user is deliberating rather than deciding in passing; Discoverability Mistaken For Absence needs the capability to possibly already ship, which it doesn't."
+ },
+ "p10": {
+  "id": "p10",
+  "keep": [
+   "Chesterton's Dead Code"
+  ],
+  "reason": "The request is literally 'delete what's unreferenced in src/legacy' \u2014 the agent's default is a static import-graph sweep, and Chesterton's Dead Code is the one thing that changes the method: it forces a search for reachability the import graph cannot see (feature flags, old clients, stale servers, reflection) before anything is removed. Its trigger names branches labeled legacy/deprecated/unused, which is this directory by name. One-Way Door Misread is rejected: it governs publishing an interface external parties come to depend on, not deleting internal code, and its concrete trigger list (new endpoint, tool name, enum value, wire format) does not match a deletion diff. Adjacent, not applicable."
+ },
+ "p11": {
+  "id": "p11",
+  "keep": [
+   "Exit Reason Assumed",
+   "Cold Start Ignored"
+  ],
+  "reason": "Exit Reason Assumed is a direct hit: the founder lists three candidate causes (empty state, repo connection, 'something dumber') and cites nothing a dropped-off user said, which is exactly the failure mode \u2014 the fix targets the instrumented variable and produces no movement. It changes the answer to 'what do I look at first' from funnel analytics to talking to the people who stopped. Cold Start Ignored earns the second slot because 'the empty state' is one of the three named hypotheses, and whether that emptiness is structural (value comes from other people who aren't there yet) or cosmetic leads to completely different fixes; the agent would otherwise treat it as a UI copy problem. Rejected: Skipping The Unscalable and Premature Automation resolve to the same remedy as the first keep and would just pad; Growth Before Retention has no growth spend in the prompt; Segment-Blind PMF Survey is about the 40% test/NPS, which nobody proposed; Curated Demo Data is about design validation, not funnel drop-off; The Metric That Moves Alone is a real but generic caution the agent doesn't need to reach the right first step here."
+ },
+ "p12": {
+  "id": "p12",
+  "keep": [],
+  "reason": "Guessing The Bottleneck does not apply. This is a schema-design question with a determinate correct answer derivable from the query shape alone \u2014 a composite index on (team_id, created_at DESC) serves the equality predicate, the range scan, the sort, and the limit in one structure, and two single-column indexes cannot. No profile, benchmark, or production measurement would change that answer, so surfacing 'measure before optimizing' costs the agent a step and improves nothing. This is the tool firing on the word 'index' rather than on the situation."
+ },
+ "p13": {
+  "id": "p13",
+  "keep": [
+   "Metaphor Fusion",
+   "Positioning To The Wrong Frame"
+  ],
+  "reason": "The ask is a harsh ten-second comprehension read, and these two turn that vague ask into specific things to look for. Metaphor Fusion supplies the operative test \u2014 can a non-user repeat what this is in one sentence \u2014 plus the concrete tell (categories joined with 'and'), which is what a stranger actually fails on. Positioning To The Wrong Frame catches the other half: copy that names a broad incumbent-owned category without naming the specific buyer or the alternative they'd otherwise use reads as generic in exactly the first ten seconds. Rejected: No Beachhead overlaps both keeps on 'name the specific first customer'; Feature Parity Positioning only fires if the copy is 'X but better', which isn't in evidence; Numbers Nobody Measured is about claim provenance, a different critique than comprehension; Job Mistaken For Demographic governs requirements segmentation, not landing copy."
+ },
+ "p14": {
+  "id": "p14",
+  "keep": [
+   "Prompt Inflation",
+   "Cold Start Ignored",
+   "The Metric That Moves Alone"
+  ],
+  "reason": "The ask is literally \"what would you need to decide\" for a new notification stream, so patterns that name un-obvious decisions change the output directly. Prompt Inflation forces the decision the user was burned by before: a daily digest is another recurring interrupt whose per-occurrence cost is paid by everyone, so the frequency/opt-out/threshold call has to be made up front. Cold Start Ignored names the digest-specific hole an agent will otherwise skip \u2014 what a solo user or a quiet workspace receives (an empty daily email is the classic half-designed digest). The Metric That Moves Alone changes the success criterion from digests-sent/opened to whether a recipient acted, which is exactly where digest features rot. Rejected: Assistant That Interrupts (scheduled, user-configured, not inferred intent), Curated Demo Data (subsumed by Cold Start for this surface), Product Line Sprawl and Global Blast Radius (generic to any new work; wouldn't change the decision list)."
+ },
+ "p15": {
+  "id": "p15",
+  "keep": [
+   "Guessing The Bottleneck"
+  ],
+  "reason": "The user is asking to sequence two remediations, and the honest answer is that neither can be sequenced without measurement \u2014 which test files own the 11 minutes, and which tests own the 20% failure rate. Without this the agent will pick a side from intuition and start parallelizing or sharding, changing the baseline before the flake set is even identified. Rejected: Alert As The Fix (no monitor/warning is being proposed \u2014 quarantine-and-report is a different shape), Root Cause Singular (trigger is a postmortem naming one cause; the user has named none), Craft On The Wrong Axis and Statistics Against Trust (topically adjacent at best; the frequency argument here is the user's own complaint, not a dismissal of a reporter)."
+ },
+ "p17": {
+  "id": "p17",
+  "keep": [
+   "Refusing The Amputation",
+   "Sunk Identity",
+   "Exit Reason Assumed"
+  ],
+  "reason": "Refusing The Amputation changes the mechanics of the answer: an agent walking someone through a cut will default to a 'phase 2' list, which keeps every data model and coupling and delivers none of the relief the user is asking for \u2014 deletion is the only cut that reduces work. Sunk Identity is the named form of the exact blocker in the prompt (\"without feeling like I'm throwing away work\"), and gives the agent the rule that prior investment is a fact about the past, not about the option. Exit Reason Assumed attacks the load-bearing weakness in the premise \u2014 \"I'd guess 3 get used\" \u2014 so the walk-through starts from usage data and user conversations rather than executing a cut on a guess. Rejected: Product Line Sprawl and Sustaining-Only Roadmap (correct diagnosis, wrong direction \u2014 the user is already cutting, not adding), Discoverability Mistaken For Absence (a real reframe but the trigger is building a duplicate capability; kept out to stay under a strong three), Numbers Nobody Measured (overlaps Exit Reason Assumed; its trigger is spec/marketing figures)."
+ },
+ "p18": {
+  "id": "p18",
+  "keep": [
+   "Alert As The Fix"
+  ],
+  "reason": "The spec's terminal state is \"dead-letter after that,\" and a DLQ with no owner, no threshold, and no defined response is precisely detection that exists on paper and is absent in practice \u2014 the agent will otherwise implement the queue, write tests that assert messages land in it, and call the feature done. Surfacing this adds the ownership/visibility/drain-path question to the implementation. Rejected: Innovation Token Overdraft (no new datastore or runtime is being introduced), The Never-Restarted Subsystem (no long-lived stateful cache or index here), Guessing The Bottleneck (this is reliability work, not performance work), Interface Without A Contract (the real boundary risk for retried webhooks is idempotency, which this pattern about units and ID namespaces does not cover)."
+ },
+ "p19": {
+  "id": "p19",
+  "keep": [
+   "Free Tier With No Wall"
+  ],
+  "reason": "Both halves of the question \u2014 should I charge, and how do I keep the people actually using it \u2014 resolve into one decision: where the wall sits. This pattern changes the answer from the default (grandfather everyone, cap on storage/time/history) to placing the limit at the specific capability a committed user cannot work without, and flags that fixing a badly-placed wall later means taking something back. Rejected: Retroactive Value-Metric Change (no billing unit and no existing contracts exist to reprice \u2014 a free beta is not a repricing), Seat Pricing Punishes Adoption (no evidence the product's value requires a whole team), Negative Unit Economics As Growth and Undifferentiated Price War (no unlimited framing, no competitor in play), Growth Before Retention and CAC Buried In COGS (no acquisition spend is proposed), Exit Reason Assumed (the user has asserted no churn cause; the agent would say \"talk to your daily users\" unprompted)."
+ }
+}

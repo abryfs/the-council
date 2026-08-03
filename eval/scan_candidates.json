@@ -1,0 +1,133 @@
+{
+ "p01": [
+  "Global Blast Radius",
+  "One-Way Door Misread",
+  "Numbers Nobody Measured",
+  "Error Text From Inside",
+  "Preserving The Shape"
+ ],
+ "p02": [
+  "Foundation Before First User",
+  "Seat Pricing Punishes Adoption",
+  "Premature Scaling",
+  "Cold Start Ignored",
+  "Refusing The Amputation",
+  "Growth Before Retention",
+  "Retroactive Value-Metric Change",
+  "Distribution As An Afterthought"
+ ],
+ "p03": [
+  "Signifier Erasure",
+  "Relearning Tax Ignored",
+  "Chesterton's Dead Code",
+  "Control Swallowed By Screen",
+  "Discoverability Mistaken For Absence",
+  "Curated Demo Data"
+ ],
+ "p04": [
+  "Skipping The Unscalable",
+  "Funding As Distribution",
+  "Distribution As An Afterthought",
+  "Piggyback Channel Ignored",
+  "No Beachhead",
+  "Growth Before Retention",
+  "Exit Reason Assumed",
+  "Wartime Frame In Peacetime"
+ ],
+ "p05": [
+  "The Great Rewrite",
+  "Second-System Rewrite",
+  "Guessing The Bottleneck",
+  "Innovation Token Overdraft",
+  "The Inside-View Estimate",
+  "Numbers Nobody Measured",
+  "Preference-First Framing",
+  "Chasing The Moving Baseline"
+ ],
+ "p06": [
+  "The Never-Restarted Subsystem",
+  "Root Cause Singular",
+  "Alert As The Fix"
+ ],
+ "p07": [
+  "Preserving The Shape",
+  "Chesterton's Dead Code"
+ ],
+ "p08": [],
+ "p09": [
+  "Stated Preference Trap",
+  "Product Line Sprawl",
+  "Built On Rented Land",
+  "One-Way Door, Casual",
+  "Discoverability Mistaken For Absence"
+ ],
+ "p10": [
+  "Chesterton's Dead Code",
+  "One-Way Door Misread"
+ ],
+ "p11": [
+  "Exit Reason Assumed",
+  "Cold Start Ignored",
+  "Skipping The Unscalable",
+  "Premature Automation",
+  "Segment-Blind PMF Survey",
+  "Curated Demo Data",
+  "Growth Before Retention",
+  "The Metric That Moves Alone"
+ ],
+ "p12": [
+  "Guessing The Bottleneck"
+ ],
+ "p13": [
+  "Metaphor Fusion",
+  "Positioning To The Wrong Frame",
+  "Feature Parity Positioning",
+  "No Beachhead",
+  "Numbers Nobody Measured",
+  "Job Mistaken For Demographic"
+ ],
+ "p14": [
+  "Prompt Inflation",
+  "The Metric That Moves Alone",
+  "Cold Start Ignored",
+  "Curated Demo Data",
+  "Assistant That Interrupts",
+  "Product Line Sprawl",
+  "Global Blast Radius"
+ ],
+ "p15": [
+  "Guessing The Bottleneck",
+  "Alert As The Fix",
+  "Root Cause Singular",
+  "Craft On The Wrong Axis",
+  "Statistics Against Trust"
+ ],
+ "p16": [],
+ "p17": [
+  "Refusing The Amputation",
+  "Sunk Identity",
+  "Product Line Sprawl",
+  "Sustaining-Only Roadmap",
+  "Exit Reason Assumed",
+  "Discoverability Mistaken For Absence",
+  "Numbers Nobody Measured"
+ ],
+ "p18": [
+  "Alert As The Fix",
+  "Innovation Token Overdraft",
+  "The Never-Restarted Subsystem",
+  "Guessing The Bottleneck",
+  "Interface Without A Contract"
+ ],
+ "p19": [
+  "Retroactive Value-Metric Change",
+  "Free Tier With No Wall",
+  "Negative Unit Economics As Growth",
+  "Seat Pricing Punishes Adoption",
+  "Growth Before Retention",
+  "Exit Reason Assumed",
+  "CAC Buried In COGS",
+  "Undifferentiated Price War"
+ ],
+ "p20": []
+}

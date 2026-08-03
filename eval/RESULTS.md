@@ -190,6 +190,48 @@ observed in 12," not as a precision guarantee. Single gate agent, no inter-rater
 gate itself. Ground truth is the union of v1 graders' relevance marks, so it inherits their
 strictness and their LLM-judge biases.
 
+## Eval 02c — index-scan + gate (v3) · RUN · 2026-08-04 · **best configuration**
+
+Replaced BM25 with an agent scanning a compact 107-entry index (`name [severity] — trigger`,
+6,098 tok) and picking ≤8 candidates. Gate unchanged. Scored against the same v1 blind-grader
+ground truth.
+
+| metric | v1 (k=15) | v2 (bm25+gate) | **v3 (scan+gate)** |
+|---|---|---|---|
+| precision | 0.107 | 1.000 (12/12) | **1.000 (26/26)** |
+| signal — relevant/prompt | 1.60 | 0.60 | **1.30** |
+| noise — irrelevant/prompt | 13.40 | 0.00 | **0.00** |
+| silence on controls | 0/5 | 5/5 | **5/5** |
+| candidate recall | 27% | 27% | **67%** |
+| end-to-end recall of available signal | 38% | 14% | **31%** |
+| tokens/prompt | 3,060 | 122 | **6,363** |
+
+**26 of 26 kept patterns were independently judged relevant.** Candidate recall 2.4×'d because
+the failure was semantic, not lexical: BM25 cannot connect *"we have 4 users, two of them are
+me and my cofounder"* to *Skipping The Unscalable* — no shared vocabulary, obvious to a reader.
+
+**Two honest costs.**
+
+1. **v3 is 2× more expensive than the k=15 baseline** — 6,363 tok vs 3,060 — because the index
+   scan is paid on every invocation. It buys zero noise and correct silence, not cheapness. The
+   v2 configuration remains the cheap option at 122 tok and 0.60 signal.
+2. **Signal is still below the v1 baseline** (1.30 vs 1.60). v3 wins because those 1.60 arrived
+   buried in 13.4 irrelevant patterns, while v3's 1.30 arrive clean. But "more useful patterns
+   than the naive baseline" is not yet true.
+
+**A prediction I got wrong, recorded.** Before running this I predicted signal ≈1.5. Actual
+1.30. The gate is more conservative on the new candidates than the projection assumed.
+
+**Remaining ceiling: 31% end-to-end.** 84 relevant patterns exist across the 20 prompts (4.2
+per prompt); v3 surfaces 1.30. Two thirds of applicable signal is still lost — roughly half at
+the candidate stage (67% recall) and half at the gate, which caps at 4 and averages 1.3.
+
+### Consequence for corpus size
+
+The index costs ~57 tok/pattern. At n=150 that is ~8.5k tok; at n=1,000 it is ~57k and the
+approach collapses. **The corpus target is ~150, not 1,000** — and embeddings only become
+worth their dependency above that line. 150 findable patterns beat 1,000 unreachable ones.
+
 ## Eval 03 — output quality · NOT RUN
 
 Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current

@@ -76,7 +76,8 @@ publishing results that went against its own changes.
 | Retrieval picks relevant patterns better than random | **yes, weakly** — 0.107 vs 0.057 prec@15, CI [+0.05, +1.45] |
 | k=4 + semantic gate beats the k=15 baseline | **yes, decisively** — precision 0.107 → 1.000, noise 13.4 → 0.0, cost 25× lower |
 | ...without losing useful signal | **no** — signal fell 1.60 → 0.60/prompt |
-| Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; this is the bottleneck |
+| Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; replaced |
+| An agent scanning a compact index can | **yes** — recall 67%, end-to-end 26/26 precision at 1.30 signal, no dependencies |
 | Patterns improve output quality vs no corpus | **not yet run** — blocked on a semantic retriever |
 | Corpus scales to 1,000 without precision collapse | **not yet run** |
 
