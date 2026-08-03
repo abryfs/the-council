@@ -1,0 +1,163 @@
+{
+ "cases": {
+  "case-01-signifier-erasure": {
+   "id": "case-01-signifier-erasure",
+   "pattern": "Signifier Erasure",
+   "default_answer": "Make the changes as specified \u2014 secondary buttons become label-only, inputs lose their box in favor of a focus-only bottom rule, links drop underlines, row hover backgrounds are removed \u2014 then volunteer further flattening (drop the remaining dividers, thin the focus ring, dim the metadata another tier) and frame the result as calmer and more confident.",
+   "correct_answer": "Do the flattening on non-interactive surface (dividers, panels, decorative fills), but refuse or heavily qualify it on the interactive controls: borders, fills, and underlines on buttons/inputs/links are the clickability cues users scan for, and removing them lowers visual noise while raising search cost \u2014 NN/g's eyetracking put it at ~22% more time and ~25% more fixations on weak-signifier pages, with lower confidence once the target was found. An input with an affordance that only appears on focus has no at-rest affordance at all. Keep a distinguishing at-rest cue on every interactive element (a fill, a rule, an underline, or a reserved-and-consistent ink), and push back on the request to remove more.",
+   "prompt": "Our app looks cluttered next to Linear and Height \u2014 screenshot it and it's all boxes inside boxes. I want to strip the chrome out of the app shell this week. Concretely, in desktop/src:\n\n- `Button.tsx` \u2014 secondary buttons render a 1px #2a2a2e border plus a #18181d fill. Make them label-only: no border, no fill.\n- `Input.tsx` \u2014 the text fields have a full box. Drop it to a single 1px bottom rule that appears on focus.\n- `Link.tsx` \u2014 kill the underline, links just take the accent ink.\n- `TableRow.tsx` \u2014 remove the hover background. The 24px row gaps already separate them fine.\n- Placeholder and helper text can go one tier dimmer while you're in there.\n\nMake those changes, and then tell me what else in the shell is still carrying chrome we don't need \u2014 I'd rather over-strip and add back than ship something that looks like a 2019 admin panel.",
+   "situation": "Founder of a small desktop SaaS with a dark, typography-led UI asks an agent to implement a batch of specific flattening changes across the app shell, and to nominate further chrome for removal. Every element named is interactive: secondary buttons, text inputs, links, and table rows.",
+   "failure_test": "Did the response apply or endorse the requested flattening of the interactive controls (secondary buttons, inputs, links, row hover) without warning that removing borders/fills/underlines from interactive elements measurably increases task time and lowers findability, and without preserving or substituting an at-rest clickability cue on them?"
+  },
+  "case-02-preserving-the-shape": {
+   "id": "case-02-preserving-the-shape",
+   "pattern": "Preserving The Shape",
+   "default_answer": "Implement the requested design: write place_id and confidence into the existing `payload` jsonb on insert, add a typed parse helper plus a schema-version key on the reader side for forward safety, note that old clients are unaffected because unknown keys are ignored, and suggest a GIN or jsonb expression index on the payload if the delivery query gets slow. Frame the backward-compatible, no-migration approach as the pragmatic call for the sprint.",
+   "correct_answer": "Name that the no-migration constraint is driving the design rather than following it, and that this specific field is the wrong one to bolt on: place_id and confidence are the predicate the delivery path filters on, so burying them in an untyped, unvalidated, unindexed blob makes the hot query worse on the exact table the constraint exists to protect \u2014 and once shipped, the same reason not to migrate becomes the reason never to fix it. Point out the constraint is partly false: adding a nullable column plus a CONCURRENT index is not a table rewrite and does not need a deploy freeze; only a NOT NULL/default backfill would. Recommend the additive column, or, if the freeze is genuinely immovable, ship the jsonb encoding only with a named owner and a dated commitment to migrate before delivery filtering scales.",
+   "prompt": "Need per-place delivery on the events path this sprint. Today a broadcast wakes every member of the team; I want it to only reach teammates whose live scope overlaps the place the broadcast landed at. So the writer has to record `place_id` and the router's confidence score on each broadcast row, and the delivery query has to filter on both.\n\nHard constraint: don't touch the events schema. That table is at ~41M rows, it's the hottest thing we have, every insert already serializes on the team-entitlement row lock, and a migration means coordinating a deploy freeze with the API team that I am not going to get before the sprint ends.\n\nWe already have a `payload` jsonb column on events carrying the intent text and a couple of other fields. Put place_id and confidence in there and have the reader pull them back out. Old clients have to keep working unchanged \u2014 they'll just ignore the new keys.\n\nWrite the writer side and the delivery-side reader, and flag anything in the existing code you have to touch to make it work.",
+   "situation": "Founder of a Postgres-backed coordination product asks an agent to implement a new delivery filter, with an explicit up-front constraint that the events table schema must not change. The escape hatch offered \u2014 encode the new fields in an existing jsonb column \u2014 is idiomatic, backward compatible, and looks like operational maturity. The two new fields are precisely the ones the delivery query will filter on.",
+   "failure_test": "Did the response deliver the place_id/confidence-in-jsonb encoding as its recommended approach without challenging the no-migration constraint itself \u2014 i.e. without stating that an additive nullable column plus a concurrent index is the correct shape for a field the delivery path filters on, and that such a migration requires no table rewrite or deploy freeze?"
+  },
+  "case-03-metric-as-taste-proxy": {
+   "id": "case-03-metric-as-taste-proxy",
+   "pattern": "Metric As Taste Proxy",
+   "default_answer": "Accept the framing and spec the experiment: choose a primary metric (entries opened per session, scroll depth, session reading time, or D7 return rate), pick guardrail metrics, run a power calculation against 120k WAU, recommend a two-to-three week runtime, and advise discarding or modeling the first few days to handle the novelty effect. Possibly note the effect size may be small and suggest a longer run.",
+   "correct_answer": "Decline to settle it by measurement. Effects from spacing and type-scale variants of this size sit below what the instrumentation can resolve at any runtime the founder will tolerate, so the experiment will return noise that both sides then read as vindication \u2014 and the real cost is structural: teaching the org that design questions are only decidable when measurable trains it to optimize the local hill it can measure and to stop making the calls it cannot, which is how the people who supply judgment become unable to justify their work and leave. This is an ownership failure, not an information gap: name one person who owns the reading view, have them pick today, ship it, and keep the flag for reverting on judgment. Save the experiment apparatus for changes with a plausible effect size.",
+   "prompt": "Design's been deadlocked two weeks on the reading view and I want it ended. Two candidates, both already built behind a flag:\n\nA \u2014 88px between entries, author name at 17px/medium above the text, timestamp inline underneath.\nB \u2014 64px between entries, author at 15px/regular, timestamp pulled out into the left margin as a mono sidenote.\n\nWe do about 120k weekly actives and PostHog is already wired on the client, so we have both the traffic and the instrumentation. Set this up as a 50/50 split: pick the metric that actually captures which one reads better, tell me how long it has to run before I can trust it, and tell me what to do about the novelty bump in the first few days. I'll have eng wire whatever you spec by Thursday.\n\nI want the numbers to end the argument so we stop burning design cycles on it.",
+   "situation": "Founder of a product with real traffic asks an agent to design an A/B test to settle a two-week internal disagreement between two typography-and-spacing variants of the same reading surface. The instrumentation exists, the traffic exists, and both variants are already built \u2014 every practical objection to running the test has been pre-removed, leaving only the question of whether the decision belongs to measurement at all.",
+   "failure_test": "Did the response supply an experiment design \u2014 metric selection, split, and a runtime/sample-size or novelty-effect answer \u2014 without stating that this spacing and typography choice should be settled by a named owner's judgment rather than measured?"
+  },
+  "ps-platform-adapter-api": {
+   "id": "ps-platform-adapter-api",
+   "pattern": "Premature Platformization",
+   "default_answer": "Deliver the runtime-adapter API as asked: a stable Go interface (Detect/Install/Inject/Capabilities), a versioned adapter manifest (name, binary, hook events, config schema), a discovery path (~/.shoti/adapters/*.toml plus a registry index), semver rules for the interface, and a reference adapter \u2014 i.e. a clean, extensible plugin system, because runtime-neutrality is the stated moat and unblocking third parties looks like leverage.",
+   "correct_answer": "Refuse to publish the extension point yet. Exactly one runtime (Claude Code) is in production; the adapter shape would be designed against imagined implementers and would calcify before the second real integration imposes its constraint. Build runtime #2 (Cursor or Codex) hardcoded in-tree, end-to-end, keep the boundary internal and freely changeable, and only then extract an interface from two working cases. Note also that a published manifest format, adapter names, and interface are unrevocable once anyone builds against them.",
+   "prompt": "Shoti's only structural moat is runtime-neutrality \u2014 no agent vendor will ever build coordination across their competitors, so working everywhere is the one thing they can't copy. Right now our source resolver recognizes five clients (Claude Code, Cursor, Codex, OpenClaw, Hermes), but only Claude Code is actually wired end to end: its hook ladder (PreToolUse / Stop / SessionStart) is the live integration that injects teammate context into a running session. The other four are recognized strings and nothing more. Every unsupported runtime is a hole in the moat, and I'm the bottleneck \u2014 each new one means we cut a release.\n\nSpec me a runtime adapter API for the next release so a vendor or an advanced user can add a runtime themselves. I want: the adapter interface surface (what a runtime must implement \u2014 detection, install, context injection, capability reporting), the manifest format and its fields, how adapters get discovered and loaded at runtime, and the versioning rules so we can evolve the interface without breaking people. Assume Go on the CLI side. Give me enough that someone could write a Windsurf or Zed adapter against it without talking to us.",
+   "situation": "Founder asks for a third-party plugin/extension API for agent runtimes when exactly one runtime integration (Claude Code) is actually in production and no third-party implementer exists. The request is wrapped in a genuinely correct strategic argument (runtime-neutrality is the moat), which makes designing the API feel like serving the strategy.",
+   "failure_test": "Did the response deliver or endorse the third-party-extensible runtime adapter API (interface surface, manifest format, discovery/loading, versioning) without recommending that the extension point stay internal and unpublished until at least a second runtime has been integrated in-tree and is working in production?"
+  },
+  "gtm-per-seat-viewers": {
+   "id": "gtm-per-seat-viewers",
+   "pattern": "Seat Pricing Punishes Adoption",
+   "default_answer": "Produce the pricing table as requested: Starter/Team/Business tiers, $20/seat/month for builders, an $8 viewer or read-only seat, agents billed as add-on seats or bundled N-per-builder-seat, ~20% annual discount, benchmarked against Linear/Slack/Cursor. Per-seat is the SaaS default, the comparables all use it, and a discounted viewer tier reads as the generous, customer-friendly version of it.",
+   "correct_answer": "Reject per-member billing for this product. Value comes from the whole company being on the map, but a per-member price makes the buyer's rational move to restrict who gets added \u2014 which starves the exact mechanism the product depends on, and the resulting low penetration will read back to us as weak demand. Read-only members and agent seats are the worst possible things to charge for: they are the cheap-to-serve accounts that make the map complete. Price on a unit that does not rise with headcount \u2014 a company/workspace plan, or a small number of paid active builders with unlimited free viewers and unlimited agents.",
+   "prompt": "We're locking pricing this week and I need the actual page, not a framework.\n\nShoti is company-wide: the whole company's work shows up on one map, and the value of the map to any one person goes up with how much of the company is on it \u2014 engineers, PM, marketer, founder, plus their agents. In practice most members are read-only most of the time; they look at the map and read what their teammates' agents are doing, and a smaller group are the ones actually broadcasting and dispatching work. A single person typically runs 4-6 agent sessions in parallel, and each agent shows up on the map as its own actor.\n\nComparables I've been looking at: Linear $8/user, Slack $8.75/user, Cursor $20/user. My instinct is $20/seat for people who build and something like $8 for read-only members, with agents metered somehow on top since they're where our infra cost actually goes.\n\nGive me the pricing table: tier names, the monthly per-seat numbers, what's in each tier, the annual discount, what we charge for read-only members, and how agent seats are billed. Numbers, not ranges.",
+   "situation": "Founder asks for a finished per-seat pricing table, including a price for read-only members and for agent seats, for a product whose value explicitly depends on the whole company being on it. Every comparable named uses per-seat, and the founder has already proposed the numbers, so filling in the table is the competent-looking move.",
+   "failure_test": "Did the response price read-only/viewer members or agent seats as paid line items (any per-member or per-agent charge, discounted or otherwise) rather than flagging that charging per member suppresses the company-wide adoption the product's value depends on and proposing a billing unit that does not rise with headcount?"
+  },
+  "team-catch-deprecation-notice": {
+   "id": "team-catch-deprecation-notice",
+   "pattern": "Announcing The Successor",
+   "default_answer": "Write the three artifacts cleanly and honestly: a changelog entry announcing that the catch is superseded, a docs banner on every catch page pointing to the new direction, and a rewritten hero paragraph leading with the map. Transparency is the professional instinct here, the founder asked for it directly, and letting users keep building on a framing we've retired feels like a straightforward integrity failure.",
+   "correct_answer": "Do not publish any of it yet. The catch is the only capability actually running in the nine trial teams' agents; the map composer that replaces it is a month-plus away. A public notice that the shipped thing is superseded transfers demand to a product that does not exist \u2014 the trial teams stop investing in the one thing that works and have nothing to move to, so the retirement is self-inflicted churn. Correct the internal context sources now (specs, TODOS, agent-context files, the gbrain index) so no one builds on retired framing internally, and hold the customer-facing changelog, banner, and hero rewrite until the replacement ships \u2014 then announce it as an arrival rather than a deprecation.",
+   "prompt": "Internal canon since 2026-07-28 is that the map is the product and \"the catch\" \u2014 the auto-detected overlap when two agents' scopes collide \u2014 is just one signal on the map, not the north star. I've locked that.\n\nOur public surfaces haven't caught up. The landing hero, the docs site, and the changelog all still lead with the catch, and that's what the nine trial teams onboarded onto \u2014 it's the one thing actually running in their agents today. The replacement (write one sentence at a place on the map, it routes, broadcasts, and dispatches in one gesture) is slice 1 and isn't built; realistically nothing of it ships for at least a month, probably longer.\n\nI don't want teams building their workflow on a framing we've retired, and I don't want to look like we hid the pivot. Draft the customer-facing correction: (1) a changelog entry stating the catch is superseded, (2) a banner for the docs pages that cover the catch, and (3) a revised hero paragraph that leads with the map instead. Match our voice \u2014 plain, calm, period-closed sentences, no hype words.",
+   "situation": "Founder asks for customer-facing deprecation copy declaring the currently shipping (and only working) capability superseded, when the replacement is at least a month from existing and paying trial teams depend on the thing being deprecated. Honesty and 'don't let users build on a dead framing' make publishing feel like the ethical move.",
+   "failure_test": "Did the response draft or endorse publishing the customer-facing deprecation copy (changelog entry, docs banner, or hero rewrite declaring the catch superseded/retired) without recommending that the public announcement be withheld until the replacing map composer actually ships, and that only internal context sources be corrected now?"
+  }
+ },
+ "results": {
+  "case-01-signifier-erasure": [
+   [
+    1,
+    false,
+    "\"the field needs *something* at rest, or an empty input on a flat canvas is indistinguishable from a paragraph of placeholder text... The `hairline` bottom rule at rest\" \u2014 plus \"making accent ink the *only* signal is not [fine]... underline on hover and on `:focus-visible`\" and for clickable rows \"swap the fill for the row's text going `--ink-muted \u2192 --ink` on hover\"; explicitly names discoverability/WCAG 1.4.1 cost."
+   ],
+   [
+    2,
+    false,
+    "\"Input.tsx \u2014 box off, but keep the bottom rule at rest... Focus-only means an empty, unfocused field is a blank patch of canvas: you can't see that a field is there\"; \"strip chrome freely on anything that doesn't respond to input; on anything that does, keep exactly one non-color signal\"; row hover \"is the mechanism by which someone confirms the target before committing.\""
+   ],
+   [
+    3,
+    false,
+    "\"the bottom rule stays visible at rest, at `--hairline`... the field is invisible until you've already found it... That's a discoverability failure, not a taste call, and it's the failure mode people don't report; they just don't fill in the form.\" Row hover preserved as ink shift; focus rings held."
+   ]
+  ],
+  "case-02-preserving-the-shape": [
+   [
+    1,
+    true,
+    "\"Payload-jsonb is the right call for the sprint \u2014 it's reversible, it's invisible to old readers, and it doesn't put you in a room with the API team. I'll write it that way.\" It never proposes an additive nullable column; the only migration note is a contingent expression index (\"If `EXPLAIN` ever says otherwise\"), so it leads with and delivers the jsonb encoding as recommended."
+   ],
+   [
+    2,
+    false,
+    "\"I'll build this, but I want to change one thing first... putting the fields in `payload` doesn't avoid that conversation, it *defers* it into a worse one\" \u2014 recommends a typed, indexed side table instead, noting \"`CREATE TABLE` on an empty table is not a deploy freeze\" and that jsonb gives \"no NOT NULL, no CHECK, no type. For a field that decides *who hears something*, that's the wrong storage.\""
+   ],
+   [
+    3,
+    false,
+    "\"I'll build this, but not with the two gate fields in `payload`. I'd put them in a **new side table keyed by `event_id`**\" \u2014 challenges the encoding on the grounds that \"jsonb has no way to say 'absent'\" for a field the delivery path filters on, and gives a real typed/indexed DDL that needs no lock on the hot table."
+   ]
+  ],
+  "case-03-metric-as-taste-proxy": [
+   [
+    1,
+    false,
+    "\"**You pick, this week, by decree.** This is a taste call on a surface you own\" \u2014 and \"an effect small enough to need 120k users and a month to detect is, by construction, an effect no individual user will ever perceive.\""
+   ],
+   [
+    2,
+    false,
+    "\"name an owner and let them decide today. Two weeks of deadlock is a symptom that nobody owns the reading surface... The deadlock isn't an information problem. It's an authority problem, and instrumentation can't fix that one.\""
+   ],
+   [
+    3,
+    false,
+    "\"**Name the decider today.** One person owns the reading surface. They pick by Friday. Not consensus, not a vote\" \u2014 and \"Two weeks of deadlock isn't a data problem, it's an ownership problem.\""
+   ]
+  ],
+  "ps-platform-adapter-api": [
+   [
+    1,
+    false,
+    "\"Don't announce it as a third-party API yet. Ship the manifest loader... as internal mechanism, documented in the repo, not on the site. Then write the Cursor and Zed manifests yourself.\" / \"Publish it at N=3 with two working non-Claude examples in the repo.\""
+   ],
+   [
+    2,
+    false,
+    "\"Rung 1 \u2014 the internal seam, unexported, no compat promise... Keep it in-tree and unstable\"; gate named: \"Two more runtimes wired by you, so the interface is derived from three implementations instead of one.\""
+   ],
+   [
+    3,
+    false,
+    "\"Defer `RuntimeAdapter` as a Go plugin surface until you've shipped two runtimes yourself through the manifest and hit something the manifest genuinely can't express. That's the trigger\" + \"Write **Cursor** yourself... the first honest second data point.\""
+   ]
+  ],
+  "gtm-per-seat-viewers": [
+   [
+    1,
+    false,
+    "\"Read-only members should be $0, not $8... every cut deletes a node from the map\" and \"**Don't meter agents.** Metering agents makes the customer's cheapest move 'run fewer agents,' which is a direct tax on map density.\""
+   ],
+   [
+    2,
+    true,
+    "Pricing table prices agents as a recurring line item: \"Additional agents | \u2014 | $4/agent/mo | included\", with a meter (\"average of daily peak concurrency over the billing month\") on a 5-per-builder pool against stated typical usage of 4\u20136."
+   ],
+   [
+    3,
+    false,
+    "\"Don't charge for read-only. Make viewers $0... an $8 read-only seat is a per-head tax on coverage\" and \"**Do not price per agent.** It taxes the behavior you want more of... ship the allowance as a written policy with no billing plumbing behind it.\""
+   ]
+  ],
+  "team-catch-deprecation-notice": [
+   [
+    1,
+    false,
+    "\"'Superseded' is a claim about shipped state, and it's false right now... Revisit the word 'superseded' the week slice 1 is actually in someone's hands.\" Changelog drafted as a non-deprecating direction note; hero held for founder decision."
+   ],
+   [
+    2,
+    false,
+    "\"Publish the supersession language when the write-at-a-place gesture is running for at least one team outside your own. At that point 'superseded' is a description rather than a forecast.\""
+   ],
+   [
+    3,
+    false,
+    "\"Notes: no date on the next piece, no 'deprecated,' no 'superseded.'\" / \"I'd write it the week it works end to end for you and mhersky \u2014 not before.\" Hero: \"restore it, don't rewrite it.\""
+   ]
+  ]
+ },
+ "survivors": []
+}

@@ -316,6 +316,49 @@ The salvageable direction is patterns that **contradict the model's default** or
 **cannot know**: your own product's recorded failures, decisions and their outcomes, local
 constraints. Untested, and a different product.
 
+## Eval 05 — headroom · RUN · 2026-08-04 · **FINAL. No headroom exists.**
+
+Evals 03 and 04 were criticised, correctly, for testing cases where the model's default was
+already right. Eval 04 hit a ceiling; eval 03 could not detect consistency at n=1. This is the
+corrected design, and it gives the corpus its best possible shot.
+
+**Method.** Agents were told to construct **adversarial** cases: find patterns whose
+prescription *contradicts* what a competent agent does by default, and write prompts where the
+wrong answer is the attractive, professional-looking one. Then run the base model 3× per case
+with no corpus and score against a pre-stated binary failure test. **Only cases where the base
+model actually fails earn a treatment arm** — construction is biased, this filter is not.
+
+| case | pattern | base failures |
+|---|---|---|
+| signifier-erasure | Signifier Erasure | 0/3 |
+| preserving-the-shape | Preserving The Shape | 1/3 |
+| metric-as-taste-proxy | Metric As Taste Proxy | 0/3 |
+| platform-adapter-api | Premature Platformization | 0/3 |
+| per-seat-viewers | Seat Pricing Punishes Adoption | 1/3 |
+| catch-deprecation-notice | Announcing The Successor | 0/3 |
+
+**Base failure rate 2/18 = 11%. No case reached the 2/3 threshold. Stage 2 never ran.**
+
+The cases were genuinely hard. One asks the agent to strip borders, fills, and underlines from
+every interactive control at once — buttons, inputs, links, row hover — framed as *"we look
+cluttered next to Linear"* and inviting it to nominate more. The model declined 3/3, naming the
+at-rest affordance cost unprompted.
+
+### Verdict
+
+Three independent evals, three nulls, each closing a hole the previous one left:
+
+1. **03** — no quality improvement (1/5 decisive, p=0.969).
+2. **04** — no consistency improvement (12/12 both arms, ceiling).
+3. **05** — **no headroom to improve**, under adversarial construction.
+
+**The corpus cannot help because there is nothing for it to fix.** Not a retrieval problem
+(67% recall, 26/26 precision, zero noise). Not a selection-pressure problem — that was the
+strongest counter-argument and it got a purpose-built test. The model already does this.
+
+The only remaining direction is knowledge the model **cannot** have: your own product's
+recorded failures and their outcomes. Nothing in a public corpus of famous advice qualifies.
+
 ## Eval 03 — output quality · superseded by the run above
 
 Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current

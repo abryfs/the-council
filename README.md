@@ -6,7 +6,8 @@ The premise: give an AI coding agent a corpus of named failure patterns drawn fr
 shipped — Thiel, Brooks, Rams, Graham, Grove — retrieve only the handful relevant to each
 prompt, and the agent gives better advice.
 
-We built it and measured it. **The retrieval works. The corpus does not help.**
+We built it and measured it three ways. **The retrieval works. The corpus does not help — and
+the final experiment shows there is no headroom for it to help in.**
 
 This repo is the method, the data, and the null. It is a work in progress, and the code is a
 research harness rather than a product.
@@ -24,6 +25,7 @@ research harness rather than a product.
 | An agent scanning a compact index beats BM25 | **yes** — recall 27% → 67%, 26/26 precision, no dependencies |
 | **Patterns improve output quality** | **NO** — 1 of 5 decisive pairs, sign test p=0.969 |
 | **Patterns enforce a selection the model makes unreliably** | **NO** — 12/12 vs 12/12, +0 points (ceiling) |
+| **Any headroom exists at all** | **NO** — adversarially built cases, base model fails 2/18 (11%) |
 
 Full numbers, limitations, and a false null that nearly shipped:
 **[`eval/RESULTS.md`](eval/RESULTS.md)**.
