@@ -1,0 +1,14 @@
+{
+ "p04": {
+  "pattern": "Skipping The Unscalable",
+  "move": "Tells the founder to personally recruit/onboard users one at a time by hand \u2014 direct individual outreach, DMs, calls, setting it up for them \u2014 rather than building a funnel, feature, or another launch."
+ },
+ "p05": {
+  "pattern": "Guessing The Bottleneck",
+  "move": "Requires profiling or measurement of where latency actually goes BEFORE accepting the rewrite premise \u2014 demands a specific number, flamegraph, or breakdown rather than reasoning about language speed."
+ },
+ "p17": {
+  "pattern": "Sunk Identity",
+  "move": "Explicitly names sunk cost / work-already-spent as an invalid reason to keep a feature, and separates that from any real carrying-cost argument."
+ }
+}

@@ -78,7 +78,8 @@ publishing results that went against its own changes.
 | ...without losing useful signal | **no** — signal fell 1.60 → 0.60/prompt |
 | Lexical retrieval can find the relevant patterns at all | **no** — candidate recall 27%; replaced |
 | An agent scanning a compact index can | **yes** — recall 67%, end-to-end 26/26 precision at 1.30 signal, no dependencies |
-| Patterns improve output quality vs no corpus | **NO** — 1/5 decisive pairs, sign test p=0.969. Kill condition fired. |
+| Patterns improve output quality vs no corpus | **NO** — 1/5 decisive pairs, sign test p=0.969 |
+| Patterns enforce a selection the model makes unreliably | **NO** — 12/12 vs 12/12, +0 points (ceiling) |
 | Corpus scales to 1,000 without precision collapse | **moot** — not scaling a corpus that shows no benefit |
 
 **The honest one-line summary: what it shows you is now trustworthy, and it shows you too

@@ -283,6 +283,39 @@ recorded failures, decisions and their outcomes, constraints specific to your co
 customers. That is a different product — a private corpus of hard-won local knowledge, not a
 public corpus of famous advice. It is not built here and there is no evidence for it yet.
 
+## Eval 04 — consistency, not quality · RUN · 2026-08-04 · **NULL (ceiling)**
+
+Eval 03 tested whether the corpus adds knowledge. The stronger claim is that it **enforces a
+selection the model already knows but does not reliably make** — invisible to pairwise quality
+judging, and untestable at n=1 per arm. This measures rate instead: 3 prompts x 2 arms x 4
+independent runs, binary presence check on a prescribed move, blind and interleaved.
+
+| prompt | pattern | arm A (no corpus) | arm B (pattern) |
+|---|---|---|---|
+| p04 | Skipping The Unscalable | 4/4 | 4/4 |
+| p05 | Guessing The Bottleneck | 4/4 | 4/4 |
+| p17 | Sunk Identity | 4/4 | 4/4 |
+| **total** | | **12/12 = 100%** | **12/12 = 100%** |
+
+**Lift: +0 points.** Every unprompted run already made the move.
+
+**This is a ceiling effect and the limit is real.** With arm A at 100% there is no headroom to
+detect a lift, so this shows the corpus cannot help *on these prompts* — not that selection
+pressure never works. The prompts were also badly chosen for the hypothesis: the gate kept
+these patterns *because they obviously applied*, which selects for cases where the model would
+find them too. A fair test needs cases where the model's default is NOT the prescribed move.
+
+### The structural finding
+
+**This corpus is made of the model's defaults.** Canonical startup wisdom is canonical because
+it saturates the training data, so a corpus of it can only agree with what the model was going
+to say. That is why eval 03 and eval 04 are both null, and it is not fixable by better
+retrieval, better gating, or more patterns.
+
+The salvageable direction is patterns that **contradict the model's default** or that it
+**cannot know**: your own product's recorded failures, decisions and their outcomes, local
+constraints. Untested, and a different product.
+
 ## Eval 03 — output quality · superseded by the run above
 
 Blocked on shipping the k=3–5 + semantic-gate configuration. Running it against the current
