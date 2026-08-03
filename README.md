@@ -2,7 +2,7 @@
 
 **A retrieval-loaded corpus of builder patterns for coding agents.** Not a persona pack. Not
 a rules file. A library of named failure patterns from people who shipped, where only the
-~15 relevant to your prompt ever enter context.
+handful that actually apply to your prompt ever enter context — and usually none do.
 
 > Working title. Rename before publishing.
 
@@ -50,21 +50,21 @@ SEVERITY — warn
 
 Name · mechanism · real case · trigger · severity. Grep-able, testable, citable.
 
-## Open risk — read this before believing anything
+## The open risk, and where it landed
 
-**The selector is the whole product, and it is unproven.** The persona paper's sharpest
-finding is that *manual* selection of the right principle helped significantly, while
-*automatic* selection performed **no better than random**. A corpus of 1,000 patterns with a
-random selector is strictly worse than no corpus: you pay context for noise.
+**The selector was always the whole product.** The persona paper's sharpest finding is that
+*manual* selection of the right principle helped significantly while *automatic* selection
+performed **no better than random** — and a corpus with a random selector is strictly worse
+than no corpus, because you pay context for noise.
 
-So the question this repo has to answer is not "do builder patterns help?" It is:
+That risk has now been measured rather than argued. Selection does beat random (weakly), and
+the two-stage pipeline drives precision to 1.000 with zero noise. But recall came out at 27%,
+so the failure mode moved rather than disappeared: the tool no longer says wrong things, it
+says nothing far too often. See **Measured so far**.
 
-> **Can we retrieve the right ~15 patterns out of 1,000 for a given prompt, better than chance?**
-
-Until `eval/` reports a number on that, this is a hypothesis with good citations. It is
-stated here rather than buried because every comparable repo ships vibes, and the one
-credible project in this space ([obra/superpowers](https://github.com/obra/superpowers))
-earned that by publishing results that went against its own changes.
+This is stated up front because every comparable repo ships vibes, and the one credible
+project in this space ([obra/superpowers](https://github.com/obra/superpowers)) earned that by
+publishing results that went against its own changes.
 
 ## Measured so far
 
@@ -94,10 +94,12 @@ including negative ones.
 
 ## Build order
 
-1. 30 patterns, 3 domains. **← current**
-2. Selection eval. If retrieval is not beating random, stop — 1,000 patterns would be 1,000 wasted entries.
-3. Quality eval, blind-graded, three arms (none / full corpus / retrieved).
-4. Only then scale the corpus.
+1. ~~30 patterns~~ → **107 patterns, 5 domains.** Done.
+2. ~~Selection eval~~ → beats random; two-stage gate reaches 1.000 precision. Done.
+3. **Fix candidate recall (27%). ← current.** Semantic retrieval at the candidate stage.
+   Nothing downstream is worth measuring until the right patterns reach the gate.
+4. Quality eval, blind-graded, three arms (none / full corpus / retrieved+gated).
+5. Only then scale the corpus toward 1,000.
 
 ## Not English-encoded, and why
 
