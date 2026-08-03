@@ -21,6 +21,45 @@ research harness rather than a product.
 
 ---
 
+## The ambient channel
+
+The corpus is inert to the model (that is the whole finding). It is **not** inert to you —
+because human recall fails under load and parametric recall does not. So the shipped tool
+surfaces at most two passages under your Claude Code status line, revealed a character at a
+time as you work:
+
+```
+Opus │ shoti
+▲ Chesterton's Dead Code — C· · · ·   · · ·   · · · ·   · ·   
+▲ The Inside-View Estimate — A· · · · ·   · ·   · · · · · · · · 
+
+Opus │ shoti
+▲ Chesterton's Dead Code — Code that appears unus·   · · · · · · · · · · · · · · · 
+▲ The Inside-View Estimate — An estimate built by d· · · · ·   ·   · · · · · ·   · · 
+
+Opus │ shoti
+▲ Chesterton's Dead Code — Code that appears unused is often reachable through a path…
+▲ The Inside-View Estimate — An estimate built by decomposing the specific task counts…
+```
+
+Silence is the common case and is correct. A passage appears only when BM25 clears a
+deliberately high floor, it is suppressed for 45 minutes after being shown, and it expires
+after 90. A status line that always has advice in it is wallpaper within a day.
+
+## Install
+
+```sh
+git clone https://github.com/abryfs/the-council && cd the-council && ./install.sh
+```
+
+Copies three hooks and the corpus into `~/.claude`, backs up `settings.json`, and wires the
+status line plus a `Stop` hook. Idempotent. Start a new session and it is live.
+
+```sh
+touch ~/.claude/council-muted      # off, instantly
+python3 ~/.claude/hooks/council-query.py "should we build the team plan before launch"
+```
+
 ## Results
 
 | Claim | Verdict |

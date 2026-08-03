@@ -22,7 +22,8 @@ prompt ──► BM25 ranks 8 candidates ──► YOU gate to ≤4, often 0 ─
 **Step 1 — retrieve candidates.**
 
 ```sh
-python3 "$(dirname "$0")/eval/retrieve.py" "<the user's request, verbatim>"
+python3 "$HOME/.claude/hooks/council-query.py" "<the user's request, verbatim>"
+# from a clone instead: python3 eval/retrieve.py "<the user's request>"
 ```
 
 **Step 2 — gate them yourself.** This is the load-bearing step and it costs nothing extra,
