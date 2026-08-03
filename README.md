@@ -78,12 +78,20 @@ rigorous evidence. It was caught by reading the reasoning instead of the count.
 
 ## What would be worth testing
 
-Two directions have headroom. Neither is built and neither has evidence.
+**Patterns that contradict the model's default** — *"ship the ugly version"*, *"don't add the
+abstraction even though it's cleaner"* — was the strongest counter-argument, and eval 05 was
+built specifically to test it. Agents constructed adversarial cases from patterns chosen for
+contradicting defaults, with the wrong answer made attractive. The base model failed **2 times
+out of 18**. There was no headroom to measure, so no treatment arm ran. That direction is now
+closed, not open.
 
-1. **Patterns that contradict the model's default**, rather than echo it — *"ship the ugly version"*, *"don't add the abstraction even though it's cleaner"*. Selection pressure is untested here, not disproven: these prompts were ones where the model's default was already correct, which left no headroom to measure.
-2. **Local knowledge the model cannot have** — your own product's recorded failures and their outcomes. *"Neon scale-to-zero suspends on query inactivity and pgxpool's health check sends nothing"* is worth retrieving forever. *"Don't boil the ocean"* never was.
+**What remains is knowledge the model cannot have** — your own product's recorded failures and
+their outcomes. *"Neon scale-to-zero suspends on query inactivity and pgxpool's health check
+sends nothing"* is worth retrieving forever. *"Don't boil the ocean"* never was. That is a
+private corpus, not a public one, and nothing here tests it.
 
-Any test of either needs prompts where the base model **fails**, or it reproduces this result.
+Any future test needs prompts where the base model demonstrably **fails**, or it reproduces
+this result.
 
 ## Not encoded in another language, and why
 
