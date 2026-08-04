@@ -50,16 +50,16 @@ FADE_IN = 0.55            # the name breathes in before any body text moves
 CPS     = 22.0
 
 RESET   = "\033[0m"
-SETTLED = "\033[38;5;240m"   # deliberately below the status line above it
-EDGE    = "\033[38;5;173m"   # the character currently being written
-GHOST   = "\033[38;5;236m"   # not yet arrived — barely there by design
-CLAY    = "\033[38;5;137m"
+SETTLED = "\033[38;5;250m"   # readable at a glance the status line above it
+EDGE    = "\033[38;5;215m"   # the character currently being written
+GHOST   = "\033[38;5;240m"   # not yet arrived — barely there by design
+CLAY    = "\033[38;5;173m"
 MARK    = {"block": CLAY + "▲", "warn": SETTLED + "▲", "note": SETTLED + "\u00b7"}
 
 def veil(name, t):
     """The name arrives as a whole, but dim, and warms as it settles."""
     if t < 0.18:  return GHOST + name + RESET
-    if t < FADE_IN: return "\033[38;5;238m" + name + RESET
+    if t < FADE_IN: return "\033[38;5;245m" + name + RESET
     return SETTLED + name + RESET
 
 for p in passages:
@@ -67,11 +67,27 @@ for p in passages:
     mech = " ".join(str(p.get("mechanism", "")).split())
     mark = MARK.get(p.get("severity"), MARK["note"]) + RESET
 
+    # Never show a mid-word fragment. A dangling clause reads as an incomplete
+    # thought and costs more attention than it returns. Ladder, best first:
+    #   1. the whole first sentence, if it fits
+    #   2. the longest CLAUSE of it that fits, closed with a period — a clause
+    #      boundary still reads as a finished thought, a word boundary does not
+    #   3. the name alone
     budget = cols - len(name) - 8
-    if budget < 20:
+    first = mech.split(". ")[0].rstrip(".")
+    if budget < 24:
         mech = ""
-    elif len(mech) > budget:
-        mech = mech[: budget - 1].rsplit(" ", 1)[0] + "\u2026"
+    elif len(first) + 1 <= budget:
+        mech = first + "."
+    else:
+        clause = ""
+        for sep in ("\u2014", ";", ",", ":"):
+            for cut in range(len(first)):
+                if first[cut] == sep and cut + 1 <= budget:
+                    clause = first[:cut].rstrip()
+            if clause:
+                break
+        mech = clause + "." if clause else ""
 
     if not mech:
         print(f"{mark} {veil(name, elapsed)}")

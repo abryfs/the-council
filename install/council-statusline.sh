@@ -17,16 +17,16 @@ MUTE_FILE="$HOME/.claude/council-muted"
 CACHE_TTL=5400                     # 90 min; matches council-retrieve.py
 
 # ── row 1..n: the existing status line, unchanged ────────────────────────────
+# ── council rows FIRST: a passage that sits above the status line reads as
+# something arriving, not as a footnote to the metrics.
+if [[ ! -f "$MUTE_FILE" && -z "${COUNCIL_DISABLE:-}" ]] && command -v python3 >/dev/null 2>&1; then
+  printf '%s' "$INPUT" | timeout 3 python3 "$HOME/.claude/hooks/council-render.py" "$CACHE_DIR" "$CACHE_TTL" 2>/dev/null
+fi
+
+# ── then the existing status line, unchanged and always last ────────────────
 if [[ -x "$BASE" || -f "$BASE" ]]; then
     printf '%s' "$INPUT" | timeout 5 node "$BASE" 2>/dev/null || true
-    printf '\n'   # base script emits no trailing newline; council rows must start clean
 fi
 
 # ── council rows: every failure path below ends in silence ───────────────────
-[[ -f "$MUTE_FILE" ]] && exit 0
-[[ -n "${COUNCIL_DISABLE:-}" ]] && exit 0
-
-command -v python3 >/dev/null 2>&1 || exit 0
-
-printf '%s' "$INPUT" | timeout 3 python3 "$HOME/.claude/hooks/council-render.py" "$CACHE_DIR" "$CACHE_TTL" 2>/dev/null
 exit 0
