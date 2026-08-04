@@ -164,6 +164,9 @@ def main():
         "ts": now,
         "passages": [
             {"name": corpus[i]["name"], "severity": corpus[i]["severity"],
+             # voice = one line of direct counsel. Falls back to mechanism for
+             # any pattern that has not been given one yet.
+             "voice": corpus[i].get("voice", ""),
              "mechanism": corpus[i]["mechanism"]}
             for i in fresh
         ],

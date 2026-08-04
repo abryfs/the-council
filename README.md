@@ -25,8 +25,9 @@ research harness rather than a product.
 
 The corpus is inert to the model (that is the whole finding). It is **not** inert to you —
 because human recall fails under load and parametric recall does not. So the shipped tool
-surfaces at most two passages under your Claude Code status line, revealed a character at a
-time as you work:
+surfaces at most two passages above your Claude Code status line, revealed a character at a
+time as you work. Each carries a `voice` line — one sentence of counsel addressed to you,
+not a taxonomy label:
 
 ```
 Opus │ shoti

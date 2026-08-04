@@ -64,7 +64,10 @@ def veil(name, t):
 
 for p in passages:
     name = str(p.get("name", ""))[:40]
-    mech = " ".join(str(p.get("mechanism", "")).split())
+    # The voice line is counsel spoken to the reader; the mechanism is an
+    # explanation about the reader. Prefer the voice — it is why this row
+    # exists at all. Mechanism is the fallback for un-voiced patterns.
+    mech = " ".join(str(p.get("voice") or p.get("mechanism", "")).split())
     mark = MARK.get(p.get("severity"), MARK["note"]) + RESET
 
     # Never show a mid-word fragment. A dangling clause reads as an incomplete

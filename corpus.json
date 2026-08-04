@@ -5,7 +5,8 @@
   "case": "Magic Leap raised over $2.6B building proprietary waveguide optics, a custom OS (Lumin), and a content ecosystem simultaneously; the Magic Leap One shipped in 2018 to reported sales of roughly 6,000 units in six months, and the company laid off ~1,000 staff and pivoted to enterprise in 2020.",
   "trigger": "A spec or plan lists three or more novel, unproven components (new runtime, new data model, new rendering surface, new protocol) that must all work before anything is usable.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Pick the one part that can fail alone, and ship only that."
  },
  {
   "name": "The Big-Bang Relaunch",
@@ -13,7 +14,8 @@
   "case": "Digg launched v4 on 2010-08-25, replacing the front page and removing the bury button and upcoming page in one shot; traffic fell about a quarter within a month, users staged 'Quit Digg Day' and migrated to Reddit, and Digg's assets sold to Betaworks for $500,000 in July 2012.",
   "trigger": "A plan replaces an existing shipped surface in one release \u2014 'v2 replaces v1', 'retire the old frame', 'cut over' \u2014 with no dual-run, opt-in, or staged migration.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Run the old surface beside the new one until people move on their own."
  },
  {
   "name": "Second-System Rewrite",
@@ -21,7 +23,8 @@
   "case": "Netscape rewrote its rendering engine after Navigator 4 rather than incrementally fixing it; no competitive browser shipped for roughly three years until Netscape 6 in November 2000, during which Internet Explorer took the market. Joel Spolsky's 2000 essay 'Things You Should Never Do' documented it as the single worst strategic error the company made.",
   "trigger": "A proposal to rewrite a working module or surface from scratch, justified by cruft, where the new version is also scoped to fix known limitations of the old one.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Rewrite one piece, keep the rest running, and fix nothing extra."
  },
  {
   "name": "Foundation Before First User",
@@ -29,7 +32,8 @@
   "case": "Microsoft built WinFS, a relational storage layer, as the foundation of Longhorn; after the August 2004 development reset onto the Windows Server 2003 codebase, WinFS was cut, and it never shipped in Vista (November 2006) or anywhere else, after roughly a decade of work.",
   "trigger": "A spec adds infrastructure \u2014 an index, cache, schema, consolidation pass, worker, centroid set, router \u2014 whose only named consumer is a feature not yet built or validated.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Build the feature crudely first and let it tell you what it needs."
  },
  {
   "name": "Technology Seeking A Job",
@@ -37,7 +41,8 @@
   "case": "Amazon built the Fire Phone around Dynamic Perspective (head-tracked 3D) and Firefly (object recognition); it launched July 2014, was cut to $0.99 on contract within two months, and Amazon took a $170M writedown plus $83M of unsold inventory in Q3 2014.",
   "trigger": "The spec leads with what the system can do ('we can embed / route / render / detect X') and the user's task appears only as a downstream illustration, or a hero feature has no named moment when someone would reach for it.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Name the moment someone reaches for this, or you have nothing yet."
  },
  {
   "name": "The Vanished Job",
@@ -45,7 +50,8 @@
   "case": "Quibi raised $1.75B for short-form video designed around mobile viewing during commutes and launched April 6, 2020, weeks into pandemic lockdowns; it shut down in December 2020, about six months later.",
   "trigger": "A roadmap item's rationale depends on a user behavior, environment, or third-party surface continuing to exist \u2014 'when they're commuting', 'in their agent's window', 'while the CI runs', 'via partner X's API'.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Name what has to stay true, and check it before you build deeper."
  },
  {
   "name": "Parity Roadmap",
@@ -53,7 +59,8 @@
   "case": "Google+ was built to match Facebook's social graph feature-for-feature and was force-integrated into YouTube comments and Google accounts to drive numbers; it was widely reported as a ghost town, and Google shut down the consumer version in April 2019.",
   "trigger": "A requirement is justified by a competitor having it \u2014 'X ships this', 'table stakes', 'we need parity', a feature-comparison matrix, or a decision that would change if that competitor disappeared.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Cross it off unless you would still build it with them gone."
  },
  {
   "name": "Undifferentiated Price War",
@@ -61,7 +68,8 @@
   "case": "Groupon and LivingSocial spent years outbidding each other on merchant terms and discounting in the daily-deals market; LivingSocial raised roughly $928M and was once valued around $4.5B, and Groupon's own SEC 8-K records that it acquired LivingSocial in October 2016 for no consideration.",
   "trigger": "The plan competes on price, free-tier size, limits, discounting, or speed of copying a feature, in a market where a funded competitor can match the move immediately.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Whoever has more money wins that fight, so pick a different fight."
  },
  {
   "name": "Growth Before Retention",
@@ -69,7 +77,8 @@
   "case": "Fab.com raised roughly $336M between 2011 and 2013, grew to about 700 employees burning ~$12M/month at a $1B valuation, then sold to PCH International in March 2015 for a reported $15M.",
   "trigger": "A plan proposes launch, marketing, headcount, or scale spend while retention, repeat usage, or activation is unmeasured, known-bad, or measured on a single cohort.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Measure whether they come back before you spend a dollar on more."
  },
  {
   "name": "Org Chart Shipped To Users",
@@ -77,7 +86,8 @@
   "case": "Netflix announced on 2011-09-18 that its DVD business would become a separate company and site called Qwikster; the episode cost about 800,000 US subscribers in Q3 2011, and Reed Hastings killed the split on 2011-10-10, roughly three weeks later.",
   "trigger": "A split, rename, or separation in the product mirrors an internal boundary (two teams, two repos, two services, two panes) and forces the user to move between surfaces to complete one task.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Keep it one motion, even if two teams have to share one surface."
  },
  {
   "name": "Sustaining-Only Roadmap",
@@ -85,7 +95,8 @@
   "case": "In 2000 Reed Hastings and Marc Randolph offered to sell Netflix to Blockbuster for $50M and were declined by CEO John Antioco, who saw mail-order DVD as a niche; Blockbuster filed for bankruptcy in 2010.",
   "trigger": "Every roadmap item deepens the product for existing or highest-paying users, and a cheaper, simpler, or lower-fidelity alternative in the market is dismissed as a toy or 'not our customer'.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Go use the cheap toy your best customers laugh at, then decide."
  },
  {
   "name": "Inflection Point Denial",
@@ -93,7 +104,8 @@
   "case": "In 1985 Andy Grove asked Gordon Moore what a new CEO would do about Intel's memory business, which was being destroyed by Japanese DRAM makers; they answered 'get out of memory', exited DRAM, and committed to microprocessors \u2014 Grove later framed this as the canonical strategic inflection point in 'Only the Paranoid Survive'.",
   "trigger": "A stated premise of the plan has visibly changed since it was written (a spec's corrections block, a superseded framing, a shipped assumption that is no longer true) and the plan continues incrementally against the old premise.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "The premise moved; stop tuning the plan and rewrite it from the top."
  },
  {
   "name": "Refusing The Amputation",
@@ -101,7 +113,8 @@
   "case": "Kevin Systrom and Mike Krieger cut Burbn \u2014 which had check-ins, plans, points, and photos \u2014 down to photos, comments, and likes, deleting the rest rather than deferring it; the result launched as Instagram in October 2010.",
   "trigger": "A v1 spec preserves every feature from a prototype or predecessor, and the scope-cut discussion produces deferrals ('phase 2', 'later slice', 'roadmap') rather than removals from the model.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Cut it from the model, not the schedule \u2014 phase two is not a cut."
  },
  {
   "name": "Product Line Sprawl",
@@ -109,7 +122,8 @@
   "case": "On returning to Apple in 1997 Steve Jobs collapsed the product line onto a four-quadrant grid (consumer/pro \u00d7 desktop/portable), cancelling most projects including OpenDoc and Cyberdog, and killed the Newton in February 1998.",
   "trigger": "The plan adds a new surface, product, SKU, CLI command, MCP tool, page, or entry point while existing ones are unfinished, unowned, or undocumented; a countable surface inventory grows.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Finish or kill something before you add the next one."
  },
  {
   "name": "Premature Automation",
@@ -117,7 +131,8 @@
   "case": "Airbnb's founders, unable to explain why New York listings underperformed, rented a camera and went door to door photographing hosts' apartments themselves rather than building a photo tool; the manual pass revealed that bad photos, not pricing or search, were the bottleneck \u2014 later cited by Paul Graham in 'Do Things That Don't Scale'.",
   "trigger": "A spec automates onboarding, setup, matching, curation, routing, or support before that process has been performed by hand enough times to have written down the exception cases.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Do it by hand twenty times and write down every case that broke."
  },
  {
   "name": "Job Mistaken For Demographic",
@@ -125,7 +140,8 @@
   "case": "Clayton Christensen's team studying McDonald's milkshakes found that a large share were bought alone, before 8am, by commuters hiring the shake to make a boring one-handed drive tolerable \u2014 a job invisible to the demographic segmentation the chain had been optimizing against.",
   "trigger": "Requirements are segmented by who the user is (role, persona, seniority, company size, 'founders vs engineers') rather than by the situation and task at the moment of use.",
   "severity": "note",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Ask what happened the hour they signed up, not who they are."
  },
  {
   "name": "Product Without Distribution",
@@ -133,7 +149,8 @@
   "case": "Everpix built a widely praised cloud photo product on $2.3M raised, reached roughly 55,000 users but too few paying subscribers to cover an incoming ~$35,000 AWS bill, failed to raise or find an acquirer, and shut down in November 2013 \u2014 documented in The Verge's 'Out of the picture'.",
   "trigger": "A plan, sprint, or milestone is entirely product surface \u2014 polish, refactor, design review, quality bar \u2014 with no line item for how anyone discovers, installs, or is onboarded to it, or the distribution path is known to 404.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Put one line in the plan for how a stranger finds and installs it."
  },
  {
   "name": "Chasing The Moving Baseline",
@@ -141,7 +158,8 @@
   "case": "3D Realms announced Duke Nukem Forever in April 1997 for a 1998 release, then switched from the Quake II engine to Unreal Engine in mid-1998 and re-based repeatedly thereafter; the game finally shipped in 2011, fourteen years later, to poor reviews.",
   "trigger": "In-flight work is rescoped to adopt a newly released model, framework, engine, API version, or internal abstraction before the current version has shipped to anyone.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Ship what you have on the old version, then adopt the new one."
  },
  {
   "name": "Premature Platformization",
@@ -149,7 +167,8 @@
   "case": "Google launched Wave in 2009 as a general communication protocol with a federation spec and an extension API, positioned as 'what email would be if invented today'; with no single clear job it never found adoption, and Google announced in August 2010 it would stop development.",
   "trigger": "A spec introduces a protocol, plugin API, extension point, federation model, or abstraction justified by future third parties ('so others can build on it', 'generic enough for N cases') before one concrete case is in production.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Hardcode the first case and wait for the third before generalizing."
  },
  {
   "name": "One-Way Door Misread",
@@ -157,7 +176,8 @@
   "case": "Twitter cultivated a third-party client ecosystem on an open API, then reversed: Ryan Sarver's March 2011 post told developers to stop building clients, and the 2012 v1.1 API imposed token caps that killed existing ones \u2014 permanently ending Twitter's developer trust, a position it could not buy back in the decade after.",
   "trigger": "A diff or spec publishes something external parties will depend on: a public API endpoint, an MCP or CLI tool name, an event type or enum value, a URL scheme, a config key, an on-disk or wire format.",
   "severity": "block",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Once someone depends on that name you keep it forever, so choose slowly."
  },
  {
   "name": "Two-Way Door Deliberated",
@@ -165,7 +185,8 @@
   "case": "Jeff Bezos's 2015 Amazon shareholder letter named the failure explicitly: Type 1 (one-way, irreversible) versus Type 2 (reversible) decisions, warning that as organizations grow they apply the heavyweight Type 1 process to most Type 2 decisions, producing slowness and diminished invention.",
   "trigger": "An easily reversible change \u2014 copy, layout, a default value, ordering, a flag's initial setting, a threshold \u2014 is escalated to a spec, a review cycle, or a founder decision.",
   "severity": "note",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Just change it and watch; you can put it back tomorrow."
  },
  {
   "name": "The Metric That Moves Alone",
@@ -173,7 +194,8 @@
   "case": "YouTube ran on view counts until 2012, which rewarded misleading titles and thumbnails that generated clicks and immediate abandonment; Cristos Goodrow's team switched the recommendation objective to watch time in March 2012 specifically because views could rise while viewer satisfaction fell.",
   "trigger": "A success criterion is a count that can increase while the underlying job goes unserved \u2014 events emitted, broadcasts sent, tool calls, DAU, sign-ups, page views \u2014 with no paired measure of whether the recipient acted on it.",
   "severity": "warn",
-  "domain": "product-scope"
+  "domain": "product-scope",
+  "voice": "Count what the recipient did, not what you sent."
  },
  {
   "name": "Second-System Effect",
@@ -181,7 +203,8 @@
   "case": "Microsoft's Longhorn: WinFS, Avalon, and Indigo all landed in one release. In August 2004 Microsoft reset the project onto the Windows Server 2003 SP1 codebase, discarding roughly three years of work; WinFS never shipped.",
   "trigger": "A spec or plan for a v2/next-gen version that lists features deferred from v1, or bundles a new data model + new UI + new extensibility layer in one release.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Ship one thing you deferred from v1. The rest of that list stays deferred."
  },
  {
   "name": "The Great Rewrite",
@@ -189,7 +212,8 @@
   "case": "Netscape rewrote its layout engine after Communicator 4 (1997). No competitive browser shipped for roughly three years; Netscape 6 arrived in November 2000 to poor reception, by which point Internet Explorer held the market.",
   "trigger": "A prompt or issue proposing to \"rewrite from scratch\", \"start clean\", \"greenfield it\", or replace a working subsystem wholesale because the code is messy.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "You will run both systems for years. Replace it one file at a time."
  },
  {
   "name": "Man-Month Arithmetic",
@@ -197,7 +221,8 @@
   "case": "Fred Brooks managed IBM's OS/360; staff was added as the schedule slipped and the project slipped further. The Mythical Man-Month (1975) is the postmortem of that project.",
   "trigger": "A plan responding to schedule slip by adding engineers, parallel agents, or extra workstreams to the same late deliverable.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Another engineer makes it later. Cut the scope or move the date instead."
  },
  {
   "name": "Innovation Token Overdraft",
@@ -205,7 +230,8 @@
   "case": "Dan McKinley introduced both Scala and MongoDB at Etsy, then helped remove both and return to MySQL/PHP \u2014 the experience behind \"Choose Boring Technology\" and the three-innovation-tokens rule.",
   "trigger": "A diff or spec that introduces a new datastore, language, queue, or orchestration layer \u2014 especially two or more in the same change \u2014 where an already-running component would do.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Pick one unfamiliar thing this quarter. Run the rest on what you know."
  },
  {
   "name": "Distributed Monolith",
@@ -213,7 +239,8 @@
   "case": "Segment grew to 140+ destination microservices, then found a shared-library change required deploying all of them and on-call was paged constantly for per-service load spikes. In 2018 they consolidated back to a single service (Alexandra Noonan, \"Goodbye Microservices\").",
   "trigger": "A spec proposing a separate service, worker, repo, or deployable per entity/destination/integration, or a diff introducing an RPC boundary between two things that ship together.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "If they always deploy together, leave them in one process. Split later."
  },
  {
   "name": "Chesterton's Dead Code",
@@ -221,7 +248,8 @@
   "case": "Knight Capital repurposed the flag that had activated its deprecated \"Power Peg\" routine but never deleted the routine. On 1 Aug 2012 one of eight servers missed the deploy, the old code woke up, and Knight lost roughly $460M in 45 minutes.",
   "trigger": "A diff that deletes or repurposes a feature flag, retry, guard clause, or branch labeled unused/deprecated/legacy without explaining what originally set it.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Find who set that flag before you touch it. Delete the code, not the guard."
  },
  {
   "name": "The Untested Restore",
@@ -229,7 +257,8 @@
   "case": "GitLab, 31 Jan 2017: an engineer removed a production database directory, and of five backup/replication mechanisms none worked \u2014 the S3 buckets were empty. Six hours of data was permanently lost.",
   "trigger": "A spec, runbook, or reply that mentions backups, snapshots, replicas, or disaster recovery as mitigation, with no restore drill or verification step.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Restore it into a scratch box today. A backup you have never read is not one."
  },
  {
   "name": "The Never-Restarted Subsystem",
@@ -237,7 +266,8 @@
   "case": "AWS S3, 28 Feb 2017: a mistyped command removed too many servers, and Amazon's postmortem noted the index and placement subsystems had not been fully restarted in the larger regions for many years \u2014 the restart and safety checks took hours.",
   "trigger": "A design involving a long-lived stateful service, cache, or index, where warm-up, rebuild, replay, or cold-start time is unstated or assumed fast.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Restart it on purpose, on a quiet Tuesday, and time how long it takes."
  },
  {
   "name": "Big-Bang Delivery",
@@ -245,7 +275,8 @@
   "case": "The FBI's Virtual Case File: SAIC delivered ~700,000 lines in one drop in December 2003. The bureau scrapped it in April 2005 after $170M, roughly $105M of it unusable code.",
   "trigger": "A roadmap or plan whose milestones are all internal (design, build, integrate) with a single user-visible cutover at the end, and no shippable increment before it.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Put something in a real user's hands this month, however small."
  },
  {
   "name": "Launch Without Load",
@@ -253,7 +284,8 @@
   "case": "HealthCare.gov: testing on 30 Sep 2013, the day before launch, showed response times degrading at ~1,100 concurrent users. Launch day brought roughly 250,000 simultaneous users and the site fell over within hours.",
   "trigger": "A ship/launch date with no load or soak test in the plan, or a stated concurrency/throughput number that is an estimate rather than a measurement.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Point real load at it before launch day does. Estimates run one way: low."
  },
  {
   "name": "Pet Cluster Upgrade",
@@ -261,7 +293,8 @@
   "case": "Reddit's Pi Day 2023 outage: an in-place Kubernetes 1.23\u21921.24 upgrade of a hand-built cluster removed the node-role.kubernetes.io/master label that Calico's route reflectors selected on. The route-reflector config existed in no repo; 314 minutes down.",
   "trigger": "An in-place upgrade, version bump, or migration of infrastructure described as legacy, hand-built, one-off, or \"the original\" \u2014 or config applied manually rather than from version control.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Rebuild it from a file first. Never upgrade a box you cannot recreate."
  },
  {
   "name": "Global Blast Radius",
@@ -269,7 +302,8 @@
   "case": "CrowdStrike, 19 Jul 2024: Channel File 291 shipped to all Windows Falcon sensors at once. Microsoft estimated 8.5 million devices entered BSOD loops within about an hour; recovery required per-machine manual intervention.",
   "trigger": "A change shipping to all users, machines, or tenants simultaneously \u2014 or a data/config/rules/prompt/template update path that bypasses the canary and staged-rollout used for code.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Ship it to one machine, wait an hour, then the rest. Config counts as code."
  },
  {
   "name": "Reused Component, New Envelope",
@@ -277,7 +311,8 @@
   "case": "Ariane 5 Flight 501, 4 Jun 1996: inertial-reference software carried over from Ariane 4 converted a horizontal-bias value to a 16-bit integer. Ariane 5's higher trajectory overflowed it, both units failed, and the rocket self-destructed ~37 seconds after liftoff.",
   "trigger": "A diff or plan that lifts an existing module, service, query, or library into a new scale, platform, region, or traffic profile described as reusing it \"unchanged\" or \"as-is\".",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Write down the ranges it was proven at, then check the new ones fit."
  },
  {
   "name": "Interface Without A Contract",
@@ -285,7 +320,8 @@
   "case": "NASA's Mars Climate Orbiter, 1999: Lockheed Martin's ground software produced thruster impulse in pound-force seconds while JPL's navigation software read newton-seconds. The orbiter entered the atmosphere too low and was destroyed; the mission cost ~$327M.",
   "trigger": "A new API field, event payload, or cross-team/cross-service boundary passing raw numbers, timestamps, identifiers, or strings with no shared type, unit, or validation at the boundary.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Put the unit in the field name and reject anything that will not parse."
  },
  {
   "name": "Automatic Failover Split-Brain",
@@ -293,7 +329,8 @@
   "case": "GitHub, 21 Oct 2018: a 43-second connectivity loss between the US East Coast hub and its primary data center caused Orchestrator to promote a second primary. Writes landed on both sides; the site ran degraded for over 24 hours while data was reconciled.",
   "trigger": "A design adding automatic failover, leader election, multi-region writes, or a health-check-driven promotion \u2014 or any mention of a heartbeat timeout that decides who is authoritative.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Decide now who reconciles two primaries, or fail over by hand."
  },
  {
   "name": "Trivial Transitive Dependency",
@@ -301,7 +338,8 @@
   "case": "March 2016: Azer Ko\u00e7ulu unpublished 273 npm packages including left-pad, an 11-line function. Builds broke across the ecosystem \u2014 Babel and React Native among them \u2014 until npm restored the package.",
   "trigger": "A diff adding a package to package.json, go.mod, requirements.txt, or Cargo.toml \u2014 especially a small single-purpose one, or one arriving transitively rather than being chosen.",
   "severity": "note",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Read your lockfile. Vendor the small ones or write the eleven lines."
  },
  {
   "name": "Complected Convenience",
@@ -309,7 +347,8 @@
   "case": "Log4j's message-lookup substitution interpreted ${jndi:...} inside any logged string, joining logging to remote class loading. Log4Shell (CVE-2021-44228, CVSS 10.0) made any application that logged user input remotely executable.",
   "trigger": "A change adding implicit behavior to a shared path: string interpolation, template evaluation, auto-deserialization, dynamic dispatch on user data, or a \"helpful\" default that triggers without being requested.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Make callers ask for it by name, and leave it off by default."
  },
  {
   "name": "Alert As The Fix",
@@ -317,7 +356,8 @@
   "case": "Target, November 2013: FireEye alerted on the exfiltration malware and the alerts reached the security team, which did not act on them. About 40 million payment cards were stolen.",
   "trigger": "A proposed remediation that consists of logging a warning, emitting a metric, or adding a monitor \u2014 with no owner, threshold, or defined response \u2014 or a codebase with existing warnings nobody triages.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Name the person who wakes up for it, or do not add the alert."
  },
  {
   "name": "Preserving The Shape",
@@ -325,7 +365,8 @@
   "case": "Boeing's MCAS was designed to fit inside the 737 MAX's existing architecture and common type rating, taking input from a single angle-of-attack sensor with no redundancy. Two crashes followed; the fleet was grounded from March 2019 for roughly 20 months.",
   "trigger": "A change explicitly scoped to avoid touching an existing schema, interface, migration, or retraining/re-certification cost \u2014 phrases like \"without changing the existing\", \"to avoid a migration\", \"keep it backward compatible\" driving the design rather than following it.",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "If dodging the migration is shaping the design, do the migration."
  },
  {
   "name": "Control Plane Inside The Blast Radius",
@@ -333,7 +374,8 @@
   "case": "Meta, 4 Oct 2021: a backbone command withdrew the BGP routes to Facebook's DNS, and because internal tooling and even physical badge access resolved through the same infrastructure, engineers could not remotely reach or quickly enter the data centers. Roughly six hours down.",
   "trigger": "A design where monitoring, deploy, auth, feature flags, or the rollback path runs on, resolves through, or authenticates against the same system it controls.",
   "severity": "block",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Keep one way in that does not depend on the thing you are fixing."
  },
  {
   "name": "Guessing The Bottleneck",
@@ -341,7 +383,8 @@
   "case": "Discord's Read States service showed latency spikes that persisted through Go GC tuning and version upgrades. Correlating the spikes with Go's forced 2-minute garbage-collection interval \u2014 a measurement, not a guess \u2014 showed the tuning could not help; they rewrote the service in Rust (2020).",
   "trigger": "A diff or plan doing performance work \u2014 caching, batching, async, index, language/runtime swap \u2014 with no profile, benchmark, or production measurement cited, or a claim that something \"should be faster\".",
   "severity": "warn",
-  "domain": "engineering"
+  "domain": "engineering",
+  "voice": "Get the profile before you agree to anything. Guessing costs more."
  },
  {
   "name": "Silent Mode Divergence",
@@ -349,7 +392,8 @@
   "case": "Air Inter Flight 148 (Strasbourg, 20 Jan 1992): the crew entered \"33\" intending a -3.3\u00b0 flight-path angle, but the autopilot was in Vertical Speed mode and read it as -3,300 ft/min. 87 died. Airbus's fix was interface-level \u2014 vertical speed is now shown as four digits so it can never be mistaken for an angle.",
   "trigger": "A diff or spec adds a mode, toggle, view-state, or context in which the same control, keystroke, or input field produces different results \u2014 especially when the current mode is shown somewhere other than where the input happens.",
   "severity": "block",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Put the mode next to the input, or someone runs the wrong one blind."
  },
  {
   "name": "Confirmation Instead Of Reversal",
@@ -357,7 +401,8 @@
   "case": "Hawaii Emergency Management, 13 Jan 2018: a warning officer picked the live-alert template from a dropdown, clicked \"yes\" on \"Are you sure that you want to send this Alert?\", and pushed a ballistic-missile warning to the whole state. There was no cancel path or pre-scripted correction template \u2014 the retraction took 38 minutes.",
   "trigger": "A diff or spec guards a destructive, irreversible, or broadcast-to-others action with a confirmation dialog, checkbox, or type-to-confirm \u2014 and no undo window, recall, dry-run, or reversal path is specified.",
   "severity": "block",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Build the undo first \u2014 they will click yes on the wrong thing."
  },
  {
   "name": "Unlabeled Working Surface",
@@ -365,7 +410,8 @@
   "case": "GitLab.com, 31 Jan 2017: an engineer ran a variant of rm -rf on the primary Postgres host believing it was the secondary, destroying 300GB and losing six hours of production data. A named remediation in the public postmortem was issue #1094, \"Update PS1 across all hosts to more clearly differentiate between hosts and environments.\"",
   "trigger": "Work touches an internal-only surface \u2014 CLI output, shell/SSH tooling, admin console, staging vs prod environment, log lines, migration scripts \u2014 and the change is justified as \"internal, no design needed.\"",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Color the prod prompt. Someone tired will type into the wrong window."
  },
  {
   "name": "Signifier Erasure",
@@ -373,7 +419,8 @@
   "case": "Nielsen Norman Group's eyetracking study (Kate Meyer, 2017): 71 participants across 9 sites in strong- vs weak-signifier versions. Participants spent 22% more time and had 25% more fixations on the weak-signifier (flat) pages, and were less confident once they found the target.",
   "trigger": "A diff removes borders, background fills, underlines, or shadows from interactive elements, converts buttons to text/ghost buttons, or a spec asks to \"make it cleaner / flatter / less chrome.\"",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Keep the border. A calmer screenshot is not a cheaper click."
  },
  {
   "name": "Metric As Taste Proxy",
@@ -381,7 +428,8 @@
   "case": "Douglas Bowman, Google's visual design lead, resigned in March 2009 (\"Goodbye, Google\"): \"a team at Google couldn't decide between two blues, so they're testing 41 shades... I had a recent debate over whether a border should be 3, 4 or 5 pixels wide, and was asked to prove my case.\"",
   "trigger": "A design disagreement is proposed to be settled by A/B test, click-through data, or \"let's measure it\" \u2014 particularly on typography, spacing, color, copy tone, or single-pixel values.",
   "severity": "note",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Pick the spacing yourself \u2014 a test on it costs more than being wrong."
  },
  {
   "name": "Redesign Riding A Rewrite",
@@ -389,7 +437,8 @@
   "case": "Digg v4 (August 2010) launched a redesign on a rebuilt platform, dropping the bury button, favorites, and category sorting. Traffic collapsed, Kevin Rose stepped down as CEO on 1 Sept 2010, and the site sold for about $500,000 in 2012 after peaking at a $200M valuation.",
   "trigger": "A plan couples a visual/IA redesign with a platform migration, framework swap, schema change, or API rewrite in one release \u2014 or the rollback plan for a UI change is \"revert the deploy\" when the data model also changed.",
   "severity": "block",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Ship the new backend under the old screens, then change the screens."
  },
  {
   "name": "Relearning Tax Ignored",
@@ -397,7 +446,8 @@
   "case": "Snapchat's 2018 redesign separated friends from publishers; a Change.org petition passed 1.2 million signatures, Evan Spiegel attributed the fall to \"disruption caused by our redesign,\" and Snap posted its first-ever DAU decline in Q2 2018 (-3M), losing another 2M in Q3.",
   "trigger": "A spec reorganizes navigation, moves an existing feature to a new location, renames a primary action, or changes the information architecture of a product that already has habituated daily users.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Leave it where their hands already go, or plan to eat a bad week."
  },
  {
   "name": "Craft On The Wrong Axis",
@@ -405,7 +455,8 @@
   "case": "Juicero's $399 press: teardowns (Ben Einstein, 2017) found an aluminum-cast, 8-revisions-of-a-polymer, extraordinarily engineered mechanism \u2014 and Bloomberg showed the proprietary packs could be squeezed by hand for the same juice. The company shut down in September 2017.",
   "trigger": "A diff or spec invests heavy effort in something the user never sees, touches, or measures \u2014 an internal abstraction, a component's hidden tolerances, a custom build pipeline, a rendering engine \u2014 while the user-facing behavior is unchanged.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Spend the hard week on what they touch, not on what impresses you."
  },
  {
   "name": "Stated Preference Trap",
@@ -413,7 +464,8 @@
   "case": "Marissa Mayer's Google experiment (reported at Web 2.0, 2006): users asked for more than 10 search results, so Google shipped 30. Traffic and revenue from that group dropped 20% \u2014 the 10-result page took 0.4s, the 30-result page 0.9s. The users got exactly what they asked for.",
   "trigger": "A spec justifies a feature with \"users asked for it,\" a feature-request count, survey results, or a support-ticket theme \u2014 with no statement of what the addition costs in load time, screen density, or steps.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Ask what they would give up for it before you build what they asked."
  },
  {
   "name": "Discoverability Mistaken For Absence",
@@ -421,7 +473,8 @@
   "case": "The Microsoft Office team's research ahead of Office 2007 found roughly 90% of feature requests were for features already in the product; Jensen Harris's account of the Ribbon's origin is that Office \"added new features, but hardly anyone found them.\" The fix shipped was a new interface, not new features.",
   "trigger": "A ticket or spec proposes building a capability that may already exist somewhere in the product \u2014 \"add a way to X,\" \"users can't do Y\" \u2014 without a check of whether X/Y already ships behind a menu, flag, or command.",
   "severity": "note",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Search your own product first \u2014 you probably built it and hid it."
  },
  {
   "name": "Accessibility As Post-Ship Bug",
@@ -429,7 +482,8 @@
   "case": "Robles v. Domino's Pizza: a blind customer could not order via the website or app with a screen reader. The Ninth Circuit held the ADA applies; the Supreme Court denied cert on 7 Oct 2019, and in June 2021 the district court granted summary judgment ordering Domino's to conform to WCAG 2.0.",
   "trigger": "A spec or diff ships an interactive component with a11y noted as follow-up, or introduces custom interactive markup (div-as-button, custom modal, canvas UI, drag-and-drop) with no keyboard path, focus management, or accessible name.",
   "severity": "block",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Wire the keyboard path now; later it is a rewrite, not a ticket."
  },
  {
   "name": "Motion Without An Exit",
@@ -437,7 +491,8 @@
   "case": "iOS 7 (September 2013): parallax wallpaper and the zoom-in/zoom-out app launch animations produced widely reported vertigo and nausea. Apple's initial Reduce Motion switch only killed parallax; iOS 7.0.3 extended it to disable the zoom transitions.",
   "trigger": "A diff adds parallax, zoom transitions, autoplay, scroll-linked animation, or page transitions \u2014 and does not gate them behind prefers-reduced-motion or an equivalent user setting.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Add the reduced-motion switch in the same commit as the animation."
  },
  {
   "name": "Prompt Inflation",
@@ -445,7 +500,8 @@
   "case": "Windows Vista's UAC: Microsoft's own telemetry (E7 engineering blog) showed users hitting a UAC prompt in 50% of sessions, with 775,312 distinct applications producing prompts. Users learned to click through; Windows 7 was redesigned specifically to cut prompt volume.",
   "trigger": "A diff adds a confirmation dialog, permission prompt, toast, banner, badge, or notification to a flow that already has one \u2014 or a spec's answer to a risk is \"warn the user.\"",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Delete one warning before you add one, or they dismiss them all."
  },
  {
   "name": "Beautiful Prototype Bias",
@@ -453,7 +509,8 @@
   "case": "Kurosu and Kashimura, \"Apparent Usability vs. Inherent Usability\" (CHI '95, Hitachi Design Center): 252 participants rated 26 ATM interface variants. Aesthetic appeal correlated more strongly with perceived ease of use than with measured ease of use.",
   "trigger": "A design is approved from a high-fidelity mock, Figma prototype, or rendered screenshot; or usability testing is run on a visually finished build without a low-fidelity or degraded-data comparison.",
   "severity": "note",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Test it ugly, in grey boxes, or the polish hides what is broken."
  },
  {
   "name": "Native Control Replacement",
@@ -461,7 +518,8 @@
   "case": "GOV.UK's research on form controls (Alice Bartlett, \"Burn your select tags,\" 2014) documented users typing into selects, confusing focused with selected options, and trying to pinch-zoom option lists on tablets \u2014 leading GOV.UK's design system to steer away from selects toward radios and checkboxes rather than to a prettier custom widget.",
   "trigger": "A diff replaces a native element (select, date input, file input, scrollbar, checkbox, alert) with a custom component, or a design spec styles a control in a way only achievable by rebuilding it.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Keep the native one \u2014 you cannot rebuild what you never saw it doing."
  },
  {
   "name": "Control Swallowed By Screen",
@@ -469,7 +527,8 @@
   "case": "Euro NCAP's 2026 protocol: cars that route indicators, hazard lights, horn, wipers, or the SOS call through a touchscreen alone lose points toward a five-star rating; the body requires direct physical controls with tactile feedback, citing distraction research on eyes-off-road time.",
   "trigger": "A spec relocates a frequent, urgent, or eyes-busy control into a screen, menu, submenu, command palette, or gesture \u2014 replacing a dedicated key, button, or always-visible affordance.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Keep the real button for anything done in a hurry or in the dark."
  },
  {
   "name": "Curated Demo Data",
@@ -477,7 +536,8 @@
   "case": "Apple Maps (iOS 6, September 2012) demoed beautifully on flyover showcase cities and shipped with misplaced towns, warped landmarks, and missing transit. Tim Cook issued a public apology letter on 28 Sept 2012 and Scott Forstall departed weeks later.",
   "trigger": "A design, screenshot, or demo uses seeded, curated, or short sample data; or a spec has no defined empty state, long-string, stale-data, error, and high-volume case for the surface being built.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Load the worst real data you have before anyone signs off on it."
  },
  {
   "name": "Assistant That Interrupts",
@@ -485,7 +545,8 @@
   "case": "Microsoft's Office Assistant (Clippy), on by default from Office 97, became the canonical hated feature: Microsoft turned it off by default in Office XP and marketed its removal, and it was dropped entirely by Office 2007.",
   "trigger": "A spec adds a proactive tip, coach mark, onboarding tour, suggestion popup, or AI assistant that appears without the user requesting it, based on inferred intent.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Make it wait to be asked; every wrong guess bills your best user."
  },
  {
   "name": "Metaphor Fusion",
@@ -493,7 +554,8 @@
   "case": "Google Wave: demoed for 80 minutes at I/O in May 2009 to a standing ovation as email + IM + wiki + collaborative document in one surface. Google announced its shutdown on 4 Aug 2010, with Urs H\u00f6lzle saying \"Wave has not seen the user adoption we would have liked.\"",
   "trigger": "A spec describes the surface by joining categories with \"and\" (\"it's a doc and a chat and a board\"), unifies two existing product surfaces into one, or cannot state what the thing is in one sentence a non-user would repeat.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Name one category and live in it, or nobody can pass your thing on."
  },
  {
   "name": "Friction Placed For Revenue",
@@ -501,7 +563,8 @@
   "case": "FTC v. Epic Games (Dec 2022): Fortnite's \"counterintuitive, inconsistent, and confusing button configuration\" caused unwanted charges from a single button press. Epic paid $245M in refunds for the dark-pattern count (part of a $520M total order), and the FTC began distributing refunds to roughly 37 million players.",
   "trigger": "A diff changes default selections, button placement/prominence, cancel-vs-confirm ordering, or opt-out wording in a purchase, subscription, consent, sharing, or account-deletion flow in a way that favors the business.",
   "severity": "block",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Make cancel as easy as buy; that money comes back with lawyers."
  },
  {
   "name": "Error Text From Inside",
@@ -509,7 +572,8 @@
   "case": "HP LaserJet printers' \"PC LOAD LETTER\" \u2014 the panel reported paper-cassette state in the machine's own vocabulary. Users had no way to derive \"put Letter-size paper in the tray,\" and the string became a byword for incomprehensible error messages after Office Space.",
   "trigger": "A diff adds or changes user-visible error, empty, or status copy that names an internal condition (state names, error codes, subsystem names, exception text) instead of what failed plus one concrete action the user can take.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Say what broke and the one thing to do; drop the internal name."
  },
  {
   "name": "One Shell, Two Inputs",
@@ -517,7 +581,8 @@
   "case": "Windows 8 (2012) put one touch-first shell \u2014 full-screen Start, edge-swipe charms, no Start menu \u2014 on desktop hardware with a mouse. Microsoft reversed course in Windows 10, restoring the Start menu and adding Continuum to switch modes by device.",
   "trigger": "A spec targets one UI across incompatible input modes or form factors \u2014 touch and mouse, mobile and desktop, TV and handheld \u2014 or introduces hover-dependent or edge-gesture affordances in a surface that must also work with the other input.",
   "severity": "warn",
-  "domain": "design-craft"
+  "domain": "design-craft",
+  "voice": "Pick the input you are serving and tune for it; both means neither."
  },
  {
   "name": "Distribution As An Afterthought",
@@ -525,7 +590,8 @@
   "case": "Everpix: widely praised photo app, shut down November 2013 with an unpayable AWS bill. Founders publicly stated the mistakes were taking too long to build the product and giving too little thought to growth and distribution; they published their full metrics and financials on GitHub as a post-mortem.",
   "trigger": "A roadmap, spec, or milestone list where every item is a product capability and no item names a specific acquisition channel, or a plan that says marketing/launch/GTM happens \"after v1\".",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Put a channel on the roadmap now; you will not have money for one later."
  },
  {
   "name": "Channel-Price Mismatch",
@@ -533,7 +599,8 @@
   "case": "Dropbox found Google AdWords cost $233\u2013$388 to acquire a customer for a product priced at $99/year. Drew Houston described this at the 2010 Startup Lessons Learned conference; they abandoned paid search and built the storage-for-referrals loop instead.",
   "trigger": "A GTM plan or budget line proposing Google/Meta/LinkedIn/Reddit ads, sponsorships, or outbound SDRs without stating ARPU, gross margin, and a payback period in months.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Know what one customer pays you back before you bid on a single click."
  },
  {
   "name": "CAC Buried In COGS",
@@ -541,7 +608,8 @@
   "case": "Blue Apron's 2017 S-1: Q1 2017 spent $60.6M on marketing to acquire 157,000 customers (~$386 each) while analyst reconstructions of the disclosed cohorts showed roughly 72% of customers gone by month six. The stock lost most of its value within a year of the June 2017 IPO.",
   "trigger": "A growth dashboard, OKR, or investor update whose headline metric is signups, downloads, trials, or new customers, with no cohort retention curve or LTV:CAC ratio alongside it.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Never look at signups without the month-six cohort sitting next to it."
  },
  {
   "name": "Negative Unit Economics As Growth",
@@ -549,7 +617,8 @@
   "case": "MoviePass cut to $9.95/month for a movie a day in August 2017 while paying theaters near-full retail (US average ticket ~$9.11). Subscribers peaked above 3 million in June 2018 at ~2.11 movies/month against a break-even of ~0.77; losses ran ~$20M/month and the service was dead by 2019.",
   "trigger": "A pricing proposal with unlimited/all-you-can-eat framing, a price below the per-user infrastructure or fulfillment cost, or copy promising to monetize later via ads, data, or upsell.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Charge more than each user costs you to serve, before you chase volume."
  },
  {
   "name": "Retroactive Value-Metric Change",
@@ -557,7 +626,8 @@
   "case": "Unity announced a per-install Runtime Fee on 12 September 2023 applying retroactively to shipped games. Developer revolt forced a partial retreat within days, CEO John Riccitiello departed on 9 October 2023, and Unity cancelled the fee outright a year later.",
   "trigger": "A pricing change that alters the billing unit (seats\u2192usage, revenue\u2192installs, flat\u2192metered), reprices existing contracts, or applies to activity that already happened.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Change the price going forward only; never re-bill work already shipped."
  },
  {
   "name": "Segment-Blind PMF Survey",
@@ -565,7 +635,8 @@
   "case": "Superhuman scored 22% on \"how would you feel if you could no longer use this\" across all users. Rahul Vohra segmented to the high-expectation core, which alone scored 32%, then spent half of each cycle deepening what fans loved and half unblocking the \"somewhat disappointed\" group \u2014 reaching 58% within a year.",
   "trigger": "A proposal to run the 40% test, NPS, or a satisfaction survey across the full user list, or a stated PMF/NPS number reported as one figure with no segment breakdown.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Cut the survey by segment before you believe the number and pivot."
  },
  {
   "name": "Premature Scaling",
@@ -573,7 +644,8 @@
   "case": "Webvan contracted Bechtel for roughly $1B of automated warehouses (~$35M each, 350,000 sq ft) and committed to 26 cities in 18 months before achieving profitability in a single one. Most facilities ran near a third of capacity; the company filed for bankruptcy in July 2001, roughly 18 months after its IPO.",
   "trigger": "A plan that adds headcount, geographies, warehouses, regions, or provisioned infrastructure capacity on a schedule rather than in response to a measured demand signal; \"build it so it scales to N\" before N/100 exists.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Wait for demand to strain what you have before you buy any more of it."
  },
  {
   "name": "Funding As Distribution",
@@ -581,7 +653,8 @@
   "case": "Color Labs raised $41M pre-launch from Sequoia and Bain, launched March 2011 to enormous coverage and over 1M downloads, and was under 100,000 monthly actives by September 2011. A co-founder left within three months of launch; the app shut down 31 December 2012.",
   "trigger": "A launch plan whose top-of-funnel is press coverage, a funding announcement, an influencer/analyst push, or a Product Hunt / HN / Show HN day, with no channel that keeps producing users on day 30.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Launch day is not a channel; know what brings users in on day thirty."
  },
  {
   "name": "Paid Launch Without A Loop",
@@ -589,7 +662,8 @@
   "case": "Quibi raised $1.75B and launched 6 April 2020 behind a Super Bowl ad and a national campaign. Of roughly 910,000 free-trial downloads, over 90% did not convert; the company announced its shutdown on 21 October 2020, six months after launch.",
   "trigger": "A GTM plan with a large paid media budget, a launch-day ad buy, or a campaign brief, where no line item describes an in-product mechanism that generates the next user.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Before you buy the ad, name the thing in the product that makes user two."
  },
  {
   "name": "Built On Rented Land",
@@ -597,7 +671,8 @@
   "case": "Meerkat grew by auto-posting to and importing Twitter's social graph. On 13 March 2015 \u2014 the first day of SXSW and the day Twitter announced it had acquired Periscope \u2014 Twitter cut Meerkat's social-graph access, citing internal policy. Periscope launched weeks later with full graph access and won.",
   "trigger": "A growth mechanism that depends on another company's API, social graph, app-store placement, feed distribution, marketplace listing, extension store, or OAuth integration as the primary source of new users.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Start the second channel while the platform still likes you."
  },
  {
   "name": "Feature Parity Positioning",
@@ -605,7 +680,8 @@
   "case": "Google+ launched in 2011 as a feature-matched Facebook alternative with enormous forced-distribution advantages across Google's properties. In announcing the consumer shutdown in October 2018, Google disclosed that 90% of Google+ user sessions lasted under five seconds.",
   "trigger": "A positioning doc, landing page, or spec that frames the product as \"X but better/faster/cheaper\", or leads with a feature-comparison table against a named incumbent.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Drop the comparison table and say what you do that they would never do."
  },
  {
   "name": "Positioning To The Wrong Frame",
@@ -613,7 +689,8 @@
   "case": "April Dunford repositioned Janna Systems from generic enterprise CRM \u2014 where it lost to Siebel \u2014 to relationship intelligence for investment banks, where its ability to model relationships was the core value. Revenue went from roughly $1M to over $70M, and Siebel acquired the company for $1.7B.",
   "trigger": "Copy or a spec that names a broad established category (\"CRM\", \"project management\", \"observability\", \"coordination layer\") without naming the specific buyer and the specific alternative they'd otherwise use.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Name the buyer and what they use instead; the category follows from that."
  },
  {
   "name": "No Beachhead",
@@ -621,7 +698,8 @@
   "case": "Dean Kamen forecast Segway would produce 10,000 units a week and hoped for half a million a year. With no defined target customer and no pricing research, Segway sold roughly 30,000 units in its first six years, ending up mostly in niche corporate and tourism use.",
   "trigger": "TAM-driven sizing, \"for any team / any company / everyone who...\", or a launch plan listing three or more personas with no ranking of which one ships first.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Pick one kind of customer and write only for them until they tell a friend."
  },
  {
   "name": "Cold Start Ignored",
@@ -629,7 +707,8 @@
   "case": "Reddit's founders seeded the site under a large number of fake accounts. Steve Huffman has said roughly 99% of submissions in the first weeks were him or Alexis Ohanian under different usernames, and the founders still accounted for about 80% of links for months \u2014 done deliberately to set the tone and make the site look populated.",
   "trigger": "A spec for a feed, map, marketplace, roster, leaderboard, directory, team view, or any social surface, with no stated plan for what a first user or solo user sees.",
   "severity": "block",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Decide what the first person sees in an empty room, then go fill it yourself."
  },
  {
   "name": "Skipping The Unscalable",
@@ -637,7 +716,8 @@
   "case": "Airbnb's bookings in New York were flat until Brian Chesky and Joe Gebbia rented a camera, flew out, and knocked on hosts' doors photographing listings themselves. Professionally photographed listings booked two to three times as often and New York revenue roughly doubled within the month.",
   "trigger": "A plan to build self-serve signup, an onboarding wizard, an email drip, an in-app tour, or a help center before roughly ten users have been onboarded by a founder in person.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Onboard the first ten yourself, by hand, before you build a single wizard."
  },
  {
   "name": "Free Tier With No Wall",
@@ -645,7 +725,8 @@
   "case": "Evernote reached over 150 million users with only a small fraction paying. In June 2016 it retroactively capped free Basic accounts at two synced devices and raised Plus and Premium prices, provoking sustained public backlash and defections to Apple Notes and competitors.",
   "trigger": "A spec adding a free plan, free tier, or open beta whose limits are storage, seats-of-one, retention window, or time, rather than the specific capability a committed user cannot work without; also any \"free forever\" framing.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Put the limit on the one thing a serious user cannot work without."
  },
  {
   "name": "Hype Ahead Of Usability",
@@ -653,7 +734,8 @@
   "case": "Google demoed Wave for about 80 minutes at I/O in May 2009 to a standing ovation and released it by invitation. Google announced on 4 August 2010 that it was halting development, stating Wave \"has not seen the user adoption we would have liked\"; almost no user could say what it was for.",
   "trigger": "A launch plan gated by waitlist or invite codes, or a demo script/video longer than about two minutes that requires narration to make the product legible.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Drop the waitlist and watch a stranger use it without you in the room."
  },
  {
   "name": "Seat Pricing Punishes Adoption",
@@ -661,7 +743,8 @@
   "case": "Slack's Fair Billing Policy bills only members active in a rolling window and automatically issues prorated credits for members who go inactive, so adding a teammate who may not stick carries near-zero downside for the buyer. It removed the main objection to broad rollout in a product whose value is proportional to coverage.",
   "trigger": "A pricing page or spec charging per seat, per user, or per member for a product whose core value requires a whole team, or charging full price for read-only/viewer/observer roles.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Make adding the tenth teammate cost near nothing, or nobody gets added."
  },
  {
   "name": "Single Channel Concentration",
@@ -669,7 +752,8 @@
   "case": "Groupon grew on a mass daily-deal email list, priced its November 2011 IPO at $20, and opened at $28. As subscriber email fatigue set in and discount-acquired customers failed to convert to loyal ones \u2014 driving merchant churn and forcing ever more expensive merchant acquisition \u2014 the stock hit $3.87 by 2 November 2012, down over 80% in a year.",
   "trigger": "A growth model that extrapolates the current dominant channel's conversion rate forward, or a plan where one channel already supplies most users and no second-channel experiment is funded and dated.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Fund and date the second channel while the first one is still working."
  },
  {
   "name": "Referral On A Leaky Bucket",
@@ -677,7 +761,8 @@
   "case": "Dropbox's double-sided referral (500MB of storage each way) drove roughly 3900% signup growth over about 15 months, taking it from ~100K to ~4M users between September 2008 and January 2010. The reward worked because storage was the retained product itself \u2014 the incentive deepened the very dependency that kept users.",
   "trigger": "A spec adding a referral program, invite bonus, share incentive, or affiliate scheme when D30 retention is unknown, unstated, or declining, or where the reward is unrelated to the product's core value.",
   "severity": "warn",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Fix retention first; invites only pay when people stayed long enough."
  },
  {
   "name": "Piggyback Channel Ignored",
@@ -685,7 +770,8 @@
   "case": "Airbnb reverse-engineered Craigslist's undocumented posting flow and built a bot that let a host cross-post their Airbnb listing to Craigslist with a link back. It pulled traffic and hosts off the largest existing pool of the exact audience Airbnb needed, without Craigslist's cooperation or any ad spend, until Craigslist eventually blocked it.",
   "trigger": "A GTM plan whose channel list contains only owned surfaces (own blog, own newsletter, own social account, own docs site) and names no existing venue, marketplace, forum, or community where the target users already gather.",
   "severity": "note",
-  "domain": "distribution-gtm"
+  "domain": "distribution-gtm",
+  "voice": "Your first channel is someone else's crowd, not your own blog."
  },
  {
   "name": "The Inside-View Estimate",
@@ -693,7 +779,8 @@
   "case": "Kahneman's Israeli curriculum team estimated two years to finish a textbook; when he asked the group's own curriculum expert for the outside view, the expert said comparable teams took seven to ten years and roughly 40% never finished. The book took eight years. Everyone, including the expert, had just voted for two.",
   "trigger": "A plan, spec, or roadmap states a duration, ship date, or phase count derived by listing the work, with no reference to how long a comparable past effort actually took.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Find out how long the last one took, then answer with that number."
  },
  {
   "name": "Fixed Date Beats Evidence",
@@ -701,7 +788,8 @@
   "case": "BAE told Denver International Airport it needed another year for the automated baggage system, citing Munich's simpler system which took two years of testing and ran six months before opening. The airport opened 16 months late with roughly $560M in overruns tied largely to that system.",
   "trigger": "An immovable external date (launch event, conference demo, investor meeting, contract deadline) is stated, and someone with direct prior experience of the same work says the schedule is short.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "The date won't move, so cut scope now and say out loud what you cut."
  },
  {
   "name": "Silent Room Consensus",
@@ -709,7 +797,8 @@
   "case": "Arthur Schlesinger sat through the Bay of Pigs planning meetings believing the plan was nonsense and wrote afterward that he could only explain \"my failure to do more than raise a few timid questions\" by the circumstances of the discussion. Janis built the concept of groupthink on that case.",
   "trigger": "A prompt or doc asserts \"the team is aligned\", \"no objections were raised\", or \"we all agreed\" without naming a specific person who argued the other side and what they said.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Name the person who argued against it, or you don't have agreement."
  },
  {
   "name": "Preference-First Framing",
@@ -717,7 +806,8 @@
   "case": "Reed Hastings pushed the Qwikster split; after it collapsed, employees told him they had thought it was a terrible idea from the start and had not felt able to say so. Netflix's \"farming for dissent\" practice \u2014 written proposals with open margins for objections \u2014 was built specifically in response.",
   "trigger": "A request to review, sign off on, or implement an approach whose author has already stated a preferred outcome, or a message shaped as \"here's what we're doing \u2014 thoughts?\"",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Ask for the objection before you say what you want; after, it's too late."
  },
  {
   "name": "The Deck Instead Of The Memo",
@@ -725,7 +815,8 @@
   "case": "Bezos banned PowerPoint for Amazon's senior team in 2004 in favor of six-page narratives read silently for up to 30 minutes at the start of the meeting, on the reasoning that narrative structure forces the author to state what matters more than what.",
   "trigger": "A plan or spec arrives as a feature list, bullet outline, table, or phase grid with no prose section stating the problem, the constraints, and what evidence would falsify the approach.",
   "severity": "note",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Write it as paragraphs; the sentences you can't finish are the holes."
  },
  {
   "name": "Commit Without Disagreeing",
@@ -733,7 +824,8 @@
   "case": "Bezos's 2016 shareholder letter describes greenlighting an Amazon Studios original he thought was debatable, expensive to produce, and poorly termed \u2014 writing to the team \"I disagree and commit and hope it becomes the most watched thing we've ever made\" rather than either blocking it or pretending to agree.",
   "trigger": "A decision is recorded with unanimous support and then reopened, slow-walked, or partially implemented; or a teammate agrees to a plan in one message and questions its premise in a later one.",
   "severity": "note",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Say your objection out loud, write it down, then back the plan fully."
  },
  {
   "name": "Numbers Nobody Measured",
@@ -741,7 +833,8 @@
   "case": "Feynman's Challenger appendix found NASA management working with a shuttle failure estimate near 1 in 100,000 while the working engineers' estimates were closer to 1 in 100 \u2014 a thousandfold gap with no measurement reconciling it. His conclusion: reality must take precedence over public relations, for nature cannot be fooled.",
   "trigger": "A spec, README, or marketing line quotes a reliability, latency, uptime, accuracy, or coverage figure without naming the measurement that produced it.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Say who measured it and how, or take the number out."
  },
  {
   "name": "Root Cause Singular",
@@ -749,7 +842,8 @@
   "case": "The Columbia Accident Investigation Board named the foam strike as the physical cause but held that NASA's management practices were \"as much a cause of the accident as the foam\", explicitly weighting organizational causes equally \u2014 because fixing only the foam had already been tried after prior strikes.",
   "trigger": "An incident writeup, postmortem, or bug analysis names exactly one root cause and one code-level fix, with no finding about how the defect passed review or shipped.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Fix the code, then find how it got past review \u2014 that part ships again."
  },
  {
   "name": "The Metric Becomes The Job",
@@ -757,7 +851,8 @@
   "case": "Wells Fargo's \"Gr-eight\" initiative targeted eight products per household with daily new-account quotas; employees opened roughly two million unauthorized accounts, 5,300 were fired, and the bank paid a $185M fine before abandoning the cross-sell metric in 2017.",
   "trigger": "A spec, OKR, or plan ties compensation, ranking, or a pass/fail gate to a single countable output (accounts, PRs merged, tickets closed, coverage percent, broadcasts sent).",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Before you set the number, ask how you'd hit it while cheating."
  },
  {
   "name": "Compliance As Friction",
@@ -765,7 +860,8 @@
   "case": "Parker Conrad built a browser macro letting Zenefits sales reps appear to complete California's mandatory 52-hour insurance pre-licensing course; reps then certified completion under penalty of perjury. He resigned in February 2016 and later surrendered his insurance license in a settlement with the state.",
   "trigger": "A prompt or diff proposes bypassing, auto-satisfying, or faking a legal, licensing, security-review, audit-log, or approval requirement on the grounds that the requirement is overhead.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Your name is on that workaround forever; win the argument instead."
  },
  {
   "name": "Statistics Against Trust",
@@ -773,7 +869,8 @@
   "case": "Intel responded to the 1994 Pentium FDIV bug with a statistical analysis arguing the error was vanishingly rare; IBM halted shipments of Pentium PCs, and Intel reversed to a full replacement offer in December 1994, taking a $475M pretax charge.",
   "trigger": "A response to a user-reported bug, data-loss report, or wrong-output complaint leads with how rare the condition is, or proposes closing it as won't-fix on frequency grounds.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Never answer a bug report with how rare it is; fix it and say so."
  },
  {
   "name": "The Approval Bottleneck",
@@ -781,7 +878,8 @@
   "case": "Marissa Mayer personally reviewed every Yahoo hire after team vetting, reading up to roughly 50 resumes a week; internal critics said the review slowed hiring enough that candidates were taken by rivals before Yahoo could close them.",
   "trigger": "A process or spec routes every instance of a recurring decision (hires, merges, deploys, copy changes, place bindings) through one named approver, with no delegation rule or bypass condition.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Write the rule that lets someone else say yes when you're not there."
  },
  {
   "name": "Announcing The Successor",
@@ -789,7 +887,8 @@
   "case": "Stephen Elop's February 2011 \"burning platform\" memo declared Symbian non-competitive days before Nokia announced a Windows Phone pivot; Symbian's share fell by nearly half within two quarters and Elop later conceded to shareholders that the memo hurt Symbian sales.",
   "trigger": "Customer-facing copy, changelog, docs, or a public roadmap describes a currently shipping product, framing, or API as deprecated, weak, or superseded before its replacement is available.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Don't call it dead until the replacement is something people can use."
  },
  {
   "name": "Sunk Identity",
@@ -797,7 +896,8 @@
   "case": "In 1985, with memory losing to Japanese competitors, Grove asked Moore what a new CEO brought in by the board would do; Moore said get out of memories. Grove's move was to walk out, walk back in, and do it themselves \u2014 Intel exited DRAM, the business that had defined the company.",
   "trigger": "A decision or spec is defended by how much has already been built, how long it took, or by identity language (\"we're a X company\", \"this is our thesis\"), rather than by the option's forward value.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Ask what someone hired yesterday would do, then go do that."
  },
  {
   "name": "Exit Reason Assumed",
@@ -805,7 +905,8 @@
   "case": "Michael Abrashoff interviewed every sailor on the USS Benfold and found the top reasons for leaving the Navy were not being treated with respect, being prevented from having an impact, and not being listened to. Pay \u2014 the reason he had assumed was first \u2014 ranked fifth.",
   "trigger": "An explanation of attrition, churn, drop-off, or non-adoption asserts a cause (price, speed, missing feature) without citing anything the departed users or teammates actually said.",
   "severity": "note",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Call five who left and ask; the reason you assumed is rarely first."
  },
  {
   "name": "Adding People To A Late Thing",
@@ -813,7 +914,8 @@
   "case": "Fred Brooks managed IBM's OS/360 and drew the law from it: adding manpower to a late software project makes it later. OS/360 shipped years late, over budget, and with thousands of known defects despite a headcount peak in the thousands.",
   "trigger": "A slipping deliverable is answered by assigning more engineers, more parallel agents, or more concurrent sessions to the same component or file set, rather than by cutting scope.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Cut scope instead \u2014 more hands on a late piece buys you nothing."
  },
  {
   "name": "The Famous Forecaster",
@@ -821,7 +923,8 @@
   "case": "Tetlock's 20-year study collected roughly 28,000 predictions from 284 experts and found they barely beat chance and lost to simple extrapolation rules \u2014 with the better-known and more media-visible experts scoring worse, not better.",
   "trigger": "A claim about the future (adoption, competitor behavior, market timing, \"users will want X\") is backed by seniority, conviction, or a cited authority rather than by a dated, falsifiable statement someone will check.",
   "severity": "note",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Pin it to a date and a number someone can check, or drop the claim."
  },
  {
   "name": "One-Way Door, Casual",
@@ -829,7 +932,8 @@
   "case": "In 2000 Reed Hastings and Marc Randolph offered to sell Netflix to Blockbuster for $50M; Blockbuster declined in a meeting Randolph describes as barely suppressing laughter. Blockbuster filed for bankruptcy in 2010.",
   "trigger": "A decision that forecloses a future option (a partnership declined, a public API committed, a naming/positioning lock, a data model that cannot be migrated) is being made in the same pass as routine work, with no note distinguishing it.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "Ask if you can undo it; if not, stop and give it its own hour."
  },
  {
   "name": "Wartime Frame In Peacetime",
@@ -837,7 +941,8 @@
   "case": "With Loudcloud's stock near $0.35, Ben Horowitz sold the entire revenue-producing managed-services business to EDS for $63.5M in 2002 and bet the company on unproven software as Opsware \u2014 a single narrowed decision made against the diversified one. HP bought Opsware for $1.6B in 2007.",
   "trigger": "An existential condition is stated (runway, a competitor shipping the core feature, a broken primary flow, zero users) and the proposed response is a broad multi-track plan, a process change, or a round of alignment.",
   "severity": "warn",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "When runway is the problem, pick one bet and kill the rest today."
  },
  {
   "name": "Cofounder Equity Without Vesting",
@@ -845,7 +950,8 @@
   "case": "Reggie Brown, credited with the disappearing-photo idea, was pushed out of Snapchat early; his suit against Evan Spiegel and Bobby Murphy settled in 2014 for $157.5M, disclosed days before Snap's IPO filing years later.",
   "trigger": "A cofounder split, advisor grant, contractor equity arrangement, or early-employee offer is described with a percentage but no vesting schedule, cliff, or repurchase right.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "No vesting, no grant \u2014 settle it today while you're still friends."
  },
  {
   "name": "The Concealed Constraint",
@@ -853,6 +959,7 @@
   "case": "Boeing owed Southwest a reported $1M-per-plane rebate if the 737 MAX required simulator training; MCAS references were removed from pilot operating and training manuals, and pilots on the Lion Air and Ethiopian flights faced a system they had not been told existed.",
   "trigger": "A design or documentation decision is justified by preserving a commercial or compatibility commitment (\"no retraining\", \"no migration\", \"no API break\", \"don't scare the customer\") rather than by the requirement itself \u2014 especially when it removes a mechanism from docs while keeping it in code.",
   "severity": "block",
-  "domain": "decisions-team"
+  "domain": "decisions-team",
+  "voice": "If it's in the code, it goes in the docs, whatever the promise cost."
  }
 ]
