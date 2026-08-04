@@ -1,0 +1,23 @@
+eval/install-test.sh
+  s_90e8c61216621c::t_d2a25812cb66e8 1-63
+install/council-render.py
+  s_90e8c61216621c::t_c1b77d05426c80 53-56,62,70-75,77-78,80-90
+install/council-statusline.sh
+  s_90e8c61216621c::t_1325836e2442ef 20-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "1475dc46102e19cf3fa95c7d45e13b1acc059690",
+  "prompts": {},
+  "sessions": {
+    "s_90e8c61216621c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "433649e4-02b4-4126-a5db-d32e56d1bb71",
+        "model": "claude-opus-5"
+      },
+      "human_author": "abryfs <69842068+abryfs@users.noreply.github.com>"
+    }
+  }
+}
